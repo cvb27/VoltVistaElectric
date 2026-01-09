@@ -117,3 +117,30 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(None))
         # TODO: Guardar en SQLite si quieres
 
     return {"status": "ok"}
+@router.post("/link")
+def create_shareable_link(request: Request, amount: float = Form(...), description: str = Form("")):
+    """
+    Genera un link compartible (Stripe Checkout Session URL).
+    """
+    if amount <= 0:
+        raise HTTPException(status_code=400, detail="Invalid amount")
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=["card"],
+        mode="payment",
+        line_items=[
+            {
+                "price_data": {
+                    "currency": settings.stripe_currency,
+                    "product_data": {"name": description.strip() or "Electric Service Payment"},
+                    "unit_amount": int(round(amount * 100)),
+                },
+                "quantity": 1,
+            }
+        ],
+        success_url=f"{settings.base_url}/payments/success",
+        cancel_url=f"{settings.base_url}/payments/cancel",
+    )
+
+    # Volvemos a /payments pasando el link como query param
+    return RedirectResponse(f"/payments/?link={session.url}", status_code=303)

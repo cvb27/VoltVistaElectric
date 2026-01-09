@@ -1,53 +1,94 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="h4 fw-bold">Pagos</h1>
-<p class="text-muted">Puedes pagar un depósito o una factura (monto manual).</p>
+<div class="container py-4">
 
-{% if request.query_params.get('error') %}
-  <div class="alert alert-danger">Error: {{ request.query_params.get('error') }}</div>
-{% endif %}
+  <h1 class="h4 fw-bold mb-2">
+    <i class="fas fa-credit-card me-2 text-primary"></i>
+    Card Payment
+  </h1>
 
-<div class="row g-3">
-  <div class="col-lg-6">
-    <div class="card rounded-4 p-3 p-md-4 h-100">
-      <div class="fw-semibold">Tarjeta (Stripe)</div>
-      {% if not stripe_on %}
-        <div class="text-muted small mt-2">Stripe no está configurado (ver .env).</div>
-      {% else %}
-        
+  <p class="text-muted mb-4">
+    Enter the amount to pay. You will be redirected to a secure Stripe checkout page to complete your payment.
+  </p>
 
-        <form class="mt-3" method="post" action="/payments/checkout">
-          <input type="hidden" name="purpose" value="invoice">
-          <label class="form-label mt-2">Pagar factura (monto manual)</label>
-          <input class="form-control" name="amount" type="number" step="0.01" min="1"required>
-          <label class="form-label mt-2">Email (opcional)</label>
-          <input class="form-control" name="email" type="email">
-          <button class="btn btn-outline-primary mt-3" type="submit">Ir a pagar</button>
-        </form>
-      {% endif %}
+  {% if not stripe_on %}
+    <div class="alert alert-warning">
+      Stripe is not configured yet.
     </div>
-  </div>
+  {% else %}
 
-  <div class="col-lg-6">
-    <div class="card rounded-4 p-3 p-md-4 h-100">
-      <div class="fw-semibold">PayPal</div>
-      {% if not paypal_on %}
-        <div class="text-muted small mt-2">PayPal no está configurado (ver .env).</div>
-      {% else %}
-        <button id="pp-deposit" class="btn btn-brand mt-3">Pagar depósito (PayPal)</button>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
 
-        <div class="mt-3">
-          <label class="form-label">Pagar factura (monto manual)</label>
-          <input id="pp-amount" class="form-control" type="number" step="0.01" min="1">
-          <button id="pp-invoice" class="btn btn-outline-primary mt-3">Pagar con PayPal</button>
+      <div class="card shadow-sm rounded-4 p-4">
+
+        <!-- Header -->
+        <div class="d-flex align-items-center mb-3">
+          <div class="me-3 fs-3 text-success">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div>
+            <div class="fw-semibold">Secure payment</div>
+            <div class="small text-muted">Powered by Stripe</div>
+          </div>
         </div>
 
-        <div id="pp-msg" class="small text-muted mt-3"></div>
-      {% endif %}
+        <!-- Form -->
+        <form method="post" action="/payments/checkout">
+
+          <label class="form-label fw-semibold">
+            Amount to pay (USD)
+          </label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input
+              class="form-control"
+              name="amount"
+              type="number"
+              step="0.01"
+              min="1"
+              required
+              placeholder="e.g. 150.00"
+            >
+          </div>
+
+          <label class="form-label">
+            Description (optional)
+          </label>
+          <input
+            class="form-control mb-3"
+            name="description"
+            type="text"
+            placeholder="e.g. Outlet installation, service call"
+          >
+
+          <button class="btn btn-brand w-100 py-2">
+            <i class="fas fa-arrow-right me-2"></i>
+            Proceed to payment
+          </button>
+
+        </form>
+
+        <!-- Trust footer -->
+        <div class="text-center mt-3 small text-muted">
+          <i class="fab fa-cc-visa me-1"></i>
+          <i class="fab fa-cc-mastercard me-1"></i>
+          <i class="fab fa-cc-amex me-1"></i>
+          <span class="ms-2">
+            Encrypted transaction · We do not store card details
+          </span>
+        </div>
+
+      </div>
     </div>
   </div>
+
+  {% endif %}
+
 </div>
+
+
 
 <script>
 (async function(){
