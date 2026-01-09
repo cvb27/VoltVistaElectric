@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="hero p-4 p-md-5 rounded-4 border">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <h1 class="display-6 fw-bold mb-2">{{ t("hero_title") }}</h1>
+      <p class="lead text-muted mb-3">{{ t("hero_subtitle") }}</p>
+
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-brand" href="/estimate">{{ t("cta_free_estimate") }}</a>
+
+        {% if phone %}
+          <a class="btn btn-outline-primary" href="tel:{{ phone }}">{{ t("cta_call") }}</a>
+        {% endif %}
+        {% if sms %}
+          <a class="btn btn-outline-primary" href="sms:{{ sms }}">{{ t("cta_text") }}</a>
+        {% endif %}
+        {% if whatsapp %}
+          <a class="btn btn-outline-success" href="https://wa.me/{{ whatsapp|replace('+','')|replace(' ','') }}?text={{ 'Hola, quiero un estimado gratis.'|urlencode }}">
+            {{ t("cta_whatsapp") }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="mt-3 small text-muted">
+        Área principal: <strong>{{ city }}</strong>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card shadow-sm rounded-4">
+        <div class="card-body">
+          <div class="fw-semibold mb-2">Clientes destacados</div>
+          <div class="row g-2">
+            {% for c in client_highlights %}
+              <div class="col-6">
+                <div class="client-tile rounded-3 border p-2 h-100">
+                  <div class="d-flex align-items-center gap-2">
+                    <img src="{{ c.logo }}" alt="{{ c.name }}" class="client-logo">
+                    <div class="small">
+                      <div class="fw-semibold">{{ c.name }}</div>
+                      <span class="badge text-bg-secondary">
+                        {{ "Hotel" if c.type=="hotel" else ("HOA" if c.type=="hoa" else "Commercial") }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            {% if client_highlights|length == 0 %}
+              <div class="text-muted small">Agrega clientes en <code>data/clients.json</code></div>
+            {% endif %}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Servicios -->
+<section class="mt-5">
+  <div class="d-flex justify-content-between align-items-end mb-2">
+    <h2 class="h4 fw-bold mb-0">Servicios</h2>
+    <a class="small link-muted" href="/estimate">Solicitar estimado</a>
+  </div>
+  <div class="row g-3">
+    {% for s in services %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-4 h-100">
+          <div class="card-body">
+            <div class="fw-semibold">{{ s }}</div>
+            <div class="small text-muted mt-1">Trabajo limpio, seguro y orientado a cumplir requisitos.</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Áreas -->
+<section class="mt-5">
+  <h2 class="h4 fw-bold mb-2">Áreas que cubrimos</h2>
+  <div class="d-flex flex-wrap gap-2">
+    {% for a in areas %}
+      <span class="badge rounded-pill text-bg-light border">{{ a }}</span>
+    {% endfor %}
+    {% if areas|length == 0 %}
+      <span class="text-muted small">Edita <code>BUSINESS_SERVICE_AREA</code> en tu .env</span>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Por qué nosotros -->
+<section class="mt-5">
+  <h2 class="h4 fw-bold mb-2">¿Por qué Voltvista?</h2>
+  <div class="row g-3">
+    <div class="col-lg-4">
+      <div class="card rounded-4 h-100">
+        <div class="card-body">
+          <div class="fw-semibold">Seriedad & Cumplimiento</div>
+          <div class="small text-muted">Enfoque en seguridad, buenas prácticas y “inspection-ready mindset” cuando aplique.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card rounded-4 h-100">
+        <div class="card-body">
+          <div class="fw-semibold">Respuesta rápida</div>
+          <div class="small text-muted">Comunicación directa por texto y WhatsApp para acelerar estimados y agenda.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card rounded-4 h-100">
+        <div class="card-body">
+          <div class="fw-semibold">Transparencia</div>
+          <div class="small text-muted">Recomendaciones claras, opciones y prioridades (seguridad primero).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Galería (Before/After) -->
+<section class="mt-5">
+  <div class="d-flex justify-content-between align-items-end mb-2">
+    <h2 class="h4 fw-bold mb-0">Galería (Antes / Después)</h2>
+    {% if instagram_url %}
+      <a class="small link-muted" target="_blank" href="{{ instagram_url }}">Ver trabajos en Instagram</a>
+    {% endif %}
+  </div>
+
+  <div class="row g-3">
+    {% for g in gallery %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-4 overflow-hidden h-100">
+          <div class="ratio ratio-16x9 bg-light">
+            <img class="object-fit-cover" src="{{ g.before }}" alt="{{ g.title }}">
+          </div>
+          {% if g.after %}
+            <div class="ratio ratio-16x9 bg-light border-top">
+              <img class="object-fit-cover" src="{{ g.after }}" alt="{{ g.title }} after">
+            </div>
+          {% endif %}
+          <div class="card-body">
+            <div class="fw-semibold">{{ g.title }}</div>
+            <div class="small text-muted">{{ g.tag }}</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% if gallery|length == 0 %}
+      <div class="text-muted small">Agrega items en <code>data/gallery.json</code> y fotos en <code>static/img/gallery/</code>.</div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="mt-5">
+  <div class="d-flex justify-content-between align-items-end mb-2">
+    <h2 class="h4 fw-bold mb-0">Reseñas</h2>
+    <a class="small link-muted" href="/reviews">Ver todas</a>
+  </div>
+  <div class="row g-3">
+    {% for r in reviews %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-4 h-100">
+          <div class="card-body">
+            <div class="small text-muted">★★★★★</div>
+            <div class="fw-semibold">{{ r.name }}</div>
+            <div class="small text-muted">{{ r.location }}</div>
+            <p class="mt-2 mb-0">{{ r.text }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Productos afiliados -->
+<section class="mt-5">
+  <div class="d-flex justify-content-between align-items-end mb-2">
+    <h2 class="h4 fw-bold mb-0">Productos recomendados</h2>
+    <span class="small text-muted">Soporte afiliados</span>
+  </div>
+
+  <div class="row g-3">
+    {% for p in products %}
+      <div class="col-md-6 col-lg-3">
+        <div class="card rounded-4 h-100">
+          <div class="card-body">
+            <div class="fw-semibold">{{ p.title }}</div>
+            <div class="small text-muted">{{ p.desc }}</div>
+            <a class="btn btn-sm btn-outline-primary mt-3" target="_blank" href="{{ p.url }}">Ver en Amazon</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

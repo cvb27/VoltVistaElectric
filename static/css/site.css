@@ -1,0 +1,48 @@
+:root{
+  /* Colores inspirados en tu logo (azul marino + rojo) */
+  --vv-navy: #1f3b73;
+  --vv-red:  #e11d2a;
+  --vv-bg:   #0b1220; /* para pequeños detalles oscuros */
+}
+
+.brand-logo{
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.brand-text{
+  letter-spacing: .08em;
+  color: var(--vv-navy);
+}
+
+.btn-brand{
+  background: var(--vv-red);
+  border-color: var(--vv-red);
+  color: white;
+}
+.btn-brand:hover{
+  background: #c91722;
+  border-color: #c91722;
+  color: white;
+}
+
+.link-muted{
+  color: var(--vv-navy);
+  text-decoration: none;
+}
+.link-muted:hover{ text-decoration: underline; }
+
+.hero{
+  background: linear-gradient(180deg, rgba(31,59,115,.06), rgba(225,29,42,.04));
+}
+
+.client-logo{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.client-tile{
+  background: white;
+}

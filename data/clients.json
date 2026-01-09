@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Best Western Universal",
+    "type": "hotel",
+    "logo": "/static/img/clients/sample-hotel.png",
+    "highlight": true,
+    "note": "Maintenance partner"
+  },
+  {
+    "name": "Sample HOA Community",
+    "type": "hoa",
+    "logo": "/static/img/clients/sample-hoa.png",
+    "highlight": true,
+    "note": "HOA electrical support"
+  },
+  {
+    "name": "Local Small Business",
+    "type": "commercial",
+    "logo": "/static/img/clients/sample-hotel.png",
+    "highlight": false,
+    "note": ""
+  }
+]

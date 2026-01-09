@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h4 fw-bold">Servicios de Emergencia</h1>
+
+<div class="alert alert-warning">
+  <strong>Disclaimer:</strong> Si hay olor a quemado, chispas, humo o riesgo inmediato, corta el breaker principal si es seguro hacerlo y llama al 911.
+</div>
+
+<div class="card rounded-4 p-4">
+  <p class="text-muted mb-3">Para urgencias eléctricas (cuando aplique), contáctanos:</p>
+
+  <div class="d-flex flex-wrap gap-2">
+    {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ phone }}">Llamar</a>{% endif %}
+    {% if whatsapp %}
+      <a class="btn btn-outline-success" href="https://wa.me/{{ whatsapp|replace('+','')|replace(' ','') }}?text={{ 'Emergencia eléctrica: necesito ayuda.'|urlencode }}">WhatsApp</a>
+    {% endif %}
+  </div>
+
+  <hr>
+  <div class="small text-muted">
+    Nota: disponibilidad y alcance varían según ubicación y tipo de emergencia.
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Instalación de GFCI en exterior",
+    "before": "/static/img/gallery/job1.jpg",
+    "after": "/static/img/gallery/job1_after.jpg",
+    "tag": "GFCI / Exterior"
+  },
+  {
+    "title": "Reemplazo de outlet y diagnóstico",
+    "before": "/static/img/gallery/job2.jpg",
+    "after": "",
+    "tag": "Outlet / Troubleshooting"
+  },
+  {
+    "title": "Iluminación exterior",
+    "before": "/static/img/gallery/job3.jpg",
+    "after": "",
+    "tag": "Lighting"
+  }
+]

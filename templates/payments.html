@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="h4 fw-bold">Pagos</h1>
+<p class="text-muted">Puedes pagar un depósito o una factura (monto manual).</p>
+
+{% if request.query_params.get('error') %}
+  <div class="alert alert-danger">Error: {{ request.query_params.get('error') }}</div>
+{% endif %}
+
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="card rounded-4 p-3 p-md-4 h-100">
+      <div class="fw-semibold">Tarjeta (Stripe)</div>
+      {% if not stripe_on %}
+        <div class="text-muted small mt-2">Stripe no está configurado (ver .env).</div>
+      {% else %}
+        <form class="mt-3" method="post" action="/payments/stripe/checkout">
+          <input type="hidden" name="purpose" value="deposit">
+          <button class="btn btn-brand" type="submit">Pagar depósito ({{ deposit_amount_fmt }})</button>
+        </form>
+
+        <form class="mt-3" method="post" action="/payments/stripe/checkout">
+          <input type="hidden" name="purpose" value="invoice">
+          <label class="form-label mt-2">Pagar factura (monto manual)</label>
+          <input class="form-control" name="amount" type="number" step="0.01" min="1">
+          <label class="form-label mt-2">Email (opcional)</label>
+          <input class="form-control" name="email" type="email">
+          <button class="btn btn-outline-primary mt-3" type="submit">Ir a pagar</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card rounded-4 p-3 p-md-4 h-100">
+      <div class="fw-semibold">PayPal</div>
+      {% if not paypal_on %}
+        <div class="text-muted small mt-2">PayPal no está configurado (ver .env).</div>
+      {% else %}
+        <button id="pp-deposit" class="btn btn-brand mt-3">Pagar depósito (PayPal)</button>
+
+        <div class="mt-3">
+          <label class="form-label">Pagar factura (monto manual)</label>
+          <input id="pp-amount" class="form-control" type="number" step="0.01" min="1">
+          <button id="pp-invoice" class="btn btn-outline-primary mt-3">Pagar con PayPal</button>
+        </div>
+
+        <div id="pp-msg" class="small text-muted mt-3"></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+(async function(){
+  const depositBtn = document.getElementById("pp-deposit");
+  const invoiceBtn = document.getElementById("pp-invoice");
+  const amountEl = document.getElementById("pp-amount");
+  const msg = document.getElementById("pp-msg");
+
+  async function create(purpose, amount){
+    msg.textContent = "Creando orden PayPal...";
+    const fd = new FormData();
+    fd.append("purpose", purpose);
+    fd.append("amount", amount);
+    const r = await fetch("/payments/paypal/create", { method:"POST", body: fd });
+    const j = await r.json();
+    if(!j.ok){ msg.textContent = "Error PayPal: " + (j.reason || ""); return; }
+    if(j.approve_url){ window.location.href = j.approve_url; }
+  }
+
+  if(depositBtn){
+    depositBtn.addEventListener("click", () => create("deposit", 0));
+  }
+  if(invoiceBtn){
+    invoiceBtn.addEventListener("click", () => create("invoice", amountEl.value || 0));
+  }
+})();
+</script>
+
+{% endblock %}

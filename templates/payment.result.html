@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card rounded-4 p-4">
+  {% if status == "success" %}
+    <h1 class="h4 fw-bold">Pago confirmado ✅</h1>
+    <p class="text-muted mb-0">Gracias. Tu pago fue procesado correctamente ({{ provider }}).</p>
+  {% else %}
+    <h1 class="h4 fw-bold">Pago cancelado</h1>
+    <p class="text-muted mb-0">No se completó el pago ({{ provider }}). Puedes intentar de nuevo.</p>
+  {% endif %}
+  <div class="mt-3">
+    <a class="btn btn-brand" href="/payments">Volver a pagos</a>
+  </div>
+</div>
+{% endblock %}
