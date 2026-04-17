@@ -59,3 +59,13 @@
   .hero { min-height: 100vh; }
 }
 .hero-content { width: 100%; padding: 3rem 1rem; }
+
+/* Mobile overrides — col-md-* sin col-12 no colapsan por default */
+@media (max-width: 768px) {
+  .container { padding-left: 1rem; padding-right: 1rem; }
+  .row { margin-left: 0; margin-right: 0; }
+  .col-md-6, .col-md-4, .col-md-3 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
