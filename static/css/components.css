@@ -52,3 +52,10 @@
   background: #CC2222;
   color: #fff;
 }
+
+/* Fix hero mobile — 100svh respeta URL bar iOS; width:100% previene shrink en flex */
+.hero { min-height: 100svh; }
+@supports not (height: 100svh) {
+  .hero { min-height: 100vh; }
+}
+.hero-content { width: 100%; padding: 3rem 1rem; }
