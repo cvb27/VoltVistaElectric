@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Estimate Requested | VoltVista Electric{% endblock %}
+{% block description %}We received your estimate request. VoltVista Electric will contact you within 24 hours.{% endblock %}
+{% block canonical %}
+<!-- Página post-conversión: no debe indexarse -->
+<meta name="robots" content="noindex, nofollow">
+{% endblock %}
+{% block page %}estimate-success{% endblock %}
+
+{% block content %}
+<div class="card rounded-4 p-4 text-center">
+  <h1 class="h4 fw-bold">We'll be in touch soon</h1>
+  <p class="text-muted mt-2 mb-1">Thank you. We'll review your request and contact you within 24 hours.</p>
+  {% if estimate_id %}<div class="small text-muted mb-3">Reference ID: <strong>#{{ estimate_id }}</strong></div>{% endif %}
+  <div>
+    <a class="btn btn-brand" href="/">Back to Home</a>
+  </div>
+</div>
+{% endblock %}

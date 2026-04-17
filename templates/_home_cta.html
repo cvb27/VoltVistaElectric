@@ -1,0 +1,18 @@
+{# Sección CTA final — "Ready to Get Started?" sobre fondo rojo #}
+<section class="section-accent py-5 py-md-6">
+  <div class="container text-center">
+    <h2 class="display-5 fw-bold text-white mb-3">Ready to Get Started?</h2>
+    <p class="lead text-white mb-4" style="opacity: 0.9;">
+      Call us or send a message — we respond fast.
+    </p>
+
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+      {% if settings.phone %}
+        <a class="btn btn-light btn-lg fw-semibold" href="tel:{{ settings.phone }}">
+          <i class="bi bi-telephone-fill me-2"></i>Call Now
+        </a>
+      {% endif %}
+      <a class="btn btn-outline-light btn-lg fw-semibold" href="/estimate">Get a Free Estimate</a>
+    </div>
+  </div>
+</section>

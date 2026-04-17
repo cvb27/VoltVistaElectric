@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Electrical Installations in Orlando, FL | VoltVista Electric{% endblock %}
+{% block description %}Professional electrical installations in Orlando. VoltVista Electric — 10+ years experience, fully insured. Residential and commercial.{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/services/electrical-installations">
+{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">{{ service_jsonld | tojson }}</script>
+{% endblock %}
+
+{% block content %}
+<article>
+  <header class="mb-4">
+    <h1 class="h3 fw-bold">Electrical Installations in Orlando</h1>
+    <p class="lead text-muted">New circuits, fixtures, outlets and wiring — installed safely and to code. Residential and commercial across Orlando metro.</p>
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi!%20I%20need%20electrical%20installation%20work%20done%20in%20Orlando.%20Can%20you%20help%3F"
+         target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp me-2"></i>Get a Free Estimate
+      </a>
+      {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"><i class="bi bi-telephone-fill me-2"></i>Call Us Now</a>{% endif %}
+    </div>
+    <p class="small text-muted mt-2 mb-0">
+      Need a detailed estimate? <a href="/estimate">Fill out our form</a>
+    </p>
+  </header>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Residential &amp; Commercial Installations</h2>
+    <ul class="mb-0">
+      <li>Lighting fixtures — indoor, outdoor, landscape and security.</li>
+      <li>Outlets, switches and dedicated circuits (kitchen, laundry, HVAC).</li>
+      <li>EV charger install with dedicated 240V circuit.</li>
+      <li>Ceiling fans, smart switches, whole-home surge protection.</li>
+      <li>Commercial tenant build-outs and retrofits.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Our Installation Process</h2>
+    <ol class="mb-0">
+      <li>On-site walkthrough or photo review of the scope.</li>
+      <li>Itemized estimate with parts, labor and permit scope.</li>
+      <li>Scheduled install with minimum disruption to your routine.</li>
+      <li>Final test and walk-through before we leave.</li>
+    </ol>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Service Area</h2>
+    <p class="mb-0">
+      {% for a in areas %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endfor %}
+    </p>
+  </section>
+
+  <div class="card rounded-4 p-4 text-center bg-light-subtle">
+    <div class="fw-semibold mb-2">Need a quote for your install?</div>
+    <div class="d-flex justify-content-center gap-2">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi!%20I%20need%20electrical%20installation%20work%20done%20in%20Orlando.%20Can%20you%20help%3F"
+         target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp me-2"></i>Get a Free Estimate
+      </a>
+      {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"><i class="bi bi-telephone-fill me-2"></i>Call Us Now</a>{% endif %}
+    </div>
+  </div>
+</article>
+{% endblock %}

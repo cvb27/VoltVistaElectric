@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}EV Charger Installation in Orlando, FL | VoltVista Electric{% endblock %}
+{% block description %}Professional EV charger installation for homes and businesses in Orlando. VoltVista Electric — 10+ years experience, fully insured. Get a free estimate today.{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/services/ev-charger-installation">
+{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">{{ service_jsonld | tojson }}</script>
+{% endblock %}
+
+{% block content %}
+<article>
+  <header class="mb-4">
+    <h1 class="h3 fw-bold">EV Charger Installation in Orlando</h1>
+    <p class="lead text-muted">Residential and commercial EV chargers installed safely and to code. Dedicated 240V circuits, load calculations, and permit handling — across Orlando metro.</p>
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi!%20I'd%20like%20to%20know%20more%20about%20EV%20charger%20installation%20at%20my%20home%20in%20Orlando.%20Can%20you%20help%3F"
+         target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp me-2"></i>Get a Free Estimate
+      </a>
+      {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"><i class="bi bi-telephone-fill me-2"></i>Call Us Now</a>{% endif %}
+    </div>
+    <p class="small text-muted mt-2 mb-0">
+      Need a detailed estimate? <a href="/estimate">Fill out our form</a>
+    </p>
+  </header>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Level 1 &amp; Level 2 Home Charger Installation</h2>
+    <ul class="mb-0">
+      <li>Level 1 (120V) — standard outlet, slower charge, no new circuit needed.</li>
+      <li>Level 2 (240V) — dedicated circuit, 3-7x faster charge, overnight refill.</li>
+      <li>Tesla Wall Connector, ChargePoint, JuiceBox, Grizzl-E and other brands.</li>
+      <li>Panel capacity check and load calculation before we install.</li>
+      <li>Permit, inspection and utility coordination where needed.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Commercial EV Charging Stations</h2>
+    <ul class="mb-0">
+      <li>Multi-unit parking lots, HOAs and office buildings.</li>
+      <li>Networked chargers with access control and billing.</li>
+      <li>ADA-compliant signage and bollards where required.</li>
+      <li>Service upgrades and dedicated feeders when needed.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Service Area</h2>
+    <p class="mb-0">
+      {% for a in areas %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endfor %}
+    </p>
+  </section>
+
+  <div class="card rounded-4 p-4 text-center bg-light-subtle">
+    <div class="fw-semibold mb-2">Ready to install your EV charger?</div>
+    <div class="d-flex justify-content-center gap-2">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi!%20I'd%20like%20to%20know%20more%20about%20EV%20charger%20installation%20at%20my%20home%20in%20Orlando.%20Can%20you%20help%3F"
+         target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp me-2"></i>Get a Free Estimate
+      </a>
+      {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"><i class="bi bi-telephone-fill me-2"></i>Call Us Now</a>{% endif %}
+    </div>
+  </div>
+</article>
+{% endblock %}

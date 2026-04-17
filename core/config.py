@@ -32,6 +32,22 @@ class Settings:
     service_area: str = _get("BUSINESS_SERVICE_AREA", "")
     instagram_url: str = _get("INSTAGRAM_URL", "")
 
+    # Business identity — usado en JSON-LD, footer y Google Ads.
+    # Centralizado aquí para que NAP sea idéntico en todo el sitio.
+    business_name: str = _get("BUSINESS_NAME", "VoltVista")
+    address: str = _get("BUSINESS_ADDRESS", "")
+    state: str = _get("BUSINESS_STATE", "FL")
+    zip_code: str = _get("BUSINESS_ZIP", "")
+    lat: float = float(_get("BUSINESS_LAT", "0.0") or "0.0")
+    lng: float = float(_get("BUSINESS_LNG", "0.0") or "0.0")
+    hours: str = _get("BUSINESS_HOURS", "Mo-Fr 08:00-18:00")
+    business_url: str = _get("BUSINESS_URL", "https://voltvistaelectric.com")
+    logo_url: str = _get("BUSINESS_LOGO_URL", "https://voltvistaelectric.com/static/img/logo.png")
+
+    # Tracking IDs — se rellenan vía .env, nunca hardcodeados.
+    ga4_id: str = _get("GA4_ID", "")
+    gads_id: str = _get("GADS_ID", "")
+
     # DB
     sqlite_path: str = _get("SQLITE_PATH", "./voltvista.db")
 

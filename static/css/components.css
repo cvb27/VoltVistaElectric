@@ -1,0 +1,54 @@
+/**
+ * Componentes UI compartidos (CSS separado de site.css por cap 120).
+ * Por ahora: estilos del CTA WhatsApp + botón flotante global.
+ */
+
+/* Botón WhatsApp — color oficial */
+.btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  border: none;
+}
+.btn-whatsapp:hover {
+  background: #1da851;
+  color: #fff;
+}
+
+/* Botón flotante WhatsApp — todas las páginas */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform .2s;
+  color: #fff;
+  font-size: 28px;
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+/* Botón CTA del nav — versión afinada del btn-brand para el header */
+.btn-cta-nav {
+  background: #E8352E;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 8px 20px;
+  transition: background .2s;
+}
+.btn-cta-nav:hover {
+  background: #CC2222;
+  color: #fff;
+}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Electrical Panel Upgrade in Orlando, FL | VoltVista Electric{% endblock %}
+{% block description %}Expert panel upgrades in Orlando, FL by VoltVista Electric. 10+ years experience, fully insured. Get a free estimate today.{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/services/panel-upgrade">
+{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">{{ service_jsonld | tojson }}</script>
+{% endblock %}
+
+{% block content %}
+<article>
+  <header class="mb-4">
+    <h1 class="h3 fw-bold">Electrical Panel Upgrade in Orlando</h1>
+    <p class="lead text-muted">Modernize your electrical panel for safety, capacity and code compliance. Serving Orlando and surrounding cities for 10+ years.</p>
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi!%20I'm%20interested%20in%20an%20electrical%20panel%20upgrade%20for%20my%20home%20in%20Orlando.%20Can%20you%20give%20me%20more%20info%3F"
+         target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp me-2"></i>Get a Free Estimate
+      </a>
+      {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"><i class="bi bi-telephone-fill me-2"></i>Call Us Now</a>{% endif %}
+    </div>
+    <p class="small text-muted mt-2 mb-0">
+      Need a detailed estimate? <a href="/estimate">Fill out our form</a>
+    </p>
+  </header>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Signs You Need a Panel Upgrade</h2>
+    <ul class="mb-0">
+      <li>Breakers trip frequently or the panel feels warm to the touch.</li>
+      <li>You still have a fuse box or an outdated 60/100-amp panel.</li>
+      <li>Flickering lights or discoloration around outlets.</li>
+      <li>You're adding major appliances, EV chargers or a home addition.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Our Panel Upgrade Process</h2>
+    <ol class="mb-0">
+      <li>Free on-site or photo-based assessment.</li>
+      <li>Detailed estimate with parts, labor and permit scope.</li>
+      <li>Utility and permit coordination where required.</li>
+      <li>Clean, code-compliant install and inspection-ready handoff.</li>
+    </ol>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Service Area</h2>
+    <p class="mb-0">
+      {% for a in areas %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endfor %}
+    </p>
+  </section>
+
+  <div class="card rounded-4 p-4 text-center bg-light-subtle">
+    <div class="fw-semibold mb-2">Ready to upgrade your panel?</div>
+    <div class="d-flex justify-content-center gap-2">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi!%20I'm%20interested%20in%20an%20electrical%20panel%20upgrade%20for%20my%20home%20in%20Orlando.%20Can%20you%20give%20me%20more%20info%3F"
+         target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp me-2"></i>Get a Free Estimate
+      </a>
+      {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"><i class="bi bi-telephone-fill me-2"></i>Call Us Now</a>{% endif %}
+    </div>
+  </div>
+</article>
+{% endblock %}

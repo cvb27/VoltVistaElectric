@@ -22,9 +22,13 @@ def sitemap():
         f"{settings.base_url}/",
         f"{settings.base_url}/estimate",
         f"{settings.base_url}/payments",
-        f"{settings.base_url}/reviews",
-        f"{settings.base_url}/emergency",
         f"{settings.base_url}/blog",
+        f"{settings.base_url}/services/panel-upgrade",
+        f"{settings.base_url}/services/electrical-installations",
+        f"{settings.base_url}/services/ev-charger-installation",
+        f"{settings.base_url}/blog/panel-upgrade-orlando",
+        f"{settings.base_url}/blog/ev-charger-installation-orlando",
+        f"{settings.base_url}/blog/electrical-problems-orlando-homes",
     ]
 
     xml_items = "\n".join([f"<url><loc>{u}</loc></url>" for u in urls])

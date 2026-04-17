@@ -1,0 +1,21 @@
+{# Sección Areas — ciudades cubiertas + CTA a estimado #}
+<section class="section-navy py-5 py-md-6">
+  <div class="container text-center">
+    <h2 class="display-6 fw-bold text-white mb-2">Areas We Serve</h2>
+    <p class="lead mb-4" style="color: var(--color-muted);">Contact us today for a free estimate</p>
+
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+      {% for area in settings.service_area.split(",") %}
+        {% set trimmed = area.strip() %}
+        {% if trimmed %}
+          <span class="badge rounded-pill px-3 py-2 fs-6"
+                style="background: rgba(255,255,255,0.1); color: #fff;">
+            <i class="bi bi-geo-alt-fill me-1" style="color: var(--color-accent);"></i>{{ trimmed }}
+          </span>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <a class="btn btn-brand btn-lg" href="/estimate">Get a Free Estimate</a>
+  </div>
+</section>

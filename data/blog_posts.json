@@ -1,14 +1,26 @@
 [
   {
-    "slug": "gfci-trips-causes",
-    "title": "GFCI se dispara: causas comunes y qué hacer",
-    "excerpt": "Motivos más comunes por los que un GFCI se dispara y cómo diagnosticar sin riesgos.",
-    "file": "gfci-trips-causes.md"
+    "slug": "electrical-problems-orlando-homes",
+    "title": "Top 5 Electrical Problems in Orlando Homes (And How to Fix Them)",
+    "excerpt": "From flickering lights to tripping breakers, Orlando homes face common electrical issues. VoltVista Electric shares the top 5 problems and solutions.",
+    "description": "From flickering lights to tripping breakers, Orlando homes face common electrical issues. VoltVista Electric shares the top 5 problems and solutions.",
+    "published_at": "2026-04-17",
+    "file": "electrical-problems-orlando-homes.md"
   },
   {
-    "slug": "panel-upgrade-when-needed",
-    "title": "¿Cuándo conviene un upgrade de panel eléctrico?",
-    "excerpt": "Señales típicas y cómo evaluar si necesitas modernizar tu panel.",
-    "file": "panel-upgrade-when-needed.md"
+    "slug": "ev-charger-installation-orlando",
+    "title": "EV Charger Installation at Home: What Orlando Homeowners Need to Know",
+    "excerpt": "Thinking about installing an EV charger at home in Orlando? VoltVista Electric explains Level 1 vs Level 2, costs, and what to expect during installation.",
+    "description": "Thinking about installing an EV charger at home in Orlando? VoltVista Electric explains Level 1 vs Level 2, costs, and what to expect during installation.",
+    "published_at": "2026-04-10",
+    "file": "ev-charger-installation-orlando.md"
+  },
+  {
+    "slug": "panel-upgrade-orlando",
+    "title": "How to Know if Your Home Needs a Panel Upgrade in Orlando",
+    "excerpt": "Learn the warning signs that your Orlando home needs an electrical panel upgrade. VoltVista Electric explains what to look for and when to call a professional.",
+    "description": "Learn the warning signs that your Orlando home needs an electrical panel upgrade. VoltVista Electric explains what to look for and when to call a professional.",
+    "published_at": "2026-04-03",
+    "file": "panel-upgrade-orlando.md"
   }
 ]

@@ -1,48 +1,120 @@
-:root{
-  /* Colores inspirados en tu logo (azul marino + rojo) */
-  --vv-navy: #1f3b73;
-  --vv-red:  #e11d2a;
-  --vv-bg:   #0b1220; /* para pequeños detalles oscuros */
+/**
+ * Paleta VoltVista + estilos de layout para la home.
+ *
+ * Variables de color centralizadas. Fondo oscuro aplicado solo en la home
+ * (body[data-page="home"]) — las demás páginas mantienen fondo blanco.
+ */
+
+:root {
+  --color-bg:      #0D1B2A;
+  --color-accent:  #D52B2B;
+  --color-navy:    #1E3A6E;
+  --color-text:    #FFFFFF;
+  --color-muted:   #A8B8C8;
+  --color-overlay: rgba(13, 27, 42, 0.65);
 }
 
-.brand-logo{
+/* Fondo oscuro solo en home — evita romper páginas con diseño blanco */
+body[data-page="home"] {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Hero section — video de fondo a pantalla completa */
+.hero {
+  position: relative;
+  z-index: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Secciones alternas por color de fondo */
+.section-dark   { background: var(--color-bg); }
+.section-navy   { background: var(--color-navy); }
+.section-accent { background: var(--color-accent); }
+
+/* Botones de marca */
+.btn-brand {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+}
+.btn-brand:hover {
+  background: #b52020;
+  color: #fff;
+}
+.btn-outline-brand {
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  background: transparent;
+}
+.btn-outline-brand:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Brand assets — preservados del CSS previo */
+.brand-logo {
   width: 34px;
   height: 34px;
   object-fit: contain;
 }
-
-.brand-text{
-  letter-spacing: .08em;
-  color: var(--vv-navy);
+.brand-text {
+  letter-spacing: 0.08em;
+  color: var(--color-navy);
 }
 
-.btn-brand{
-  background: var(--vv-red);
-  border-color: var(--vv-red);
-  color: white;
-}
-.btn-brand:hover{
-  background: #c91722;
-  border-color: #c91722;
-  color: white;
-}
-
-.link-muted{
-  color: var(--vv-navy);
+/* Enlaces muted en páginas con fondo claro */
+.link-muted {
+  color: var(--color-navy);
   text-decoration: none;
 }
-.link-muted:hover{ text-decoration: underline; }
-
-.hero{
-  background: linear-gradient(180deg, rgba(31,59,115,.06), rgba(225,29,42,.04));
+.link-muted:hover {
+  text-decoration: underline;
 }
 
-.client-logo{
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
+/* Override del footer en home: navy no contrasta sobre fondo oscuro */
+body[data-page="home"] .link-muted {
+  color: var(--color-muted);
 }
 
-.client-tile{
-  background: white;
+/* Navbar — blanca en páginas no-home, transparente-to-oscura en home */
+body:not([data-page="home"]) .navbar {
+  background: #fff;
+  border-bottom: 1px solid #dee2e6;
 }
+body[data-page="home"] .navbar {
+  background: transparent;
+  transition: background 0.3s ease;
+}
+body[data-page="home"] .navbar.nav-scrolled {
+  background: var(--color-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+body[data-page="home"] .navbar .nav-link,
+body[data-page="home"] .navbar .brand-text {
+  color: #fff;
+}
+html { scroll-behavior: smooth; }

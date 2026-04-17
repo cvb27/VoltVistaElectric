@@ -4,10 +4,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{{ app_name }}</title>
+  {% if settings.ga4_id %}
+  <!-- Google Analytics 4 — carga solo si GA4_ID está configurado en .env -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.ga4_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ settings.ga4_id }}');
+  </script>
+  {% endif %}
 
-  <!-- SEO básico -->
-  <meta name="description" content="Voltvista Electric: servicios y reparaciones eléctricas. Estimado gratis. Atención residencial y comercial.">
+  {% if settings.gads_id %}
+  <!-- Google Ads remarketing tag — carga solo si GADS_ID está configurado en .env -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.gads_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ settings.gads_id }}');
+  </script>
+  {% endif %}
+
+  <!-- Título por página — cada plantilla hija sobreescribe este bloque -->
+  <title>{% block title %}Electrical Services in Orlando | VoltVista{% endblock %}</title>
+
+  <!-- SEO básico — cada plantilla hija sobreescribe el bloque description -->
+  <meta name="description"
+    content="{% block description %}Licensed electricians in Orlando, FL. Panel upgrades, installations, and 24/7 emergency service. Call VoltVista today.{% endblock %}">
   <meta property="og:title" content="{{ app_name }}">
   <meta property="og:description" content="Servicios y reparaciones eléctricas. Estimado gratis.">
   <meta property="og:type" content="website">
@@ -15,17 +39,30 @@
 
   <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <!-- Site CSS -->
   <link href="/static/css/site.css" rel="stylesheet">
+  <link href="/static/css/components.css" rel="stylesheet">
 
   <!-- Tracking hook (opcional) -->
   {# Ejemplo: pega aquí Plausible o GA si quieres #}
   {# <script defer data-domain="tudominio.com" src="https://plausible.io/js/script.js"></script> #}
-</head>
-<body>
 
-<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+  <!-- URL canónica — cada plantilla hija sobreescribe este bloque -->
+  {% block canonical %}
+  <link rel="canonical" href="{{ business_url }}">
+  {% endblock %}
+
+  <!-- Schemas JSON-LD específicos de la página — las hijas inyectan aquí -->
+  {% block jsonld %}{% endblock %}
+
+  <!-- Schema global LocalBusiness — no mover ni duplicar -->
+  <script type="application/ld+json">{{ global_jsonld | tojson }}</script>
+</head>
+<body data-page="{% block page %}{% endblock %}">
+
+<nav class="navbar navbar-expand-lg sticky-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="/">
       <img src="/static/img/logo.png" alt="Voltvista Electric" class="brand-logo">
@@ -38,44 +75,36 @@
 
     <div id="nav" class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-        <li class="nav-item"><a class="nav-link" href="/">{{ t("nav_home") }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/estimate">{{ t("nav_estimate") }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/payments">{{ t("nav_payments") }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/reviews">{{ t("nav_reviews") }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/blog">{{ t("nav_blog") }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/emergency">{{ t("nav_emergency") }}</a></li>
-
-        <!-- selector simple de idioma -->
-        <li class="nav-item d-flex gap-1 ms-lg-2">
-          <a class="btn btn-sm btn-outline-secondary" href="?lang=es">ES</a>
-          <a class="btn btn-sm btn-outline-secondary" href="?lang=en">EN</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/payments">Payments</a></li>
+        <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
 
         <li class="nav-item ms-lg-2">
-          <a class="btn btn-brand btn-sm" href="/estimate">{{ t("cta_free_estimate") }}</a>
+          <a class="btn btn-cta-nav" href="/estimate">Get Estimate</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 
+{% block main %}
 <main class="py-4">
   <div class="container">
     {% block content %}{% endblock %}
   </div>
 </main>
+{% endblock %}
 
-<footer class="border-top py-4">
-  <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
-    <div class="text-muted small">
-      © {{ app_name }} — {{ city or "" }}
-    </div>
-    <div class="text-muted small">
-      <a class="link-muted" href="/sitemap.xml">Sitemap</a>
-      · <a class="link-muted" href="/robots.txt">Robots</a>
-    </div>
-  </div>
-</footer>
+{% include '_footer.html' %}
+
+<!-- Botón flotante WhatsApp — visible en todas las páginas -->
+<a href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi!%20I%20have%20a%20question%20about%20your%20electrical%20services%20in%20Orlando."
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener"
+   aria-label="Contact us on WhatsApp">
+  <i class="bi bi-whatsapp"></i>
+</a>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/static/js/site.js"></script>

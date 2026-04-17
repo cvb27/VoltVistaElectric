@@ -5,18 +5,17 @@ from typing import List
 
 from fastapi import APIRouter, Depends, Request, UploadFile, File, Form
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from sqlmodel import Session
 
 from core.utils import get_lang
 from core.i18n import t
 from core.config import settings
 from core.emailer import send_owner_email
+from core.templating import templates
 from db.session import get_session
 from db.models import EstimateRequest, EstimatePhoto
 
 router = APIRouter(prefix="/estimate", tags=["estimate"])
-templates = Jinja2Templates(directory="templates")
 
 ALLOWED_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 UPLOAD_ROOT = Path("static/uploads/estimates")

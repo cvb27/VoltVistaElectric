@@ -1,14 +1,20 @@
 {% extends "base.html" %}
+{% block title %}Request a Free Estimate | VoltVista Electric Orlando{% endblock %}
+{% block description %}Get a free estimate from VoltVista Electric — 10 years of experience in Orlando, Kissimmee and Winter Park. Fast response, fully insured.{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/estimate">
+{% endblock %}
+
 {% block content %}
 
-<h1 class="h4 fw-bold">Estimado gratis</h1>
-<p class="text-muted">Cuéntanos lo que necesitas y adjunta fotos si puedes (ayuda a estimar más rápido).</p>
+<h1 class="h4 fw-bold">Free Estimate</h1>
+<p class="text-muted">Tell us what you need and attach photos if you can (helps us estimate faster).</p>
 
 {% if error %}
   <div class="alert alert-danger">{{ error }}</div>
 {% endif %}
 
-<form class="card rounded-4 p-3 p-md-4" method="post" enctype="multipart/form-data">
+<form id="estimate-form" class="card rounded-4 p-3 p-md-4" method="post" enctype="multipart/form-data">
   <div class="row g-3">
     <div class="col-md-6">
       <label class="form-label">Nombre *</label>

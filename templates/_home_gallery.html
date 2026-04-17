@@ -1,0 +1,32 @@
+{# Sección Gallery — grid 3×3 de fotos de trabajos realizados #}
+<section id="gallery" class="section-dark py-5 py-md-6">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-6 fw-bold text-white mb-2">Our Work</h2>
+      <p class="lead" style="color: var(--color-muted);">Real jobs in Orlando and surrounding areas.</p>
+    </div>
+
+    <div class="row g-3">
+      {% for img in [
+        "IMG_20260213_125657_778.jpg",
+        "IMG_20260213_224333_547.jpg",
+        "IMG_20260213_224333_639.jpg",
+        "IMG_20260213_224342_606.jpg",
+        "IMG_20260213_224342_891.jpg",
+        "IMG_20260213_224343_129.jpg",
+        "IMG_20260213_224357_209.jpg",
+        "IMG_20260213_224357_785.jpg",
+        "IMG_20260213_224357_817.jpg"
+      ] %}
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="ratio ratio-1x1 rounded-4 overflow-hidden shadow-sm">
+            <img src="/static/img/gallery/{{ img }}"
+                 alt="Electrical work by VoltVista Electric — Orlando, FL"
+                 class="object-fit-cover"
+                 loading="lazy">
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

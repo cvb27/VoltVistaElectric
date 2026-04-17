@@ -1,7 +1,12 @@
 {% extends "base.html" %}
+{% block title %}Electrical Tips & Guides for Orlando Homeowners | VoltVista{% endblock %}
+{% block description %}Electrical safety tips, panel upgrade guides and home wiring advice from VoltVista Electric — 10 years serving Orlando.{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/blog">
+{% endblock %}
+
 {% block content %}
-<h1 class="h4 fw-bold">Guías rápidas</h1>
-<p class="text-muted">Contenido corto para SEO local. Edita el índice en <code>data/blog_posts.json</code>.</p>
+<h1 class="h4 fw-bold">Electrical Tips &amp; Guides</h1>
 
 <div class="list-group">
   {% for p in posts %}

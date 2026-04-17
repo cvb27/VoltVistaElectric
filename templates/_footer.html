@@ -1,0 +1,40 @@
+{# Footer compartido con NAP + Google Maps embed — incluido desde base.html #}
+<footer class="border-top py-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="fw-semibold mb-2">{{ settings.business_name }}</div>
+        <address class="small text-muted mb-2 mb-md-3">
+          {{ settings.address }}<br>
+          {{ settings.city }}, {{ settings.state }} {{ settings.zip_code }}
+        </address>
+        <div class="small text-muted mb-1">
+          <a class="link-muted" href="tel:{{ settings.phone }}">{{ settings.phone }}</a>
+          · <a class="link-muted" href="mailto:{{ settings.email }}">{{ settings.email }}</a>
+        </div>
+        <div class="small text-muted">Hours: {{ settings.hours }}</div>
+      </div>
+      <div class="col-md-6">
+        <iframe
+          src="https://maps.google.com/maps?q={{ settings.lat }},{{ settings.lng }}&z=15&output=embed"
+          width="100%" height="200" style="border:0;" loading="lazy"
+          allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+          title="{{ settings.business_name }} location">
+        </iframe>
+      </div>
+    </div>
+    <div class="small mt-3 pt-3 border-top">
+      <span class="fw-semibold text-muted me-2">Services:</span>
+      <a class="link-muted" href="/services/panel-upgrade">Electrical Panel Upgrade</a>
+      · <a class="link-muted" href="/services/electrical-installations">Electrical Installations</a>
+      · <a class="link-muted" href="/services/ev-charger-installation">EV Charger Installation</a>
+    </div>
+    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mt-3 pt-3 border-top">
+      <div class="text-muted small">© {{ app_name }}</div>
+      <div class="text-muted small">
+        <a class="link-muted" href="/sitemap.xml">Sitemap</a>
+        · <a class="link-muted" href="/robots.txt">Robots</a>
+      </div>
+    </div>
+  </div>
+</footer>

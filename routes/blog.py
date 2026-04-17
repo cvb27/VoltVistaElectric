@@ -2,15 +2,15 @@ import json
 from pathlib import Path
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 import markdown as md
 
 from core.utils import get_lang
 from core.i18n import t
 from core.config import settings
+from core.templating import templates
+from core.seo_blog import build_article_schema
 
 router = APIRouter(prefix="/blog", tags=["blog"])
-templates = Jinja2Templates(directory="templates")
 
 POSTS_INDEX = Path("data/blog_posts.json")
 POSTS_DIR = Path("posts")
@@ -38,10 +38,11 @@ def blog_post(request: Request, slug: str):
     posts = _load_posts()
     post = next((p for p in posts if p.get("slug") == slug), None)
     if not post:
+        not_found = {"title": "Post Not Found", "excerpt": "The post you are looking for does not exist.", "slug": slug}
         return templates.TemplateResponse(
             "blog_post.html",
             {"request": request, "lang": lang, "t": lambda k: t(lang, k), "app_name": settings.app_name,
-             "title": "No encontrado", "html": "<p>Post no encontrado.</p>"},
+             "post": not_found, "html": "<p>Post not found.</p>"},
             status_code=404,
         )
 
@@ -51,5 +52,5 @@ def blog_post(request: Request, slug: str):
     return templates.TemplateResponse(
         "blog_post.html",
         {"request": request, "lang": lang, "t": lambda k: t(lang, k), "app_name": settings.app_name,
-         "title": post.get("title", ""), "html": html},
+         "post": post, "html": html, "article_jsonld": build_article_schema(settings, post)},
     )

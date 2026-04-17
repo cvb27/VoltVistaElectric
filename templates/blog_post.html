@@ -1,7 +1,18 @@
 {% extends "base.html" %}
+{% block title %}{{ post.title }} | VoltVista Electric{% endblock %}
+{% block description %}{{ post.excerpt if post.excerpt else post.title }}{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/blog/{{ post.slug }}">
+{% endblock %}
+{% block jsonld %}
+  {% if article_jsonld %}
+  <script type="application/ld+json">{{ article_jsonld | tojson }}</script>
+  {% endif %}
+{% endblock %}
+
 {% block content %}
-<a class="small link-muted" href="/blog">← Volver</a>
-<h1 class="h3 fw-bold mt-2">{{ title }}</h1>
+<a class="small link-muted" href="/blog">← Back</a>
+<h1 class="h3 fw-bold mt-2">{{ post.title }}</h1>
 <div class="card rounded-4 p-4 mt-3">
   <div class="prose">{{ html|safe }}</div>
 </div>

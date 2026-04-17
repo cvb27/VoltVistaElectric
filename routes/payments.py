@@ -1,14 +1,13 @@
 import stripe
 from fastapi import APIRouter, Request, Form, Header, HTTPException
 from fastapi.responses import RedirectResponse
-from fastapi.templating import Jinja2Templates
 
 from core.config import settings
 from core.utils import get_lang
 from core.i18n import t
+from core.templating import templates
 
 router = APIRouter(prefix="/payments", tags=["payments"])
-templates = Jinja2Templates(directory="templates")
 
 # Stripe secret key (LIVE o TEST según tu env)
 stripe.api_key = settings.stripe_secret_key
