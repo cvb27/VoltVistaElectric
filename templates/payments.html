@@ -4,7 +4,6 @@
 <div class="container py-4">
 
   <h1 class="h4 fw-bold mb-2">
-    <i class="fas fa-credit-card me-2 text-primary"></i>
     Card Payment
   </h1>
 
@@ -26,7 +25,7 @@
         <!-- Header -->
         <div class="d-flex align-items-center mb-3">
           <div class="me-3 fs-3 text-success">
-            <i class="fas fa-lock"></i>
+            🔒
           </div>
           <div>
             <div class="fw-semibold">Secure payment</div>
@@ -64,7 +63,6 @@
           >
 
           <button class="btn btn-brand w-100 py-2">
-            <i class="fas fa-arrow-right me-2"></i>
             Proceed to payment
           </button>
 
@@ -72,9 +70,7 @@
 
         <!-- Trust footer -->
         <div class="text-center mt-3 small text-muted">
-          <i class="fab fa-cc-visa me-1"></i>
-          <i class="fab fa-cc-mastercard me-1"></i>
-          <i class="fab fa-cc-amex me-1"></i>
+          💳 Visa, Mastercard, Amex accepted
           <span class="ms-2">
             Encrypted transaction · We do not store card details
           </span>
@@ -87,34 +83,5 @@
   {% endif %}
 
 </div>
-
-
-
-<script>
-(async function(){
-  const depositBtn = document.getElementById("pp-deposit");
-  const invoiceBtn = document.getElementById("pp-invoice");
-  const amountEl = document.getElementById("pp-amount");
-  const msg = document.getElementById("pp-msg");
-
-  async function create(purpose, amount){
-    msg.textContent = "Creando orden PayPal...";
-    const fd = new FormData();
-    fd.append("purpose", purpose);
-    fd.append("amount", amount);
-    const r = await fetch("/payments/paypal/create", { method:"POST", body: fd });
-    const j = await r.json();
-    if(!j.ok){ msg.textContent = "Error PayPal: " + (j.reason || ""); return; }
-    if(j.approve_url){ window.location.href = j.approve_url; }
-  }
-
-  if(depositBtn){
-    depositBtn.addEventListener("click", () => create("deposit", 0));
-  }
-  if(invoiceBtn){
-    invoiceBtn.addEventListener("click", () => create("invoice", amountEl.value || 0));
-  }
-})();
-</script>
 
 {% endblock %}
