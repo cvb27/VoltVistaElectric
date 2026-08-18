@@ -89,6 +89,7 @@ def payment_cancel(request: Request):
     return templates.TemplateResponse(
         "payments.html",
         {"request": request, "lang": lang, "t": lambda k: t(lang, k)},
+        "stripe_on": stripe_on,
     )
 
 
