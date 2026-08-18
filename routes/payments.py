@@ -86,10 +86,15 @@ def payment_success(request: Request):
 @router.get("/cancel")
 def payment_cancel(request: Request):
     lang = get_lang(request)
+    stripe_on = bool(settings.stripe_secret_key)
+
     return templates.TemplateResponse(
         "payments.html",
-        {"request": request, "lang": lang, "t": lambda k: t(lang, k)},
+        {"request": request, 
+        "lang": lang, 
+        "t": lambda k: t(lang, k),
         "stripe_on": stripe_on,
+        }
     )
 
 
