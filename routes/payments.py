@@ -13,7 +13,7 @@ router = APIRouter(prefix="/payments", tags=["payments"])
 stripe.api_key = settings.stripe_secret_key
 
 
-@router.get("/")
+@router.get("")
 def pay_page(request: Request):
     lang = get_lang(request)
 
