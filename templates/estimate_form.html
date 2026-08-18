@@ -17,11 +17,11 @@
 <form id="estimate-form" class="card rounded-4 p-3 p-md-4" method="post" enctype="multipart/form-data">
   <div class="row g-3">
     <div class="col-md-6">
-      <label class="form-label">Nombre *</label>
+      <label class="form-label">Name *</label>
       <input class="form-control" name="name" required>
     </div>
     <div class="col-md-6">
-      <label class="form-label">Teléfono *</label>
+      <label class="form-label">Phone number *</label>
       <input class="form-control" name="phone" required>
     </div>
 
@@ -31,53 +31,44 @@
     </div>
 
     <div class="col-md-6">
-      <label class="form-label">Dirección (opcional)</label>
+      <label class="form-label">Address (opcional)</label>
       <input class="form-control" name="address">
     </div>
 
     <div class="col-md-4">
-      <label class="form-label">ZIP (opcional)</label>
+      <label class="form-label">Zip Code (opcional)</label>
       <input class="form-control" name="zip_code">
     </div>
 
     <div class="col-md-8">
-      <label class="form-label">Tipo de trabajo *</label>
+      <label class="form-label">Job Type *</label>
       <input class="form-control" name="job_type" placeholder="Ej: GFCI, luces, panel, outlet..." required>
     </div>
 
     <div class="col-12">
-      <label class="form-label">Descripción *</label>
+      <label class="form-label">Description *</label>
       <textarea class="form-control" name="description" rows="4" required></textarea>
     </div>
 
-    <div class="col-md-6">
-      <label class="form-label">Urgencia</label>
-      <select class="form-select" name="urgency">
-        <option value="low">Baja</option>
-        <option value="normal" selected>Normal</option>
-        <option value="high">Alta</option>
-        <option value="emergency">Emergencia</option>
-      </select>
-    </div>
 
     <div class="col-md-6">
-      <label class="form-label">Preferencia de contacto</label>
+      <label class="form-label">Contact</label>
       <select class="form-select" name="contact_preference">
-        <option value="text" selected>Texto</option>
-        <option value="call">Llamada</option>
-        <option value="whatsapp">WhatsApp</option>
+        <option value="text" selected>Text</option>
+        <option value="call">Call</option>
+        <option value="whatsapp">Text/WhatsApp</option>
       </select>
     </div>
 
     <div class="col-12">
-      <label class="form-label">Fotos (1 a 5, opcional)</label>
+      <label class="form-label">Photos (1 a 5, opcional)</label>
       <input class="form-control" type="file" name="photos" accept=".jpg,.jpeg,.png,.webp" multiple>
-      <div class="form-text">JPG/PNG/WEBP. Máx {{ 8 }}MB por foto (configurable en .env).</div>
+      <div class="form-text">JPG/PNG/WEBP. Max {{ settings.max_upload_mb }}MB per photo</div>
     </div>
 
     <div class="col-12 d-flex gap-2">
-      <button class="btn btn-brand" type="submit">Enviar</button>
-      <a class="btn btn-outline-secondary" href="/">Cancelar</a>
+      <button class="btn btn-brand" type="submit">Submit</button>
+      <a class="btn btn-outline-secondary" href="/">Cancel</a>
     </div>
   </div>
 </form>
