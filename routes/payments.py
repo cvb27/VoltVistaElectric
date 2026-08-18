@@ -82,7 +82,7 @@ def payment_success(request: Request):
         {"request": request, "lang": lang, "t": lambda k: t(lang, k)},
     )
 
-
+""" ### arreglado """
 @router.get("/cancel")
 def payment_cancel(request: Request):
     lang = get_lang(request)
@@ -91,11 +91,12 @@ def payment_cancel(request: Request):
     return templates.TemplateResponse(
         "payments.html",
         {"request": request, 
-        "lang": lang, 
+        "lang": lang,   
         "t": lambda k: t(lang, k),
         "stripe_on": stripe_on,
         }
     )
+
 
 
 @router.post("/webhook")
