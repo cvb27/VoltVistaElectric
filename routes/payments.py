@@ -6,6 +6,7 @@ from core.config import settings
 from core.utils import get_lang
 from core.i18n import t
 from core.templating import templates
+from core.checkout import create_stripe_session
 
 router = APIRouter(prefix="/payments", tags=["payments"])
 
@@ -45,34 +46,15 @@ def pay_page(request: Request):
 def create_checkout(request: Request, amount: float = Form(...), description: str = Form("")):
     """
     Crea una sesión de pago en Stripe Checkout.
-    amount viene en dólares.
+    
     """
     # Validación mínima
-    if amount <= 0:
-        raise HTTPException(status_code=400, detail="Invalid amount")
-
-    session = stripe.checkout.Session.create(
-        payment_method_types=["card"],
-        mode="payment",
-        line_items=[
-            {
-                "price_data": {
-                    "currency": settings.stripe_currency,
-                    "product_data": {
-                        "name": description.strip() or "Electric Service Payment",
-                    },
-                    "unit_amount": int(round(amount * 100)),  # Stripe usa centavos
-                },
-                "quantity": 1,
-            }
-        ],
-        # Usa base_url (tu config.py lo llama base_url)
-        success_url=f"{settings.base_url}/payments/success",
-        cancel_url=f"{settings.base_url}/payments/cancel",
-    )
-
-    return RedirectResponse(session.url, status_code=303)
-
+    
+    try:
+        session_url = create_stripe_session(amount, description)
+        return RedirectResponse(session_url, status_code=303)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @router.get("/success")
 def payment_success(request: Request):
@@ -82,7 +64,6 @@ def payment_success(request: Request):
         {"request": request, "lang": lang, "t": lambda k: t(lang, k)},
     )
 
-""" ### arreglado """
 @router.get("/cancel")
 def payment_cancel(request: Request):
     lang = get_lang(request)
@@ -123,30 +104,15 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(None))
         # TODO: Guardar en SQLite si quieres
 
     return {"status": "ok"}
+
+
 @router.post("/link")
 def create_shareable_link(request: Request, amount: float = Form(...), description: str = Form("")):
     """
     Genera un link compartible (Stripe Checkout Session URL).
     """
-    if amount <= 0:
-        raise HTTPException(status_code=400, detail="Invalid amount")
-
-    session = stripe.checkout.Session.create(
-        payment_method_types=["card"],
-        mode="payment",
-        line_items=[
-            {
-                "price_data": {
-                    "currency": settings.stripe_currency,
-                    "product_data": {"name": description.strip() or "Electric Service Payment"},
-                    "unit_amount": int(round(amount * 100)),
-                },
-                "quantity": 1,
-            }
-        ],
-        success_url=f"{settings.base_url}/payments/success",
-        cancel_url=f"{settings.base_url}/payments/cancel",
-    )
-
-    # Volvemos a /payments pasando el link como query param
-    return RedirectResponse(f"/payments/?link={session.url}", status_code=303)
+    try:
+        session_url = create_stripe_session(amount, description)
+        return RedirectResponse(f"/payments/?link={session_url}", status_code=303)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
