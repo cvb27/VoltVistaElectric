@@ -17,7 +17,7 @@
   <meta property="og:title" content="{% block og_title %}{{ app_name }}{% endblock %}">
   <meta property="og:description" content="{% block og_description %}Electrical repairs and installations. FREE Estimate.{% endblock %}">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="{% block og_image %}{{ settings.business_logo_url|default('/static/img/logo.png') }}{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{{ settings.business_logo_url|default('/static/img/og-default.png') }}{% endblock %}">
 
   <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
 <nav class="navbar navbar-expand-lg sticky-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-      <img src="/static/img/logo.png" alt="Voltvista Electric" class="brand-logo">
+      <img src="/static/img/logo.webp" alt="Voltvista Electric" class="brand-logo">
       <span class="fw-bold brand-text">VoltvistaELectric</span>
     </a>
 
