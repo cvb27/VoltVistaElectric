@@ -22,7 +22,8 @@
       <a class="btn btn-brand" href="#plans">See Options &amp; Pricing</a>
       {% if phone %}
       <a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"
-         onclick="if(window.gtag)gtag('event','click_to_call',{page:'surge_hero'})">
+         onclick="if(window.gtag)gtag('event','click_to_call',{page:'surge_hero'})"
+         aria-label="Call VoltVista Electric">
         <i class="bi bi-telephone-fill me-2"></i>Call Us Now
       </a>
       {% endif %}
@@ -94,7 +95,8 @@
           <a class="btn {% if plan.badge %}btn-brand{% else %}btn-outline-primary{% endif %} w-100 mt-auto"
              href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%27m%20interested%20in%20the%20{{ plan.name|urlencode }}%20surge%20protector%20package%20%28%24{{ plan.price }}%29%20for%20my%20home%20in%20Orlando."
              target="_blank" rel="noopener"
-             onclick="if(window.gtag)gtag('event','select_plan',{plan:'{{ plan.key }}',value:{{ plan.price }}})">
+             onclick="if(window.gtag)gtag('event','select_plan',{plan:'{{ plan.key }}',value:{{ plan.price }}})"
+             aria-label="Get {{ plan.name }} surge protector package for ${{ plan.price }}">
             Get This Package
           </a>
 
@@ -174,7 +176,8 @@
       </a>
       {% if phone %}
       <a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"
-         onclick="if(window.gtag)gtag('event','click_to_call',{page:'surge_footer'})">
+         onclick="if(window.gtag)gtag('event','click_to_call',{page:'surge_footer'})"
+         aria-label="Call VoltVista Electric">
         <i class="bi bi-telephone-fill me-2"></i>Call Us Now
       </a>
       {% endif %}
