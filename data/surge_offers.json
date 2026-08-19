@@ -1,0 +1,54 @@
+{
+  "from_price": 299,
+  "plans": [
+    {
+      "key": "basic",
+      "name": "Essential",
+      "price": 299,
+      "badge": "",
+      "tagline": "Panel-level protection against utility-side surges",
+      "bullets": [
+        "36,000 A surge current capacity per phase",
+        "5,000 A nominal discharge rating",
+        "UL 1449 listed Type 2 device, installed at your main panel",
+        "5-year device warranty",
+        "Up to $25,000 in connected equipment coverage",
+        "Professional installation, about two hours"
+      ],
+      "note": ""
+    },
+    {
+      "key": "recommended",
+      "name": "Complete",
+      "price": 399,
+      "badge": "Most Homeowners Choose This",
+      "tagline": "Double the capacity, double the coverage, for $100 more",
+      "bullets": [
+        "60,000 A surge current capacity per phase — nearly 2x Essential",
+        "10,000 A nominal discharge rating — 2x Essential",
+        "UL 1449 listed Type 2 device, installed at your main panel",
+        "10-year device warranty — 2x Essential",
+        "Up to $50,000 in connected equipment coverage — 2x Essential",
+        "Full panel safety inspection included"
+      ]
+      
+    },
+    {
+      "key": "premium",
+      "name": "Total Home",
+      "price": 599,
+      "badge": "Maximum Coverage",
+      "tagline": "The highest protection available for a residential panel",
+      "bullets": [
+        "108,000 A surge current capacity per phase — 3x Essential",
+        "20,000 A nominal discharge rating — 4x Essential",
+        "NEMA 4 rated enclosure, sealed against moisture and dust",
+        "Dedicated 50 A double-pole circuit for maximum discharge capacity",
+        "Lifetime device warranty — never needs replacing at your cost",
+        "Up to $75,000 in connected equipment coverage — 3x Essential",
+        "Full panel safety inspection included"
+      ],
+      "note": ""
+    }
+  ]
+}

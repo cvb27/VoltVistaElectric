@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block title %}Surge Protector Installation in Orlando from ${{ from_price }} | VoltVista Electric{% endblock %}
+{% block description %}Whole-home surge protector installation in Orlando from ${{ from_price }}. Protect your appliances and electronics from power surges. Free assessment, fully insured.{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/services/surge-protector-installation">
+{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">{{ service_jsonld | tojson }}</script>
+{% endblock %}
+
+{% block content %}
+<article>
+
+  <header class="mb-5">
+    <h1 class="h3 fw-bold">Surge Protector Installation in Orlando from ${{ from_price }}</h1>
+    <p class="lead text-muted">
+      One surge can take out your AC, your water heater and every screen in the house.
+      A panel-mounted surge protector stops it before it reaches your equipment.
+      Installed in about two hours.
+    </p>
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-brand" href="#plans">See Options &amp; Pricing</a>
+      {% if phone %}
+      <a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"
+         onclick="if(window.gtag)gtag('event','click_to_call',{page:'surge_hero'})">
+        <i class="bi bi-telephone-fill me-2"></i>Call Us Now
+      </a>
+      {% endif %}
+    </div>
+    <p class="small text-muted mt-2 mb-0">
+      Prefer to send details? <a href="/estimate">Fill out our form</a>
+    </p>
+  </header>
+
+  <section class="mb-5">
+    <h2 class="h5 fw-bold">Why Orlando Homes Need Surge Protection</h2>
+    <ul class="mb-0">
+      <li><strong>Central Florida gets more lightning than anywhere else in the country.</strong>
+          Most surge damage doesn't come from a direct hit — it travels in through the utility line.</li>
+      <li><strong>Your AC is the expensive one.</strong> Replacing a surge-damaged compressor or
+          control board runs into the thousands. The protector costs a fraction of one repair.</li>
+      <li><strong>Most surges start inside the house.</strong> Every time a large motor cycles —
+          AC, pool pump, refrigerator — it sends a spike down the line. They add up and shorten
+          the life of your electronics.</li>
+      <li><strong>Power strips aren't the same thing.</strong> They only protect what's plugged
+          into them, and most are rated far below what a real surge carries.</li>
+    </ul>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h5 fw-bold">Types of Surge Protection We Install</h2>
+    <ul class="mb-0">
+      <li><strong>Whole-home Type 2 protectors:</strong> mounted at your main panel, they stop
+          surges arriving from the utility side before they reach any circuit.</li>
+      <li><strong>Point-of-use protectors:</strong> installed at the outlet for the equipment
+          that matters most — media centers, home offices, smart home hubs.</li>
+      <li><strong>Layered systems:</strong> both together. Panel protection handles the big
+          strikes; point-of-use catches what starts inside the house.</li>
+    </ul>
+  </section>
+
+  <!-- Planes y precios. Los datos vienen de data/surge_offers.json via core/offers.py -->
+  <section class="mb-5" id="plans">
+    <h2 class="h5 fw-bold mb-1">Choose Your Level of Protection</h2>
+    <p class="small text-muted mb-4">All prices include professional installation.</p>
+
+    <div class="row g-3 align-items-stretch">
+      {% for plan in plans %}
+      <div class="col-md-4">
+        <div class="card h-100 rounded-4 p-3 {% if plan.badge %}border-2 border-primary shadow{% else %}shadow-sm{% endif %}">
+
+          {% if plan.badge %}
+          <div class="badge bg-primary align-self-start mb-2">{{ plan.badge }}</div>
+          {% endif %}
+
+          <div class="h6 fw-bold mb-1">{{ plan.name }}</div>
+          <div class="small text-muted mb-3">{{ plan.tagline }}</div>
+
+          <div class="mb-3">
+            <span class="h3 fw-bold">${{ plan.price }}</span>
+            <span class="small text-muted">/ installed</span>
+          </div>
+
+          <ul class="list-unstyled small flex-grow-1 mb-3">
+            {% for b in plan.bullets %}
+            <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{{ b }}</li>
+            {% endfor %}
+          </ul>
+
+          {% if plan.note %}
+          <p class="small fst-italic text-muted border-start border-3 ps-3 mb-3">{{ plan.note }}</p>
+          {% endif %}
+
+          <a class="btn {% if plan.badge %}btn-brand{% else %}btn-outline-primary{% endif %} w-100 mt-auto"
+             href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%27m%20interested%20in%20the%20{{ plan.name|urlencode }}%20surge%20protector%20package%20%28%24{{ plan.price }}%29%20for%20my%20home%20in%20Orlando."
+             target="_blank" rel="noopener"
+             onclick="if(window.gtag)gtag('event','select_plan',{plan:'{{ plan.key }}',value:{{ plan.price }}})">
+            Get This Package
+          </a>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <p class="small text-muted mt-3 mb-0">
+      Final price confirmed after we see your panel. No charge until the work is scheduled.
+    </p>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h5 fw-bold">How the Installation Works</h2>
+    <ol class="mb-0">
+      <li><strong>We look at your panel first.</strong> Free assessment, on site or from photos
+          you send us. We confirm what your panel can take before quoting anything.</li>
+      <li><strong>You get the price up front.</strong> Device, labor and warranty, itemized.
+          If we find something unusual, you hear about it before we start.</li>
+      <li><strong>We install and test.</strong> About two hours for a standard job. Power goes off
+          briefly while we work inside the panel.</li>
+      <li><strong>You keep the paperwork.</strong> Device details and warranty documentation,
+          in case you ever need to make a claim.</li>
+    </ol>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h5 fw-bold mb-3">Common Questions</h2>
+    <div class="accordion accordion-flush" id="surgeFaq">
+      {% set faqs = [
+        ("My power company offers surge protection for a monthly fee. Why pay upfront?",
+         "Two reasons. First, location: the utility device installs at your meter, outside the house. It catches what comes in from the grid, but most surges start inside — every time your AC compressor or pool pump cycles. Those originate past the meter, where a meter-mounted device can't see them. Ours installs at your panel, between the source and every circuit in the house. Second, math: at roughly $10 a month you've paid more than our Essential install in under three years, and you never own the equipment. Ours is a one-time cost and it's yours. Plenty of homeowners run both — the utility device for the grid side, a panel device for everything else."),
+        ("What's the real difference between the three packages?",
+         "What changes is how much surge current it can absorb before it wears out, how long it's warrantied, and how much the manufacturer will pay if a surge ever gets through. Higher capacity means the device survives repeated strikes instead of spending itself on the first big one."),
+        ("How long does the installation take?",
+         "About two hours for a standard install. We shut the power off briefly to work inside the panel, then test everything before we leave."),
+        ("Do I still need power strips?",
+         "They're a complement, not a replacement. A power strip protects only what's plugged into it, and most are rated far below what a real surge carries. If you want protection at specific outlets — a home office, a media wall — we can quote that separately."),
+        ("What if my panel is old?",
+         "We check that first. If your panel can't safely take a protector, we tell you before any work starts and quote the alternative. The assessment is free either way."),
+        ("Is the listed price really final?",
+         "It covers a standard install on a typical residential panel. If we find something unusual, we tell you the difference before we start. You approve it or we walk away — no charge.")
+      ] %}
+      {% for q, a in faqs %}
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#surgeFaq{{ loop.index }}">
+            {{ q }}
+          </button>
+        </h3>
+        <div id="surgeFaq{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#surgeFaq">
+          <div class="accordion-body small">{{ a }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="h5 fw-bold">Service Area</h2>
+    <p class="mb-0">
+      {% for a in areas %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endfor %}
+    </p>
+  </section>
+
+  <div class="card rounded-4 p-4 text-center bg-light-subtle">
+    <div class="fw-semibold mb-2">Protect your home from power surges</div>
+    <p class="small text-muted mb-3">Free assessment. No obligation.</p>
+    <div class="d-flex justify-content-center gap-2 flex-wrap">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%27m%20interested%20in%20a%20surge%20protector%20installation%20for%20my%20home%20in%20Orlando.%20Can%20you%20help%3F"
+         target="_blank" rel="noopener"
+         onclick="if(window.gtag)gtag('event','whatsapp_click',{page:'surge_footer'})">
+        <i class="bi bi-whatsapp me-2"></i>Message Us
+      </a>
+      {% if phone %}
+      <a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"
+         onclick="if(window.gtag)gtag('event','click_to_call',{page:'surge_footer'})">
+        <i class="bi bi-telephone-fill me-2"></i>Call Us Now
+      </a>
+      {% endif %}
+    </div>
+  </div>
+
+</article>
+<script>
+  if (window.gtag) gtag('event', 'view_surge_offer', { from_price: {{ from_price }} });
+</script>
+{% endblock %}

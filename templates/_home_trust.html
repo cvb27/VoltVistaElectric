@@ -1,0 +1,45 @@
+{# Reviews de Google (EmbedSocial) + mapa — solo en el home #}
+<section class="py-5 bg-light-subtle">
+  <div class="container">
+    <div class="embedsocial-hashtag" data-ref="cfec9d1f53cd35b3dd9b02e7abcd8912ce774dec">
+      <a class="feed-powered-by-es feed-powered-by-es-feed-img es-widget-branding"
+         href="https://embedsocial.com/google-reviews-widget/"
+         target="_blank" rel="noopener"
+         title="Embed Google reviews">
+        <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial">
+        <div class="es-widget-branding-text">Embed Google reviews</div>
+      </a>
+    </div>
+    <script>
+      (function(d, s, id) {
+        var js;
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://embedsocial.com/cdn/ht.js";
+        d.getElementsByTagName("head")[0].appendChild(js);
+      }(document, "script", "EmbedSocialHashtagScript"));
+
+      // Esperar a que cargue y ocultar el botón
+      setTimeout(function() {
+        var ctaButton = document.querySelector('.es-cta-button, [class*="leave-review"], [class*="cta-button"]');
+        if (ctaButton) {
+          ctaButton.style.display = 'none';
+        }
+      }, 2000);
+    </script>
+    
+  </div>
+</section>
+
+<section class="pb-5">
+  <div class="container">
+    <h2 class="h5 fw-bold mb-3">Find Us</h2>
+    <iframe
+      src="https://maps.google.com/maps?q={{ settings.lat }},{{ settings.lng }}&z=13&output=embed"
+      width="100%" height="300" style="border:0; border-radius:8px;" loading="lazy"
+      allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+      title="{{ settings.business_name }} location">
+    </iframe>
+  </div>
+</section>

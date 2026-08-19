@@ -10,6 +10,7 @@ from routes.payments import router as payments_router
 from routes.blog import router as blog_router
 from routes.seo_routes import router as seo_router
 from routes.services import router as services_router
+from routes import surge
 
 
 def _register_middlewares(app: FastAPI) -> None:

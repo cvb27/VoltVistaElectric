@@ -1,10 +1,12 @@
-{# Footer compartido con NAP + Google Maps embed — incluido desde base.html #}
+{# Footer compartido — NAP, servicios y área de cobertura #}
 <footer class="border-top py-4">
   <div class="container">
-    <div class="row g-4">
-      <div class="col-md-6">
+    <div class="row g-4 align-items-start">
+
+      <!-- Columna 1: NAP -->
+      <div class="col-md-4">
         <div class="fw-semibold mb-2 text-white">{{ settings.business_name }}</div>
-        <address class="small mb-2 mb-md-3 text-white">
+        <address class="small mb-3 text-white">
           {{ settings.address }}<br>
           {{ settings.city }} {{ settings.state }} {{ settings.zip_code }}
         </address>
@@ -14,23 +16,33 @@
         </div>
         <div class="small text-white">Hours: {{ settings.hours }}</div>
       </div>
-      <div class="col-md-6">
-        <iframe
-          src="https://maps.google.com/maps?q={{ settings.lat }},{{ settings.lng }}&z=15&output=embed"
-          width="100%" height="200" style="border:0;" loading="lazy"
-          allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-          title="{{ settings.business_name }} location">
-        </iframe>
+
+      <!-- Columna 2: Servicios -->
+      <div class="col-md-4">
+        <div class="fw-semibold mb-2 text-white">Services</div>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-1"><a class="link-light" href="/services/electrical-repair-installation">Electrical Repairs &amp; Installations</a></li>
+          <li class="mb-1"><a class="link-light" href="/services/surge-protector-installation">Surge Protector Installation</a></li>
+          <li class="mb-1"><a class="link-light" href="/services/ev-charger-installation">EV Charger Installation</a></li>
+          <li class="mb-1"><a class="link-light" href="/estimate">Free Estimate</a></li>
+          <li><a class="link-light" href="/payments">Make a Payment</a></li>
+        </ul>
       </div>
+
+      <!-- Columna 3: Área de servicio -->
+      <div class="col-md-4">
+        <div class="fw-semibold mb-2 text-white">Service Area</div>
+        <p class="small text-white mb-2">
+          Lake Buena Vista · Orlando · Kissimmee · Winter Park · Windermere ·
+          Dr. Phillips · Celebration · Winter Garden
+        </p>
+        <p class="small text-white-50 mb-0">
+          Not sure if we cover your area? <a class="link-light" href="/estimate">Ask us</a>.
+        </p>
+      </div>
+
     </div>
-    <div class="small mt-3 pt-3 border-top">
-      <span class="fw-semibold mb-2 text-white">Services:</span>
-      <a class="link-muted" href="/services/electrical-repair-installation">Electrical repairs and installations</a>
-      · <a class="link-muted" href="/services/surge-protector-installation">Surge Protector Installations</a>
-      · <a class="link-muted" href="/services/ev-charger-installation">EV Charger Installation</a>
-    </div>
-    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mt-3 pt-3 border-top">
-      <div class="fw-semibold mb-2 text-white">© {{ app_name }}</div>
-          </div>
+
+    <div class="small text-white mt-4 pt-3 border-top">© {{ settings.app_name }}</div>
   </div>
 </footer>

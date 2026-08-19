@@ -21,7 +21,7 @@ class Settings:
     # App
     app_name: str = _get("APP_NAME", "Voltvista Electric")
     base_url: str = _get("BASE_URL", "http://127.0.0.1:8000")
-    default_lang: str = _get("DEFAULT_LANG", "es")
+    default_lang: str = _get("DEFAULT_LANG", "en")
 
     # Business
     phone: str = _get("BUSINESS_PHONE", "")
@@ -34,12 +34,12 @@ class Settings:
 
     # Business identity — usado en JSON-LD, footer y Google Ads.
     # Centralizado aquí para que NAP sea idéntico en todo el sitio.
-    business_name: str = _get("BUSINESS_NAME", "VoltVista")
+    business_name: str = _get("BUSINESS_NAME", "VoltVistaElectric")
     address: str = _get("BUSINESS_ADDRESS", "")
     state: str = _get("BUSINESS_STATE", "FL")
     zip_code: str = _get("BUSINESS_ZIP", "")
-    lat: float = float(_get("BUSINESS_LAT", "0.0") or "0.0")
-    lng: float = float(_get("BUSINESS_LNG", "0.0") or "0.0")
+    lat: float = float(_get("BUSINESS_LAT") or "28.392484")
+    lng: float = float(_get("BUSINESS_LNG") or "-81.506867")
     hours: str = _get("BUSINESS_HOURS", "Mo-Fr 08:00-18:00")
     business_url: str = _get("BUSINESS_URL", "https://voltvistaelectric.com")
     logo_url: str = _get("BUSINESS_LOGO_URL", "https://voltvistaelectric.com/static/img/logo.png")
