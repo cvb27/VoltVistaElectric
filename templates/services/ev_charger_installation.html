@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}EV Charger Installation in Orlando, FL | VoltVista Electric{% endblock %}
-{% block description %}Professional EV charger installation for homes and businesses in Orlando. VoltVista Electric — 10+ years experience, fully insured. Get a free estimate today.{% endblock %}
+{% block description %}Home EV charger installation in Orlando. Charge overnight, save on public charging, and start every morning with a full battery. Free estimate.{% endblock %}
 {% block canonical %}
 <link rel="canonical" href="{{ settings.business_url }}/services/ev-charger-installation">
 {% endblock %}
@@ -12,7 +12,7 @@
 <article>
   <header class="mb-4">
     <h1 class="h3 fw-bold">EV Charger Installation in Orlando</h1>
-    <p class="lead text-muted">Residential and commercial EV chargers installed safely and to code. Dedicated 240V circuits, load calculations, and permit handling — across Orlando metro.</p>
+    <p class="lead text-muted">Wake up to a full battery every morning. We install home and commercial EV chargers across the Orlando metro area, sized right for your vehicle and your electrical system.</p>
     <div class="d-flex flex-wrap gap-2 mt-3">
       <a class="btn btn-whatsapp"
          href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%27d%20like%20to%20know%20more%20about%20EV%20charger%20installation%20at%20my%20home%20in%20Orlando.%20Can%20you%20help%3F"
@@ -27,23 +27,53 @@
   </header>
 
   <section class="mb-4">
-    <h2 class="h5 fw-bold">Level 1 &amp; Level 2 Home Charger Installation</h2>
+    <h2 class="h5 fw-bold">Why Charge at Home</h2>
     <ul class="mb-0">
-      <li>Level 1 (120V) — standard outlet, slower charge, no new circuit needed.</li>
-      <li>Level 2 (240V) — dedicated circuit, 3-7x faster charge, overnight refill.</li>
-      <li>Tesla Wall Connector, ChargePoint, JuiceBox, Grizzl-E and other brands.</li>
-      <li>Panel capacity check and load calculation before we install.</li>
-      <li>Permit, inspection and utility coordination where needed.</li>
+      <li><strong>Lower cost per mile.</strong> Charging on your home rate is typically far cheaper than public fast chargers.</li>
+      <li><strong>No more detours.</strong> Skip the trip to a charging station and the wait for an open stall.</li>
+      <li><strong>Full battery every morning.</strong> Plug in at night, leave with your full range every day.</li>
+      <li><strong>Better for your battery.</strong> Slower overnight charging is gentler on the pack than repeated fast charging.</li>
+      <li><strong>Adds appeal to your home.</strong> A ready-to-use charging circuit is a feature buyers and renters look for.</li>
     </ul>
   </section>
 
   <section class="mb-4">
-    <h2 class="h5 fw-bold">Commercial EV Charging Stations</h2>
+    <h2 class="h5 fw-bold">Level 1 vs Level 2 — Which One Do You Need?</h2>
+    <p class="mb-2">The right choice depends on how far you drive each day and how fast you want to recover range.</p>
     <ul class="mb-0">
-      <li>Multi-unit parking lots, HOAs and office buildings.</li>
-      <li>Networked chargers with access control and billing.</li>
-      <li>ADA-compliant signage and bollards where required.</li>
-      <li>Service upgrades and dedicated feeders when needed.</li>
+      <li><strong>Level 1 (120V).</strong> Uses a standard outlet. Adds roughly 3–5 miles of range per hour. Fine for plug-in hybrids or short daily commutes.</li>
+      <li><strong>Level 2 (240V).</strong> Runs on a dedicated circuit and charges several times faster — most EVs go from low to full overnight. This is what the majority of homeowners end up installing.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Chargers We Install</h2>
+    <p class="mb-2">We work with the major brands and can also install a hardwired unit or a 240V outlet if you'd rather bring your own charger.</p>
+    <ul class="mb-0">
+      <li>Tesla Wall Connector and Tesla Mobile Connector setups.</li>
+      <li>ChargePoint Home Flex, JuiceBox, Grizzl-E, Emporia and similar units.</li>
+      <li>NEMA 14-50 and 6-50 outlets for portable chargers.</li>
+      <li>Hardwired installations for a cleaner look and higher amperage.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">What the Installation Looks Like</h2>
+    <ol class="mb-0">
+      <li><strong>We look at your panel first.</strong> We check available capacity so the charger you pick actually fits your home's electrical system.</li>
+      <li><strong>We agree on placement.</strong> Garage wall, carport, driveway side — wherever the cable reaches your charge port comfortably.</li>
+      <li><strong>You get a clear estimate.</strong> Parts, labor and the circuit run, itemized before we start.</li>
+      <li><strong>Clean install, tested before we go.</strong> We run the circuit, mount the unit, and confirm it charges your vehicle before we leave.</li>
+    </ol>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Commercial and Multi-Unit Charging</h2>
+    <ul class="mb-0">
+      <li>Apartment complexes, HOAs, office buildings and retail parking.</li>
+      <li>Networked chargers with usage tracking and billing for tenants or customers.</li>
+      <li>Multiple stations on shared circuits with load management.</li>
+      <li>Service capacity upgrades when the existing supply isn't enough.</li>
     </ul>
   </section>
 
@@ -56,6 +86,7 @@
 
   <div class="card rounded-4 p-4 text-center bg-light-subtle">
     <div class="fw-semibold mb-2">Ready to install your EV charger?</div>
+    <p class="small text-muted mb-3">Send us a photo of your panel and where you park — we can usually give you a ballpark the same day.</p>
     <div class="d-flex justify-content-center gap-2">
       <a class="btn btn-whatsapp"
          href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%27d%20like%20to%20know%20more%20about%20EV%20charger%20installation%20at%20my%20home%20in%20Orlando.%20Can%20you%20help%3F"

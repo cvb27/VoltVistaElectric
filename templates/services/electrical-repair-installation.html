@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Electrical Repair and Installation Services in Orlando, FL | VoltVista Electric{% endblock %}
+{% block description %}Professional electrical repair and installation services in Orlando, FL. Outlets, lighting, troubleshooting and more. 10+ years experience, fully insured. Get a free estimate today.{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/services/electrical-repair-installation">
+{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">{{ service_jsonld | tojson }}</script>
+{% endblock %}
+
+{% block content %}
+<article>
+  <header class="mb-4">
+    <h1 class="h3 fw-bold">Electrical Repair and Installation Services in Orlando</h1>
+    <p class="lead text-muted">Expert electrical repairs and installations for your home. From outlets and lighting to troubleshooting and rewiring. Serving Orlando and surrounding cities for 10+ years.</p>
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%20need%20electrical%20repair%20or%20installation%20services%20for%20my%20home%20in%20Orlando.%20Can%20you%20help%3F"
+         target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp me-2"></i>Get a Free Estimate
+      </a>
+      {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"><i class="bi bi-telephone-fill me-2"></i>Call Us Now</a>{% endif %}
+    </div>
+    <p class="small text-muted mt-2 mb-0">
+      Need a detailed estimate? <a href="/estimate">Fill out our form</a>
+    </p>
+  </header>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Common Electrical Repair and Installation Needs</h2>
+    <ul class="mb-0">
+      <li>Installing or replacing outlets, switches and light fixtures.</li>
+      <li>Adding new circuits or upgrading existing wiring.</li>
+      <li>Diagnosing and fixing electrical problems (flickering lights, dead outlets, breaker issues).</li>
+      <li>Installing exhaust fans, ceiling fans, under-cabinet lighting and accent lighting.</li>
+      <li>Adding GFCI protection in kitchens, bathrooms and outdoor areas.</li>
+      <li>Outlet and circuit relocation for renovations or new layouts.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Our Repair and Installation Process</h2>
+    <ol class="mb-0">
+      <li>Free on-site or photo-based assessment of your needs.</li>
+      <li>Detailed estimate with parts, labor and timeline.</li>
+      <li>Clean, code-compliant work with proper testing and verification.</li>
+      <li>Final inspection-ready handoff with safety assurance.</li>
+    </ol>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h5 fw-bold">Service Area</h2>
+    <p class="mb-0">
+      {% for a in areas %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endfor %}
+    </p>
+  </section>
+
+  <div class="card rounded-4 p-4 text-center bg-light-subtle">
+    <div class="fw-semibold mb-2">Ready for electrical repairs or installations?</div>
+    <div class="d-flex justify-content-center gap-2">
+      <a class="btn btn-whatsapp"
+         href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%20need%20electrical%20repair%20or%20installation%20services%20for%20my%20home%20in%20Orlando.%20Can%20you%20help%3F"
+         target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp me-2"></i>Get a Free Estimate
+      </a>
+      {% if phone %}<a class="btn btn-outline-primary" href="tel:{{ settings.phone }}"><i class="bi bi-telephone-fill me-2"></i>Call Us Now</a>{% endif %}
+    </div>
+  </div>
+</article>
+{% endblock %}

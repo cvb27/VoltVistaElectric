@@ -3,16 +3,16 @@
   <div class="container">
     <div class="row g-4">
       <div class="col-md-6">
-        <div class="fw-semibold mb-2">{{ settings.business_name }}</div>
-        <address class="small text-muted mb-2 mb-md-3">
+        <div class="fw-semibold mb-2 text-white">{{ settings.business_name }}</div>
+        <address class="small mb-2 mb-md-3 text-white">
           {{ settings.address }}<br>
-          {{ settings.city }}, {{ settings.state }} {{ settings.zip_code }}
+          {{ settings.city }} {{ settings.state }} {{ settings.zip_code }}
         </address>
-        <div class="small text-muted mb-1">
-          <a class="link-muted" href="tel:{{ settings.phone }}">{{ settings.phone }}</a>
-          · <a class="link-muted" href="mailto:{{ settings.email }}">{{ settings.email }}</a>
+        <div class="small mb-1 text-white">
+          <a class="link-light" href="tel:{{ settings.phone }}">{{ settings.phone }}</a>
+          · <a class="link-light" href="mailto:{{ settings.email }}">{{ settings.email }}</a>
         </div>
-        <div class="small text-muted">Hours: {{ settings.hours }}</div>
+        <div class="small text-white">Hours: {{ settings.hours }}</div>
       </div>
       <div class="col-md-6">
         <iframe
@@ -24,17 +24,13 @@
       </div>
     </div>
     <div class="small mt-3 pt-3 border-top">
-      <span class="fw-semibold text-muted me-2">Services:</span>
-      <a class="link-muted" href="/services/panel-upgrade">Electrical Panel Upgrade</a>
-      · <a class="link-muted" href="/services/electrical-installations">Electrical Installations</a>
+      <span class="fw-semibold mb-2 text-white">Services:</span>
+      <a class="link-muted" href="/services/electrical-repair-installation">Electrical repairs and installations</a>
+      · <a class="link-muted" href="/services/surge-protector-installation">Surge Protector Installations</a>
       · <a class="link-muted" href="/services/ev-charger-installation">EV Charger Installation</a>
     </div>
     <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mt-3 pt-3 border-top">
-      <div class="text-muted small">© {{ app_name }}</div>
-      <div class="text-muted small">
-        <a class="link-muted" href="/sitemap.xml">Sitemap</a>
-        · <a class="link-muted" href="/robots.txt">Robots</a>
-      </div>
-    </div>
+      <div class="fw-semibold mb-2 text-white">© {{ app_name }}</div>
+          </div>
   </div>
 </footer>
