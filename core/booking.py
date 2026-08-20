@@ -105,7 +105,7 @@ BLOCKED_FILE = Path("data/blocked_dates.json")
 # Deposito que se cobra al reservar. Igual en los tres planes: un solo
 # numero es mas facil de comunicar ("$50 to book") que un porcentaje que
 # cambia por plan. Se descuenta del total; el resto se paga al terminar.
-DEPOSIT = 1
+DEPOSIT = 2
 
 
 class BookingUnavailable(Exception):
