@@ -166,7 +166,7 @@ async def webhook(request: Request, session: Session = Depends(get_session)):
 
     try:
         event = stripe.Webhook.construct_event(
-            payload, sig, settings.stripe_webhook_secret
+            payload, sig, settings.stripe_webhook_secret_booking
         )
     except (ValueError, stripe.error.SignatureVerificationError):
         return {"ok": False}

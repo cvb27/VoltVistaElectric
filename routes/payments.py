@@ -92,7 +92,7 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(None))
         event = stripe.Webhook.construct_event(
             payload=payload,
             sig_header=stripe_signature,
-            secret=settings.stripe_webhook_secret,
+            secret=settings.stripe_webhook_secret_payments,
         )
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid webhook")

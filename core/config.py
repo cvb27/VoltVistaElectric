@@ -60,7 +60,8 @@ class Settings:
 
     # Stripe
     stripe_secret_key: str = _get("STRIPE_SECRET_KEY", "")
-    stripe_webhook_secret: str = _get("STRIPE_WEBHOOK_SECRET", "")
+    stripe_webhook_secret_payments: str = _get("STRIPE_WEBHOOK_SECRET_PAYMENTS", "")
+    stripe_webhook_secret_booking: str = _get("STRIPE_WEBHOOK_SECRET_BOOKING", "")
     stripe_currency: str = _get("STRIPE_CURRENCY", "usd")
     stripe_deposit_amount: float = float(_get("STRIPE_DEPOSIT_AMOUNT", "99.00"))
 
