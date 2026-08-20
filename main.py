@@ -10,7 +10,8 @@ from routes.payments import router as payments_router
 from routes.blog import router as blog_router
 from routes.seo_routes import router as seo_router
 from routes.services import router as services_router
-from routes import surge
+from routes import booking as booking_routes
+
 
 
 def _register_middlewares(app: FastAPI) -> None:
@@ -33,6 +34,7 @@ def _register_routers(app: FastAPI) -> None:
     app.include_router(blog_router)
     app.include_router(seo_router)
     app.include_router(services_router)
+    app.include_router(booking_routes.router)
 
 
 def create_app() -> FastAPI:

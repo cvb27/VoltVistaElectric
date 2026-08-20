@@ -17,6 +17,7 @@ from core.offers import load_offers
 from core.seo import build_service_schema
 from core.templating import templates
 from core.utils import get_lang
+from core.booking import DEPOSIT
 
 router = APIRouter(prefix="/services", tags=["services"])
 
@@ -74,6 +75,7 @@ async def surge_protector_installation(request: Request):
     offers = load_offers()
     ctx["plans"] = offers["plans"]
     ctx["from_price"] = offers["from_price"]
+    ctx["deposit"] = DEPOSIT
 
     # Precios en el JSON-LD: habilita que Google muestre el rango en resultados.
     ctx["service_jsonld"]["offers"] = [

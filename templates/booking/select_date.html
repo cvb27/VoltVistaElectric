@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+{% block title %}Book Your {{ plan.name }} Installation | VoltVista Electric{% endblock %}
+{% block description %}Pick a date for your {{ plan.name }} surge protector installation in Orlando. ${{ deposit }} deposit, applied to your total.{% endblock %}
+
+{% block content %}
+<article class="mx-auto" style="max-width:640px">
+
+  <h1 class="h4 fw-bold mb-1">Book your {{ plan.name }} installation</h1>
+  <p class="text-muted mb-2">
+    ${{ plan.price }} total &middot; ${{ deposit }} due now &middot; ${{ balance }} after the work is done
+  </p>
+  <p class="small text-muted">
+    The ${{ deposit }} comes off your total. Full refund if we find your panel can't
+    take a protector, or if you cancel at least 24 hours ahead.
+  </p>
+
+  {% if error %}
+  <div class="alert alert-warning">{{ error }}</div>
+  {% endif %}
+
+  <form method="post" action="/booking/checkout" class="mt-4" id="bookingForm">
+    <input type="hidden" name="plan" value="{{ plan.key }}">
+
+    <!-- Los rellena el calendario de abajo. El servidor revalida ambos
+         antes de cobrar, asi que no importa que vengan de JavaScript. -->
+    <input type="hidden" name="service_date" id="service_date">
+    <input type="hidden" name="slot" id="slot">
+
+    <!-- ============ CALENDARIO ============ -->
+    <div class="mb-4">
+      <label class="form-label fw-semibold d-block">Pick a date</label>
+
+      <div class="cal border rounded-4 p-3" style="max-width:340px">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <button type="button" class="btn btn-sm btn-light" id="calPrev" aria-label="Previous month">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <strong id="calTitle" class="small"></strong>
+          <button type="button" class="btn btn-sm btn-light" id="calNext" aria-label="Next month">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="cal-grid mb-1">
+          <div class="cal-dow">S</div><div class="cal-dow">M</div><div class="cal-dow">T</div>
+          <div class="cal-dow">W</div><div class="cal-dow">T</div><div class="cal-dow">F</div>
+          <div class="cal-dow">S</div>
+        </div>
+        <div class="cal-grid" id="calDays"></div>
+
+        <div class="d-flex gap-3 mt-3 small text-muted" style="font-size:.7rem">
+          <span><span class="cal-key cal-key-open"></span> Available</span>
+          <span><span class="cal-key cal-key-closed"></span> Not available</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FRANJAS ============ -->
+    <div class="mb-4" id="slotBox" hidden>
+      <label class="form-label fw-semibold d-block">Pick a time window</label>
+      <div class="row row-cols-2 g-2" id="slotList"></div>
+      <div class="form-text">We arrive within the window. The job takes about two hours.</div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold" for="customer_name">Your name</label>
+      <input class="form-control" id="customer_name" name="customer_name" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold" for="customer_phone">Phone</label>
+      <input class="form-control" id="customer_phone" name="customer_phone"
+             type="tel" inputmode="tel" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold" for="address">Installation address</label>
+      <input class="form-control" id="address" name="address" required>
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label fw-semibold" for="notes">
+        Anything we should know? <span class="fw-normal text-muted">(optional)</span>
+      </label>
+      <textarea class="form-control" id="notes" name="notes" rows="2"
+                placeholder="Panel location, gate code, dog in the yard…"></textarea>
+    </div>
+
+    <!-- ============ DUDAS ANTES DE PAGAR ============
+         Va justo antes del boton: es donde la duda aparece, y donde el
+         cliente abandonaria si no tuviera a quien preguntar. -->
+    <div class="card rounded-4 bg-light-subtle p-3 mb-4">
+      <div class="small fw-semibold mb-1">Not sure about something?</div>
+      <p class="small text-muted mb-2">
+        Ask us before you pay — panel type, access, timing, anything.
+      </p>
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-sm btn-whatsapp"
+           href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%27m%20booking%20the%20{{ plan.name|urlencode }}%20surge%20protector%20package%20and%20I%20have%20a%20question."
+           target="_blank" rel="noopener"
+           onclick="if(window.gtag)gtag('event','whatsapp_contact',{page:'booking'})"
+           aria-label="Ask a question on WhatsApp">
+          <i class="bi bi-whatsapp me-1"></i>WhatsApp
+        </a>
+        {% if settings.phone %}
+        <a class="btn btn-sm btn-outline-primary" href="tel:{{ settings.phone }}"
+           onclick="if(window.gtag)gtag('event','click_to_call',{page:'booking'})"
+           aria-label="Call VoltVista Electric">
+          <i class="bi bi-telephone-fill me-1"></i>Call {{ settings.phone }}
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="alert alert-warning py-2 small" id="formError" hidden></div>
+
+    <button class="btn btn-brand w-100 btn-lg" type="submit">
+      Pay ${{ deposit }} deposit &amp; book
+    </button>
+  </form>
+
+</article>
+
+<style>
+  .cal-day { height: 34px; display: flex; align-items: center; justify-content: center;
+             border-radius: 6px; font-size: .8rem; border: 1px solid transparent; }
+  .cal-day.is-open { background: var(--bs-primary-bg-subtle);
+                     border-color: var(--bs-primary-border-subtle);
+                     color: var(--bs-primary-text-emphasis); cursor: pointer; font-weight: 600; }
+  .cal-day.is-open:hover { filter: brightness(.95); }
+  .cal-day.is-closed { color: var(--bs-secondary-color); opacity: .4; }
+  .cal-day.is-selected { background: var(--bs-primary); border-color: var(--bs-primary);
+                         color: #fff; }
+  .cal-key { display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+             vertical-align: -1px; margin-right: 3px; }
+  .cal-key-open { background: var(--bs-primary-bg-subtle);
+                  border: 1px solid var(--bs-primary-border-subtle); }
+  .cal-key-closed { background: var(--bs-secondary-bg); opacity: .5; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+
+</style>
+
+
+<!-- Los dias disponibles viajan como JSON, no incrustados en el JavaScript.
+     Asi el editor no marca falsos errores de sintaxis y Jinja escapa las
+     comillas correctamente con | tojson. -->
+<script type="application/json" id="days-data">{{ days | tojson }}</script>
+
+<script>
+(function () {
+  const DAYS = JSON.parse(document.getElementById('days-data').textContent);
+  if (!DAYS.length) return;
+
+  // Indice rapido: "2026-08-21" -> {date, label, slots}
+  const byDate = {};
+  DAYS.forEach(d => byDate[d.date] = d);
+
+  const calTitle = document.getElementById('calTitle');
+  const calDays  = document.getElementById('calDays');
+  const slotBox  = document.getElementById('slotBox');
+  const slotList = document.getElementById('slotList');
+  const dateIn   = document.getElementById('service_date');
+  const slotIn   = document.getElementById('slot');
+
+  // Rango de meses a mostrar: del primer al ultimo dia disponible.
+  const [fy, fm] = DAYS[0].date.split('-').map(Number);
+  const [ly, lm] = DAYS[DAYS.length - 1].date.split('-').map(Number);
+  let viewY = fy, viewM = fm - 1;               // en JS los meses van 0..11
+
+  const MONTHS = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function render() {
+    // OJO: new Date('2026-08-21') se interpreta como UTC y puede correrse
+    // un dia en husos negativos. Por eso las fechas se arman a mano.
+    const firstWeekday = new Date(viewY, viewM, 1).getDay();
+    const daysInMonth  = new Date(viewY, viewM + 1, 0).getDate();
+
+    calTitle.textContent = MONTHS[viewM] + ' ' + viewY;
+    calDays.innerHTML = '';
+
+    // Huecos antes del dia 1 para alinear con el dia de la semana.
+    for (let i = 0; i < firstWeekday; i++) {
+      calDays.appendChild(document.createElement('div'));
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const iso  = `${viewY}-${pad(viewM + 1)}-${pad(d)}`;
+      const open = !!byDate[iso];
+      const cell = document.createElement('div');
+
+      cell.textContent = d;
+      cell.className = 'cal-day ' + (open ? 'is-open' : 'is-closed');
+      if (iso === dateIn.value) cell.classList.add('is-selected');
+
+      if (open) {
+        cell.setAttribute('role', 'button');
+        cell.setAttribute('tabindex', '0');
+        cell.setAttribute('aria-label', byDate[iso].label);
+        cell.addEventListener('click', () => pickDate(iso));
+        cell.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pickDate(iso); }
+        });
+      }
+      calDays.appendChild(cell);
+    }
+
+    // Desactivar las flechas fuera del rango con dias disponibles.
+    document.getElementById('calPrev').disabled =
+      (viewY < fy) || (viewY === fy && viewM <= fm - 1);
+    document.getElementById('calNext').disabled =
+      (viewY > ly) || (viewY === ly && viewM >= lm - 1);
+  }
+
+  function pickDate(iso) {
+    dateIn.value = iso;
+    slotIn.value = '';                          // cambiar de dia borra la franja
+    render();
+    renderSlots(byDate[iso].slots);
+  }
+
+  function renderSlots(slots) {
+      slotList.innerHTML = '';
+      slots.forEach(s => {
+        const col = document.createElement('div');
+        col.className = 'col';
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'btn btn-sm btn-outline-primary w-100';
+        b.textContent = s.label;
+        b.addEventListener('click', () => {
+          slotIn.value = s.n;
+          slotList.querySelectorAll('button').forEach(c => {
+            c.classList.remove('btn-primary');
+            c.classList.add('btn-outline-primary');
+          });
+          b.classList.remove('btn-outline-primary');
+          b.classList.add('btn-primary');
+          document.getElementById('formError').hidden = true;
+        });
+        col.appendChild(b);
+        slotList.appendChild(col);
+      });
+      slotBox.hidden = false;
+    }
+
+  document.getElementById('calPrev').addEventListener('click', () => {
+    if (--viewM < 0) { viewM = 11; viewY--; }
+    render();
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    if (++viewM > 11) { viewM = 0; viewY++; }
+    render();
+  });
+
+  // Los inputs ocultos no disparan la validacion nativa del navegador,
+  // asi que la fecha y la franja se revisan a mano antes de enviar.
+  document.getElementById('bookingForm').addEventListener('submit', e => {
+    if (!dateIn.value || !slotIn.value) {
+      e.preventDefault();
+      const err = document.getElementById('formError');
+      err.textContent = !dateIn.value
+        ? 'Please pick a date.'
+        : 'Please pick a time window.';
+      err.hidden = false;
+      err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+  render();
+})();
+</script>
+{% endblock %}
