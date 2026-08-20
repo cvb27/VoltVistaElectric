@@ -48,6 +48,9 @@ class Settings:
     ga4_id: str = _get("GA4_ID", "")
     gads_id: str = _get("GADS_ID", "")
 
+    # Postgres
+    database_url: str = _get("DATABASE_URL", "sqlite:///./voltvista.db")
+
     # DB
     sqlite_path: str = _get("SQLITE_PATH", "./voltvista.db")
 
