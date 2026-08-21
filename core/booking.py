@@ -32,6 +32,8 @@ from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from core.config import settings
+
 
 # ===========================================================================
 # CONFIGURACION
@@ -105,7 +107,11 @@ BLOCKED_FILE = Path("data/blocked_dates.json")
 # Deposito que se cobra al reservar. Igual en los tres planes: un solo
 # numero es mas facil de comunicar ("$50 to book") que un porcentaje que
 # cambia por plan. Se descuenta del total; el resto se paga al terminar.
-DEPOSIT = 2
+#
+# El valor vive en .env (BOOKING_DEPOSIT), no aqui: un "2" de prueba llego
+# a produccion dentro de un commit y se quedo publicado. Desde .env se
+# cambia sin tocar codigo.
+DEPOSIT = settings.booking_deposit
 
 
 class BookingUnavailable(Exception):

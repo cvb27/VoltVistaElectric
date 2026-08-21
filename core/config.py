@@ -51,9 +51,6 @@ class Settings:
     # Postgres
     database_url: str = _get("DATABASE_URL", "sqlite:///./voltvista.db")
 
-    # DB
-    sqlite_path: str = _get("SQLITE_PATH", "./voltvista.db")
-
     # Email (optional)
     smtp_host: str = _get("SMTP_HOST", "")
     smtp_port: int = int(_get("SMTP_PORT", "587") or "587")
@@ -67,6 +64,11 @@ class Settings:
     stripe_webhook_secret_booking: str = _get("STRIPE_WEBHOOK_SECRET_BOOKING", "")
     stripe_currency: str = _get("STRIPE_CURRENCY", "usd")
     stripe_deposit_amount: float = float(_get("STRIPE_DEPOSIT_AMOUNT", "99.00"))
+
+    # Booking
+    # El depósito vive en .env, no en el código: así bajarlo para probar no
+    # deja un valor de prueba dentro de un commit — que es justo lo que pasó.
+    booking_deposit: int = int(_get("BOOKING_DEPOSIT", "50"))
 
     # PayPal
     paypal_client_id: str = _get("PAYPAL_CLIENT_ID", "")
