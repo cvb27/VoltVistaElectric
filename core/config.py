@@ -47,6 +47,9 @@ class Settings:
     # Tracking IDs — se rellenan vía .env, nunca hardcodeados.
     ga4_id: str = _get("GA4_ID", "")
     gads_id: str = _get("GADS_ID", "")
+    # Etiqueta de la accion de conversion de Ads: la parte tras la barra en
+    # "AW-123456789/AbC-D_efGhIjK". Vacia = no se emite la conversion.
+    gads_conversion_label: str = _get("GADS_CONVERSION_LABEL", "")
 
     # Postgres
     database_url: str = _get("DATABASE_URL", "sqlite:///./voltvista.db")

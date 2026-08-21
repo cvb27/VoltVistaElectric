@@ -23,18 +23,29 @@
 
 </article>
 
+{% if booking.status == 'paid' %}
 <script>
-  // Conversion. transaction_id evita que cuente dos veces si el cliente
-  // recarga esta pagina. El value lleva el precio del PLAN, no el deposito:
-  // asi Google aprende que una reserva de Total Home vale mas que una
-  // Essential y busca trafico que compra arriba.
-  if (window.gtag) {
-    gtag('event', 'booking_paid', {
-      transaction_id: '{{ booking.public_id }}',
-      plan: '{{ booking.plan_key }}',
-      value: {{ booking.plan_price }},
-      currency: 'USD'
-    });
-  }
+  // Solo con el pago confirmado. Antes salia tambien en "pending", lo que le
+  // ensenaba a Google a buscar trafico que llega al checkout y no paga.
+  // transaction_id evita contar dos veces si el cliente recarga. El value es
+  // el precio del PLAN, no el deposito: asi Google prioriza los planes altos.
+  gtag('event', 'booking_paid', {
+    transaction_id: '{{ booking.public_id }}',
+    plan: '{{ booking.plan_key }}',
+    value: {{ booking.plan_price }},
+    currency: 'USD'
+  });
+
+  {% if settings.gads_id and settings.gads_conversion_label %}
+  // Ads no ve los eventos de GA4 salvo que se importen a mano: necesita el
+  // suyo. Si falta la etiqueta en .env, este bloque no se renderiza.
+  gtag('event', 'conversion', {
+    send_to: '{{ settings.gads_id }}/{{ settings.gads_conversion_label }}',
+    value: {{ booking.plan_price }},
+    currency: 'USD',
+    transaction_id: '{{ booking.public_id }}'
+  });
+  {% endif %}
 </script>
+{% endif %}
 {% endblock %}
