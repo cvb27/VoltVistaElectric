@@ -3,10 +3,25 @@
 {% block content %}
 <article class="mx-auto text-center py-5" style="max-width:560px">
 
-  <h1 class="h4 fw-bold">You're booked</h1>
+  {# El titulo depende del estado real del pago. Antes decia siempre "You're
+     booked", incluso con la reserva en pending: el cliente se iba creyendo que
+     tenia cita cuando el equipo no habia recibido ningun aviso. #}
+  {% if booking.status == 'paid' %}
+    <h1 class="h4 fw-bold">You're booked</h1>
+  {% else %}
+    <h1 class="h4 fw-bold">We're confirming your payment</h1>
+  {% endif %}
+
   <p class="lead text-muted mb-4">
     {{ booking.service_date.strftime('%A, %B %-d') }} &middot; {{ slot_label }}
   </p>
+
+  {% if booking.status != 'paid' %}
+  <div class="alert alert-warning small text-start">
+    Your time slot is held. We'll text you as soon as the payment clears.
+    If you don't hear from us in a few minutes, call {{ settings.phone }}.
+  </div>
+  {% endif %}
 
   <div class="card rounded-4 p-4 text-start">
     <div class="d-flex justify-content-between"><span class="text-muted">Package</span><span class="fw-semibold">{{ booking.plan_name }}</span></div>

@@ -19,6 +19,7 @@ def robots():
     """robots.txt minimo: permite todo y apunta al sitemap."""
     txt = f"""User-agent: *
 Allow: /
+Disallow: /admin
 
 Sitemap: {settings.base_url}/sitemap.xml
 """

@@ -1,0 +1,90 @@
+{# Agenda interna. NO extiende base.html a proposito: esa plantilla carga
+   gtag, y cada visita del equipo contaria como trafico y podria ensuciar las
+   conversiones. Ademas arrastra el nav y el boton de WhatsApp del cliente. #}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Bookings | VoltVista Electric</title>
+  <style>
+    body { font: 15px/1.5 system-ui, sans-serif; margin: 0; padding: 1.5rem; }
+    h1 { font-size: 1.25rem; margin: 0 0 1rem; }
+    h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em;
+         color: #666; margin: 2rem 0 .5rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { text-align: left; padding: .5rem .6rem;
+             border-bottom: 1px solid #e5e5e5; vertical-align: top; }
+    th { font-size: .75rem; text-transform: uppercase; color: #666; }
+    tr.review { background: #fff8e1; }
+    .note { margin: .25rem .6rem .75rem; font-size: .85rem; color: #666; }
+    .empty { color: #888; font-style: italic; }
+    .bar { margin-bottom: 1rem; font-size: .875rem; }
+    .bar a { margin-right: 1rem; }
+    form { margin: 0; }
+    button.cancel { font-size: .75rem; padding: .15rem .5rem; cursor: pointer;
+                    border: 1px solid #d0d0d0; border-radius: 4px; background: #fff;
+                    color: #b02a37; }
+    button.cancel:hover { background: #fdf2f2; }
+    @media (max-width: 700px) { .hide-sm { display: none; } }
+  </style>
+</head>
+<body>
+
+<h1>Installations{% if picked %} — {{ picked.strftime('%A, %B %-d') }}{% endif %}</h1>
+
+<div class="bar">
+  <a href="/admin/bookings?day={{ today }}">Today</a>
+  <a href="/admin/bookings">All upcoming</a>
+  <a href="/admin/bookings.csv">Download CSV</a>
+</div>
+
+{# Una sola definicion de la tabla, usada por las dos listas. #}
+{% macro rows_table(rows, css) %}
+<table>
+  <tr>
+    <th>Date</th><th>Time</th><th>Customer</th>
+    <th class="hide-sm">Address</th><th>Package</th><th>Collect</th>
+    <th></th>
+  </tr>
+  {% for b in rows %}
+  <tr class="{{ css }}">
+    <td>{{ b.service_date.strftime('%a %b %-d') }}</td>
+    <td>{{ slot_label(b.slot) }}</td>
+    <td>{{ b.customer_name }}<br>
+        <a href="tel:{{ b.customer_phone }}">{{ b.customer_phone }}</a></td>
+    <td class="hide-sm">{{ b.address }}
+        {%- if b.notes %}<br><small>{{ b.notes }}</small>{% endif %}</td>
+    <td>{{ b.plan_name }}</td>
+    <td>${{ b.balance_due }}</td>
+    {# POST, no un enlace: un GET que modifica datos lo dispara cualquier cosa
+       que precargue enlaces. El confirm() evita el clic accidental sin
+       necesidad de un archivo .js. #}
+    <td>
+      <form method="post" action="/admin/bookings/{{ b.public_id }}/cancel"
+            onsubmit="return confirm('Cancel this booking? The time slot will be freed.')">
+        <button class="cancel" type="submit">Cancel</button>
+      </form>
+    </td>
+  </tr>
+  {% else %}
+  <tr><td colspan="7" class="empty">Nothing here.</td></tr>
+  {% endfor %}
+</table>
+{% endmacro %}
+
+{% if review %}
+<h2>Needs review — payment not confirmed ({{ review|length }})</h2>
+<p class="note">
+  Either the customer abandoned checkout, or they paid and the confirmation
+  never arrived. Check Stripe before calling them.
+</p>
+{{ rows_table(review, 'review') }}
+{% endif %}
+
+<h2>Upcoming ({{ confirmed|length }})</h2>
+{{ rows_table(confirmed, '') }}
+
+</body>
+</html>

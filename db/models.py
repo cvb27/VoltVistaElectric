@@ -82,10 +82,18 @@ class Booking(SQLModel, table=True):
     service_date: date_type = Field(index=True)
     slot: int                          # 1..5, ver SLOTS en core/booking.py
 
-    # Cliente. Sin email a proposito: Stripe lo pide el mismo para el
-    # recibo y llega en el objeto de la sesion si hace falta.
+    # Cliente.
+    #
+    # El email NO se pide en nuestro formulario: lo pide Stripe en su checkout,
+    # que lo exige siempre, y de ahi lo copiamos al confirmar el pago. Asi el
+    # cliente lo teclea una sola vez, y Stripe le manda el recibo solo — sin
+    # que nosotros escribamos ni una linea de codigo de correo al cliente.
+    #
+    # Queda vacio mientras la reserva esta en "pending": solo lo rellena
+    # mark_paid(). Cadena vacia y no NULL para no comprobar None en ningun sitio.
     customer_name: str
     customer_phone: str
+    customer_email: str = ""
     address: str
     notes: Optional[str] = None
 

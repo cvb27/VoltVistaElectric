@@ -6,7 +6,7 @@ en el diccionario `taken` que consume la logica de calendario.
 
 from datetime import datetime, timedelta
 
-from sqlmodel import Session, select
+from sqlmodel import Session, select, update
 
 from core.booking import HOLD_MINUTES
 from db.models import Booking
@@ -57,3 +57,40 @@ def get_by_stripe_session(session: Session, session_id: str) -> Booking | None:
     return session.exec(
         select(Booking).where(Booking.stripe_session_id == session_id)
     ).first()
+
+
+def mark_paid(session: Session, booking: Booking, customer_email: str = "") -> bool:
+    """Pasa la reserva a "paid". Devuelve True solo la PRIMERA vez.
+
+    Devolver True/False es lo que permite avisar al dueno una sola vez: hay
+    dos caminos que confirman el pago — el webhook de Stripe y la pagina de
+    confirmacion — y pueden llegar a la vez.
+
+    Por eso el UPDATE lleva la condicion status="pending" dentro: es la base
+    de datos la que decide quien gana, no el codigo. Si primero leyeramos el
+    estado y luego escribieramos, los dos caminos podrian leer "pending" a la
+    vez y los dos creerian haber ganado.
+
+    Solo se pasa de "pending": una reserva cancelada no revive aunque llegue
+    un webhook tardio.
+
+    customer_email llega de Stripe, que lo pide siempre en su checkout. Se
+    guarda en el mismo UPDATE para no hacer dos escrituras: el que gana la
+    carrera es el unico que lo escribe, y el que pierde no lo pisa.
+    """
+    result = session.exec(
+        update(Booking)
+        .where(Booking.id == booking.id)
+        .where(Booking.status == "pending")
+        .values(status="paid", paid_at=datetime.utcnow(),
+                customer_email=customer_email)
+    )
+    session.commit()
+
+    if result.rowcount != 1:
+        return False
+
+    # El objeto en memoria seguia diciendo "pending": hay que releerlo para
+    # que quien llama vea el estado nuevo (la plantilla lo usa).
+    session.refresh(booking)
+    return True

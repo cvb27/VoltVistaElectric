@@ -5,10 +5,13 @@ Flujo completo:
     POST /booking/checkout           se valida, se aparta el cupo, va a Stripe
     GET  /booking/confirmed          vuelve de Stripe, se dispara el evento GA4
     POST /booking/webhook            Stripe avisa que el pago se completo
+
+Los dos ultimos confirman el pago y pueden llegar en cualquier orden. Los dos
+llaman a mark_paid(), que deja pasar solo al primero: por eso el aviso al
+dueno sale una sola vez.
 """
 
 import secrets
-from datetime import datetime
 
 import stripe
 from fastapi import APIRouter, Depends, Form, Request
@@ -18,13 +21,27 @@ from sqlmodel import Session
 from core.booking import DEPOSIT, BookingUnavailable, open_days, slot_label, validate_selection
 from core.checkout import create_booking_session
 from core.config import settings
+from core.notify import notify_new_booking
 from core.offers import get_plan
 from core.templating import templates          # ajustar si tu helper se llama distinto
-from db.booking import get_by_stripe_session, taken_map
+from db.booking import get_by_stripe_session, mark_paid, taken_map
 from db.models import Booking
 from db.session import get_session              # ajustar si tu dependencia se llama distinto
 
 router = APIRouter(prefix="/booking", tags=["booking"])
+
+
+def _stripe_email(obj) -> str:
+    """Email que Stripe recogio en su checkout. Cadena vacia si no viene.
+
+    Sirve igual para la sesion que devuelve la API y para el objeto que llega
+    en el webhook: los dos son diccionarios con la misma forma.
+
+    El encadenado con "or" evita reventar si Stripe omitiera el bloque — no
+    deberia pasar, pero un email ausente jamas puede tumbar la confirmacion de
+    un pago que ya se cobro.
+    """
+    return (obj.get("customer_details") or {}).get("email") or ""
 
 
 @router.get("")
@@ -136,11 +153,10 @@ def confirmed(request: Request, session_id: str = "",
     if booking.status == "pending":
         try:
             s = stripe.checkout.Session.retrieve(session_id)
-            if s.payment_status == "paid":
-                booking.status = "paid"
-                booking.paid_at = datetime.utcnow()
-                session.add(booking)
-                session.commit()
+            # mark_paid solo devuelve True si esta llamada gano la carrera
+            # contra el webhook. Asi el aviso sale una vez, no dos.
+            if s.payment_status == "paid" and mark_paid(session, booking, _stripe_email(s)):
+                notify_new_booking(booking)
         except stripe.error.StripeError:
             pass  # el webhook lo resolvera
 
@@ -174,10 +190,7 @@ async def webhook(request: Request, session: Session = Depends(get_session)):
     if event["type"] == "checkout.session.completed":
         data = event["data"]["object"]
         booking = get_by_stripe_session(session, data["id"])
-        if booking and booking.status == "pending":
-            booking.status = "paid"
-            booking.paid_at = datetime.utcnow()
-            session.add(booking)
-            session.commit()
+        if booking and mark_paid(session, booking, _stripe_email(data)):
+            notify_new_booking(booking)
 
     return {"ok": True}

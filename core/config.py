@@ -73,6 +73,11 @@ class Settings:
     # deja un valor de prueba dentro de un commit — que es justo lo que pasó.
     booking_deposit: int = int(_get("BOOKING_DEPOSIT", "50"))
 
+    # Admin
+    # Vacía = /admin queda cerrado. Un despliegue sin esta variable no expone
+    # la agenda por accidente.
+    admin_password: str = _get("ADMIN_PASSWORD", "")
+
     # PayPal
     paypal_client_id: str = _get("PAYPAL_CLIENT_ID", "")
     paypal_client_secret: str = _get("PAYPAL_CLIENT_SECRET", "")
