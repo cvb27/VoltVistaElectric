@@ -15,6 +15,15 @@
 {% endif %}
 
 <form id="estimate-form" class="card rounded-4 p-3 p-md-4" method="post" enctype="multipart/form-data">
+
+  {# Honeypot. Oculto por CSS y no con type=hidden: muchos bots ignoran los
+     hidden pero si rellenan los text que encuentran. tabindex=-1 lo saca del
+     tabulador y aria-hidden lo esconde de los lectores de pantalla, para que
+     ningun usuario real pueda caer en el por accidente. #}
+  <div style="position:absolute;left:-9999px" aria-hidden="true">
+    <label for="website">Website</label>
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+  </div>
   <div class="row g-3">
     <div class="col-md-6">
       <label class="form-label">Name *</label>
@@ -42,7 +51,7 @@
 
     <div class="col-md-8">
       <label class="form-label">Job Type *</label>
-      <input class="form-control" name="job_type" placeholder="Ej: GFCI, luces, panel, outlet..." required>
+      <input class="form-control" name="job_type" placeholder="e.g. GFCI, lighting, panel, outlet..." required>
     </div>
 
     <div class="col-12">
