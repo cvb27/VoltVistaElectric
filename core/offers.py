@@ -30,9 +30,15 @@ def load_offers() -> dict:
     return data
 
 
-def get_plan(key: str) -> dict | None:
-    """Busca un plan por su key. Devuelve None si no existe.
+def get_plan(key: str) -> dict:
+    """Busca un plan por su key. Lanza KeyError si no existe.
 
-    Lo usara la Fase 3 para tomar el precio del servidor al crear el cobro."""
-
-    return next((p for p in load_offers()["plans"] if p["key"] == key), None)
+    Lanza en vez de devolver None a proposito: quien llama necesita el precio
+    y no puede seguir sin el, asi que un None solo retrasaria el fallo hasta
+    un p["price"] con un TypeError mucho mas dificil de leer. Las rutas ya
+    envuelven la llamada en un try/except que espera KeyError.
+    """
+    plan = next((p for p in load_offers()["plans"] if p["key"] == key), None)
+    if plan is None:
+        raise KeyError(f"Plan desconocido: {key!r}")
+    return plan

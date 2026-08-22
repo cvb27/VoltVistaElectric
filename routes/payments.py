@@ -10,9 +10,6 @@ from core.checkout import create_stripe_session
 
 router = APIRouter(prefix="/payments", tags=["payments"])
 
-# Stripe secret key (LIVE o TEST según tu env)
-stripe.api_key = settings.stripe_secret_key
-
 
 @router.get("")
 def pay_page(request: Request):

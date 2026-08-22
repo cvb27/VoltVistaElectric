@@ -1,8 +1,16 @@
 """
 Lógica de Stripe Checkout — funciones reutilizables.
+
+Aqui se configura la clave de la API, y no en un router: los dos modulos que
+hablan con Stripe (payments y booking) importan este archivo, asi que la clave
+queda puesta llegue quien llegue primero. Antes vivia en routes/payments.py y
+las reservas solo funcionaban porque main.py lo importaba antes — reordenar
+esos imports las habria roto con "No API key provided".
 """
 import stripe
 from core.config import settings
+
+stripe.api_key = settings.stripe_secret_key
 
 
 def create_stripe_session(amount: float, description: str = "") -> str:

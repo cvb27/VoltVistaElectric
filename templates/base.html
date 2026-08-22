@@ -55,6 +55,17 @@
   {# Ejemplo: pega aquí Plausible o GA si quieres #}
   {# <script defer data-domain="tudominio.com" src="https://plausible.io/js/script.js"></script> #}
 
+  {# Indexacion. Vacio por defecto = la pagina se indexa.
+
+     Una pagina que NO debe salir en Google (checkout, confirmaciones)
+     sobreescribe DOS bloques: robots, con el meta noindex; y canonical,
+     dejandolo vacio. Ver templates/booking/confirmed.html como ejemplo.
+
+     El canonical se vacia a proposito: el de por defecto apunta a la home, y
+     decirle a Google que una pagina de checkout "es" la home es peor que no
+     decirle nada. #}
+  {% block robots %}{% endblock %}
+
   <!-- URL canónica — cada plantilla hija sobreescribe este bloque -->
   {% block canonical %}
   <link rel="canonical" href="{{ settings.business_url|default('https://voltvistaelectric.com/') }}">

@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Book Your {{ plan.name }} Installation | VoltVista Electric{% endblock %}
 {% block description %}Pick a date for your {{ plan.name }} surge protector installation in Orlando. ${{ deposit }} deposit, applied to your total.{% endblock %}
+{# Paso de checkout, no contenido: no debe indexarse. Heredaba ademas el
+   canonical por defecto, que apunta a la home. Y con ?plan= son tres URLs
+   casi identicas (basic, recommended, premium) que Google veria como
+   duplicados compitiendo entre si y con la landing. #}
+{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{% block canonical %}{% endblock %}
 
 {% block content %}
 <article class="mx-auto" style="max-width:640px">

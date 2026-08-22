@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block title %}You're booked | VoltVista Electric{% endblock %}
+{# No debe indexarse. Ademas heredaba el canonical por defecto, que apunta a
+   la home: le estaba diciendo a Google que esta pagina ERA la home. #}
+{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{% block canonical %}{% endblock %}
 {% block content %}
 <article class="mx-auto text-center py-5" style="max-width:560px">
 

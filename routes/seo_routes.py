@@ -3,20 +3,40 @@ Archivos para rastreadores: robots.txt y sitemap.xml.
 
 Las paginas de servicio NO viven aqui — estan en routes/services.py.
 Este archivo solo genera los dos archivos que leen los bots.
-
-Al agregar o quitar una pagina del sitio, actualizar la lista de urls de abajo.
 """
 
 from fastapi import APIRouter, Response
-from core.config import settings
 
+from core.config import settings
+from core.posts import load_posts
 
 router = APIRouter(tags=["seo"])
+
+# Paginas fijas del sitio. Al crear una pagina nueva se anade aqui.
+#
+# Los posts del blog NO van en esta lista: se generan leyendo el mismo indice
+# que usa /blog, asi que publicar uno nuevo lo mete en el sitemap sin tocar
+# este archivo. Antes estaban escritos a mano y era facil olvidarse.
+_STATIC_PATHS = [
+    "/",
+    "/estimate",
+    "/payments",
+    "/blog",
+    "/services/electrical-repair-installation",
+    "/services/surge-protector-installation",
+    "/services/ev-charger-installation",
+]
+
+
+def _url(path: str, lastmod: str = "") -> str:
+    """Una entrada <url> del sitemap. El <lastmod> solo si se conoce de verdad."""
+    mod = f"<lastmod>{lastmod}</lastmod>" if lastmod else ""
+    return f"<url><loc>{settings.base_url}{path}</loc>{mod}</url>"
 
 
 @router.get("/robots.txt")
 def robots():
-    """robots.txt minimo: permite todo y apunta al sitemap."""
+    """robots.txt minimo: permite todo menos /admin y apunta al sitemap."""
     txt = f"""User-agent: *
 Allow: /
 Disallow: /admin
@@ -28,28 +48,21 @@ Sitemap: {settings.base_url}/sitemap.xml
 
 @router.get("/sitemap.xml")
 def sitemap():
-    """Sitemap con lista fija de paginas.
+    """Sitemap del sitio: paginas fijas + posts del blog.
 
-    No incluir aqui URLs retiradas (panel-upgrade, electrical-installations):
-    responden 301 y no deben ofrecerse a Google como destino."""
+    Las paginas fijas no llevan <lastmod>: no guardamos cuando cambiaron, y
+    una fecha inventada es peor que ninguna — Google deja de fiarse del campo
+    si no coincide con la realidad. Los posts si lo llevan, porque su fecha
+    real esta en el indice.
 
-    urls = [
-        f"{settings.base_url}/",
-        f"{settings.base_url}/estimate",
-        f"{settings.base_url}/payments",
-        f"{settings.base_url}/blog",
-        f"{settings.base_url}/services/electrical-repair-installation",
-        f"{settings.base_url}/services/surge-protector-installation",
-        f"{settings.base_url}/services/ev-charger-installation",
-        f"{settings.base_url}/blog/panel-upgrade-orlando",
-        f"{settings.base_url}/blog/ev-charger-installation-orlando",
-        f"{settings.base_url}/blog/electrical-problems-orlando-homes",
-    ]
+    Las URLs retiradas (panel-upgrade, electrical-installations) responden 301
+    y por eso no se ofrecen aqui como destino.
+    """
+    entries = [_url(p) for p in _STATIC_PATHS]
+    entries += [_url(f"/blog/{p['slug']}", p.get("published_at", ""))
+                for p in load_posts()]
 
-    xml_items = "\n".join([f"<url><loc>{u}</loc></url>" for u in urls])
-    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{xml_items}
-</urlset>
-"""
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + "\n".join(entries) + "\n</urlset>\n")
     return Response(content=xml, media_type="application/xml")

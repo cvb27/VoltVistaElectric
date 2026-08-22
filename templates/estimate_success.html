@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Estimate Requested | VoltVista Electric{% endblock %}
 {% block description %}We received your estimate request. VoltVista Electric will contact you within 24 hours.{% endblock %}
-{% block canonical %}
-<!-- Página post-conversión: no debe indexarse -->
-<meta name="robots" content="noindex, nofollow">
-{% endblock %}
+{# Pagina post-conversion: no debe indexarse. #}
+{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{% block canonical %}{% endblock %}
 {% block page %}estimate-success{% endblock %}
 
 {% block content %}
