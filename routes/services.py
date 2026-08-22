@@ -9,7 +9,7 @@ redirects 301 para no perder el posicionamiento que ya acumularon.
 """
 
 from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from core.config import settings
 from core.i18n import t
@@ -112,18 +112,24 @@ async def ev_charger_installation(request: Request):
 # nueva en vez de devolver 404. No borrar sin revisar Search Console primero.
 # ---------------------------------------------------------------------------
 
-@router.get("/panel-upgrade", response_class=HTMLResponse)
-async def panel_upgrade(request: Request):
-    """Landing SEO para actualización de panel eléctrico."""
-    ctx = _service_context(request, "Electrical Panel Upgrade", "/services/panel-upgrade",
-                           "Expert panel upgrades in Orlando, FL by VoltVista Electric.")
-    return templates.TemplateResponse("services/panel_upgrade.html", ctx)
+# Destino de las dos redirecciones. Una sola constante para que, si la pagina
+# de reemplazo cambia de URL, no haya que acordarse de tocar dos sitios.
+_REPLACEMENT = "/services/electrical-repair-installation"
 
 
-@router.get("/electrical-installations", response_class=HTMLResponse)
-async def electrical_installations(request: Request):
-    """Landing SEO para instalaciones eléctricas residenciales y comerciales."""
-    ctx = _service_context(request, "Electrical Installations", "/services/electrical-installations",
-                           "Residential and commercial electrical installations in Orlando, FL.")
-    return templates.TemplateResponse("services/electrical_installations.html", ctx)
+@router.get("/panel-upgrade")
+async def panel_upgrade_redirect():
+    """301 permanente a la pagina que la reemplazo.
+
+    Antes intentaba renderizar services/panel_upgrade.html, que fue borrada, y
+    devolvia 500. Lo recibian tanto Google como quien llegaba desde el post
+    panel-upgrade-orlando.md, que sigue enlazando esta URL.
+    """
+    return RedirectResponse(_REPLACEMENT, status_code=301)
+
+
+@router.get("/electrical-installations")
+async def electrical_installations_redirect():
+    """301 permanente a la pagina que la reemplazo. Mismo caso que la de arriba."""
+    return RedirectResponse(_REPLACEMENT, status_code=301)
 
