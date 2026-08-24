@@ -76,7 +76,16 @@ class Booking(SQLModel, table=True):
     plan_name: str                     # Essential|Complete|Total Home
     plan_price: int                    # 299|399|599 — es el value del evento GA4
     deposit_amount: int                # lo que se cobra ahora (50)
-    balance_due: int                   # plan_price - deposit_amount
+    balance_due: int                   # plan_price - discount_amount - deposit_amount
+
+    # Descuento aplicado, congelado igual que el precio: si manana caduca el
+    # codigo o cambia el porcentaje, esta reserva conserva lo prometido.
+    #
+    # plan_price NO se toca: sigue siendo el precio de lista, para poder ver
+    # cuanto se regalo. El porcentaje no se guarda — los dolares son lo que
+    # importa al conciliar, y el codigo ya dice de que campana vino.
+    discount_code: str = ""            # "" si no hubo descuento
+    discount_amount: int = 0           # dolares descontados del total
 
     # La cita
     service_date: date_type = Field(index=True)

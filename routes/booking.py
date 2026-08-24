@@ -18,11 +18,11 @@ from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import RedirectResponse
 from sqlmodel import Session
 
-from core.booking import DEPOSIT, BookingUnavailable, open_days, slot_label, validate_selection
+from core.booking import BookingUnavailable, open_days, slot_label, validate_selection
 from core.checkout import create_booking_session
 from core.config import settings
 from core.notify import notify_new_booking
-from core.offers import get_plan
+from core.offers import get_plan, quote
 from core.templating import templates          # ajustar si tu helper se llama distinto
 from db.booking import get_by_stripe_session, mark_paid, taken_map
 from db.models import Booking
@@ -45,7 +45,7 @@ def _stripe_email(obj) -> str:
 
 
 @router.get("")
-def choose_date(request: Request, plan: str = "recommended",
+def choose_date(request: Request, plan: str = "recommended", code: str = "",
                 session: Session = Depends(get_session)):
     """Pagina de seleccion de fecha.
 
@@ -59,11 +59,13 @@ def choose_date(request: Request, plan: str = "recommended",
         # Plan desconocido: de vuelta a la landing en vez de romper.
         return RedirectResponse("/services/surge-protector-installation", status_code=303)
 
+    # quote() resuelve el descuento en el servidor. Si el codigo no existe o
+    # caduco, devuelve el precio de lista y `code` vacio — la pagina lo usa
+    # para avisar de que no valia.
     return templates.TemplateResponse("booking/select_date.html", {
         "request": request,
-        "plan": p,
-        "deposit": DEPOSIT,
-        "balance": p["price"] - DEPOSIT,
+        "q": quote(p, code),
+        "typed_code": code.strip(),
         "days": open_days(taken_map(session)),
     })
 
@@ -77,6 +79,7 @@ def start_checkout(request: Request,
                    customer_phone: str = Form(...),
                    address: str = Form(...),
                    notes: str = Form(""),
+                   code: str = Form(""),
                    session: Session = Depends(get_session)):
     """Valida, aparta el cupo y manda a pagar.
 
@@ -94,12 +97,15 @@ def start_checkout(request: Request,
         # calendario ya actualizado, con el mensaje arriba.
         return templates.TemplateResponse("booking/select_date.html", {
             "request": request,
-            "plan": p,
-            "deposit": DEPOSIT,
-            "balance": p["price"] - DEPOSIT,
+            "q": quote(p, code),
+            "typed_code": code.strip(),
             "days": open_days(taken_map(session)),
             "error": str(e),
         }, status_code=409)
+
+    # El descuento se vuelve a resolver aqui, en el servidor. Del formulario
+    # solo llega la KEY del codigo, nunca un importe: igual que con el plan.
+    q = quote(p, code)
 
     # La reserva nace como "pending". Desde este momento su cupo queda
     # apartado durante HOLD_MINUTES, aunque el cliente todavia no pague.
@@ -108,8 +114,10 @@ def start_checkout(request: Request,
         plan_key=p["key"],
         plan_name=p["name"],
         plan_price=p["price"],
-        deposit_amount=DEPOSIT,
-        balance_due=p["price"] - DEPOSIT,
+        deposit_amount=q["deposit"],
+        balance_due=q["balance"],
+        discount_code=q["code"],
+        discount_amount=q["discount"],
         service_date=day,
         slot=slot,
         customer_name=customer_name.strip(),
@@ -123,7 +131,7 @@ def start_checkout(request: Request,
 
     # {CHECKOUT_SESSION_ID} lo sustituye Stripe por el id real al redirigir.
     stripe_session = create_booking_session(
-        amount=DEPOSIT,
+        amount=q["deposit"],
         description=f"{p['name']} surge protector — deposit",
         success_url=f"{settings.base_url}/booking/confirmed?session_id={{CHECKOUT_SESSION_ID}}",
         cancel_url=f"{settings.base_url}/services/surge-protector-installation",

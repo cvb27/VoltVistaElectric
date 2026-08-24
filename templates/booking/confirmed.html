@@ -30,6 +30,9 @@
   <div class="card rounded-4 p-4 text-start">
     <div class="d-flex justify-content-between"><span class="text-muted">Package</span><span class="fw-semibold">{{ booking.plan_name }}</span></div>
     <div class="d-flex justify-content-between"><span class="text-muted">Total</span><span>${{ booking.plan_price }}</span></div>
+    {% if booking.discount_amount %}
+    <div class="d-flex justify-content-between"><span class="text-muted">Discount ({{ booking.discount_code }})</span><span>&minus;${{ booking.discount_amount }}</span></div>
+    {% endif %}
     <div class="d-flex justify-content-between"><span class="text-muted">Deposit paid</span><span>${{ booking.deposit_amount }}</span></div>
     <div class="d-flex justify-content-between border-top pt-2 mt-2"><span class="fw-semibold">Due after the work</span><span class="fw-semibold">${{ booking.balance_due }}</span></div>
     <div class="d-flex justify-content-between mt-3"><span class="text-muted">Address</span><span class="text-end">{{ booking.address }}</span></div>
@@ -51,7 +54,10 @@
   gtag('event', 'booking_paid', {
     transaction_id: '{{ booking.public_id }}',
     plan: '{{ booking.plan_key }}',
-    value: {{ booking.plan_price }},
+    // El value va NETO de descuento: es lo que se va a facturar de verdad.
+    // Reportar el precio de lista inflaria el retorno que ve Smart Bidding y
+    // Google pujaria mas de lo que la economia real justifica.
+    value: {{ booking.plan_price - booking.discount_amount }},
     currency: 'USD'
   });
 
@@ -60,7 +66,7 @@
   // suyo. Si falta la etiqueta en .env, este bloque no se renderiza.
   gtag('event', 'conversion', {
     send_to: '{{ settings.gads_id }}/{{ settings.gads_conversion_label }}',
-    value: {{ booking.plan_price }},
+    value: {{ booking.plan_price - booking.discount_amount }},
     currency: 'USD',
     transaction_id: '{{ booking.public_id }}'
   });

@@ -33,6 +33,10 @@ def _body(b: Booking) -> str:
         f"EMAIL    {b.customer_email or '-'}\n"
         f"WHERE    {b.address}\n\n"
         f"PACKAGE  {b.plan_name} - ${b.plan_price}\n"
+        # Solo sale la linea si hubo descuento: un "DISCOUNT -$0" en todos los
+        # correos seria ruido.
+        + (f"DISCOUNT -${b.discount_amount}  ({b.discount_code})\n" if b.discount_amount else "")
+        +
         f"PAID     ${b.deposit_amount} deposit\n"
         f"COLLECT  ${b.balance_due} on site\n\n"
         f"NOTES    {b.notes or '-'}\n"

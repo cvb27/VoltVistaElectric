@@ -11,6 +11,9 @@ del formulario: eso permitiria que un cliente pague lo que quiera.
 import json
 from pathlib import Path
 
+from core.booking import DEPOSIT
+from core.discounts import percent_for
+
 _PATH = Path(__file__).resolve().parent.parent / "data" / "surge_offers.json"
 
 
@@ -42,3 +45,34 @@ def get_plan(key: str) -> dict:
     if plan is None:
         raise KeyError(f"Plan desconocido: {key!r}")
     return plan
+
+
+def quote(plan: dict, code: str = "") -> dict:
+    """Desglose de precios de una reserva. Unica fuente del calculo.
+
+    Existe porque "precio - deposito" estaba repetido en cuatro sitios de
+    routes/booking.py, y el descuento habria que meterlo en los cuatro: el
+    primero que se olvidara cobraria de mas.
+
+    El descuento baja el TOTAL, nunca el deposito. El cliente paga hoy lo
+    mismo de siempre y lo que se reduce es lo que queda al terminar el trabajo.
+
+    Devuelve tambien `percent` y `code` porque la pagina los muestra: decir
+    solo "10% off" obligaria al cliente a fiarse del redondeo.
+    """
+    percent = percent_for(code)
+
+    # Redondeo al dolar mas cercano con los medios hacia arriba. No se usa
+    # round() porque en Python hace redondeo bancario — round(150.5) da 150 —
+    # y en dinero eso sorprende a cualquiera que revise la cuenta.
+    discount = int(plan["price"] * percent / 100 + 0.5) if percent else 0
+
+    return {
+        "plan": plan,
+        "code": code.strip().upper() if percent else "",
+        "percent": percent,
+        "discount": discount,
+        "total": plan["price"] - discount,
+        "deposit": DEPOSIT,
+        "balance": plan["price"] - discount - DEPOSIT,
+    }
