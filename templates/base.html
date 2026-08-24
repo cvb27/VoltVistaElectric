@@ -29,9 +29,19 @@
 
 
   <!-- Open Graph — cada plantilla hija sobreescribe estos bloques -->
-  <meta property="og:title" content="{% block og_title %}{{ app_name }}{% endblock %}">
+
+  <!-- Texto literal, no {{ app_name }}: esa variable no llega al contexto de
+       todas las plantillas y Jinja la renderiza vacia sin avisar. Un og:title
+       vacio deja la tarjeta de WhatsApp sin titulo. -->
+  <meta property="og:title" content="{% block og_title %}VoltVista Electric — Orlando {% endblock %}">
+
   <meta property="og:description" content="{% block og_description %}Electrical repairs and installations. FREE Estimate.{% endblock %}">
   <meta property="og:type" content="website">
+
+  <!-- og:url debe ser ABSOLUTA y apuntar a esta pagina, no a la home.
+       Cada hija lo sobreescribe con su propia ruta. -->
+  <meta property="og:url" content="{% block og_url %}https://voltvistaelectric.com/{% endblock %}">
+  
   <meta property="og:image" content="{% block og_image %}{{ settings.logo_url }}{% endblock %}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">

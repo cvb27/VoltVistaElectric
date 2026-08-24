@@ -1,6 +1,19 @@
+{# --- Open Graph -------------------------------------------------------
+   Lo que se ve al compartir el link por WhatsApp, Facebook o LinkedIn.
+   Sin estos bloques la pagina hereda los genericos de base.html y la
+   tarjeta se ve identica a la del home.
+
+   Los bloques twitter_* de base.html heredan de estos automaticamente
+   (self.og_title()), asi que no hay que repetirlos aqui.
+
+   La og_image DEBE ser una URL absoluta: los scrapers no resuelven
+   rutas relativas. --------------------------------------------------- #}
+
 {% extends "base.html" %}
 {% block title %}Surge Protector Installation in Orlando from ${{ from_price }} | VoltVista Electric{% endblock %}
 {% block description %}Whole-home surge protector installation in Orlando from ${{ from_price }}. Protect your appliances and electronics from power surges. Free assessment, fully insured.{% endblock %}
+{% block og_title %}Surge Protector Installation in Orlando — From $299{% endblock %}
+{% block og_image %}https://voltvistaelectric.com/static/img/og-surge-protector.png{% endblock %}
 {% block canonical %}
 <link rel="canonical" href="{{ settings.business_url }}/services/surge-protector-installation">
 {% endblock %}
