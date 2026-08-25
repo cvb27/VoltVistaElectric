@@ -1,20 +1,93 @@
 /**
- * Componentes UI compartidos (CSS separado de site.css por cap 120).
- * Por ahora: estilos del CTA WhatsApp + botón flotante global.
+ * Foco, boton flotante de WhatsApp y ajustes de movil.
+ *
+ * Los colores estan en palette.css, el layout en site.css y los botones
+ * en buttons.css.
  */
 
-/* Botón WhatsApp — color oficial */
-.btn-whatsapp {
-  background: #25D366;
-  color: #fff;
-  border: none;
-}
-.btn-whatsapp:hover {
-  background: #1da851;
-  color: #fff;
+/* ============================= NAVBAR =============================
+   Estas reglas se perdieron al reescribir site.css con la paleta nueva y
+   hay que reponerlas. Sin ellas manda el default de Bootstrap:
+
+     --bs-navbar-color: rgba(0,0,0,.65)   y el .navbar sin fondo propio
+
+   En la home el body es #0D1B2A, asi que quedaban enlaces negros sobre
+   azul casi negro: 1.15:1.
+
+   El arreglo sobreescribe las VARIABLES de Bootstrap en vez de pelear con
+   sus selectores: asi cubre de una vez enlaces, hover, activo, marca y el
+   borde del toggler, y no hace falta ningun !important — nuestro selector
+   ya gana por especificidad (0,3,1 contra 0,1,0). */
+
+body:not([data-page="home"]) .navbar {
+  background: var(--color-bg-light);
+  border-bottom: 1px solid rgba(13, 27, 42, 0.12);
 }
 
-/* Botón flotante WhatsApp — todas las páginas */
+body[data-page="home"] .navbar {
+  /* Transparente a proposito: sobre el hero se ve la foto detras. El JS le
+     pone .nav-scrolled cuando el hero sale de pantalla. */
+  background: transparent;
+  transition: background .3s ease;
+
+  --bs-navbar-color:        var(--color-text);
+  --bs-navbar-hover-color:  var(--color-accent);
+  --bs-navbar-active-color: var(--color-accent);
+  --bs-navbar-brand-color:  var(--color-text);
+  --bs-navbar-brand-hover-color: var(--color-accent);
+  --bs-navbar-toggler-border-color: var(--color-tint-border);
+
+  /* El icono del toggler es un SVG incrustado con stroke rgba(33,37,41,.75):
+     invisible sobre fondo oscuro. Mismo trazo, en blanco. */
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+body[data-page="home"] .navbar.nav-scrolled {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-tint-border);
+}
+
+/* brand-text es clase nuestra, no de Bootstrap: no la alcanza ninguna
+   variable y hay que darle color aparte. En claro es navy (11.32:1 sobre
+   blanco); en la home, blanca. */
+body[data-page="home"] .navbar .brand-text { color: var(--color-text); }
+body[data-page="home"] .navbar .navbar-brand:hover .brand-text { color: var(--color-accent); }
+
+/* ============================= FOCO =============================
+   Requisito de accesibilidad, no decoracion. El ambar sobre blanco da
+   2.15:1 y no se ve, asi que el anillo es oscuro por defecto y ambar
+   solo donde el fondo es oscuro (8.10:1). Las custom properties heredan,
+   asi que basta declararlo en el contenedor. */
+
+:root { --focus-ring: var(--color-text-dark); }
+body[data-page="home"],
+.hero, .section-dark, .section-navy { --focus-ring: var(--color-accent); }
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* ============================ WHATSAPP ============================
+   Solo el boton flotante global. El verde salio de los CTA del hero y de
+   las secciones: el sistema tiene un unico color de accion. */
+
+.btn-whatsapp,
+.whatsapp-float {
+  background: var(--color-whatsapp);
+  color: var(--color-text);
+  border: none;
+}
+.btn-whatsapp:hover,
+.whatsapp-float:hover { background: var(--color-whatsapp-dark); color: var(--color-text); }
+
 .whatsapp-float {
   position: fixed;
   bottom: 24px;
@@ -22,50 +95,24 @@
   z-index: 1000;
   width: 56px;
   height: 56px;
-  background: #25D366;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform .2s;
-  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   font-size: 28px;
+  transition: transform .2s, background .2s;
 }
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  color: #fff;
-}
+.whatsapp-float:hover { transform: scale(1.08); }
 
-/* Botón CTA del nav — versión afinada del btn-brand para el header */
-.btn-cta-nav {
-  background: #E8352E;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 8px 20px;
-  transition: background .2s;
-}
-.btn-cta-nav:hover {
-  background: #CC2222;
-  color: #fff;
-}
+/* ============================= MOVIL =============================
+   Bootstrap ya colapsa col-md-* por debajo de 768px; el override que
+   habia aqui era redundante y su ".row { margin: 0 }" anulaba los
+   gutters negativos, desalineando columnas. */
 
-/* Fix hero mobile — 100svh respeta URL bar iOS; width:100% previene shrink en flex */
-.hero { min-height: 100svh; }
-@supports not (height: 100svh) {
-  .hero { min-height: 100vh; }
-}
-.hero-content { width: 100%; padding: 3rem 1rem; }
-
-/* Mobile overrides — col-md-* sin col-12 no colapsan por default */
 @media (max-width: 768px) {
   .container { padding-left: 1rem; padding-right: 1rem; }
-  .row { margin-left: 0; margin-right: 0; }
-  .col-md-6, .col-md-4, .col-md-3 {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
+  /* Los CTA a ancho completo en movil: dos botones cortos uno junto al
+     otro se quedan en un area de toque demasiado pequena. */
+  .hero-content .btn { width: 100%; }
 }

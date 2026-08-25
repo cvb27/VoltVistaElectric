@@ -1,0 +1,90 @@
+/**
+ * Botones, foco y ajustes de movil.
+ *
+ * TRES ROLES DE BOTON Y NADA MAS:
+ *   primario    ambar solido con texto oscuro — la accion de la pantalla
+ *   secundario  transparente con borde 2px    — la alternativa
+ *   terciario   texto plano atenuado          — la salida discreta
+ *
+ * Las clases viejas (btn-brand, btn-cta-nav, btn-outline-brand,
+ * btn-outline-primary, btn-outline-light) quedan como ALIAS de estos roles.
+ * Se hace asi a proposito: son 26 usos repartidos en 10 plantillas, y
+ * renombrarlos alli seria mucho riesgo para ningun beneficio.
+ */
+
+/* ============================ PRIMARIO ============================ */
+
+.btn-cta-primary,
+.btn-brand,
+.btn-cta-nav {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-radius: 6px;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.btn-cta-primary:hover,
+.btn-brand:hover,
+.btn-cta-nav:hover {
+  background: var(--color-accent-dark);
+  color: var(--color-on-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.25);
+}
+
+/* El del navbar es el mismo rol, solo mas compacto */
+.btn-cta-nav { font-size: 0.875rem; padding: 6px 16px; }
+
+/* =========================== SECUNDARIO ===========================
+   El color de la linea NO es fijo: sobre fondo blanco un borde blanco
+   seria invisible, y btn-outline-primary vive en /booking y en las
+   landings de servicio, que son paginas claras. Por defecto es oscuro
+   y se vuelve blanco solo dentro de un contexto oscuro. */
+
+.btn-cta-secondary,
+.btn-outline-brand,
+.btn-outline-primary,
+.btn-outline-light {
+  --cta-line: var(--color-text-dark);
+  background: transparent;
+  color: var(--cta-line);
+  border: 2px solid var(--cta-line);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-radius: 6px;
+  transition: background .2s, color .2s;
+}
+body[data-page="home"] .btn-cta-secondary,
+body[data-page="home"] .btn-outline-brand,
+body[data-page="home"] .btn-outline-primary,
+body[data-page="home"] .btn-outline-light,
+.hero .btn-cta-secondary,
+.section-dark .btn-outline-brand,
+.section-navy .btn-outline-brand,
+.section-dark .btn-outline-primary,
+.section-navy .btn-outline-primary {
+  --cta-line: var(--color-text);
+}
+.btn-cta-secondary:hover,
+.btn-outline-brand:hover,
+.btn-outline-primary:hover,
+.btn-outline-light:hover {
+  background: var(--cta-line);
+  color: var(--color-bg);
+}
+
+/* =========================== TERCIARIO ===========================
+   Texto plano, sin fondo ni borde. opacity .75 sobre el fondo oscuro
+   da 10.13:1, asi que sigue pasando AA de sobra. */
+
+.btn-cta-tertiary,
+a.hover-opacity-100 {
+  background: none;
+  border: none;
+  opacity: .75;
+  transition: opacity .2s;
+}
+.btn-cta-tertiary:hover,
+a.hover-opacity-100:hover { opacity: 1; }

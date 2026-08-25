@@ -1,0 +1,59 @@
+/**
+ * Paleta VoltVista + layout de las paginas publicas.
+ *
+ * Sistema de UN solo color de accion: ambar para todo CTA. El rojo del logo
+ * queda como acento de marca (iconos y detalles) y nunca como fondo de boton.
+ * Los botones y el foco viven en components.css.
+ *
+ * Todos los ratios de contraste de los comentarios estan medidos contra
+ * WCAG AA (4.5:1 para texto, 3:1 para elementos no textuales).
+ */
+
+:root {
+  /* Fondos oscuros */
+  --color-bg:      #0D1B2A;
+  --color-surface: #16283D;
+  --color-navy:    #1E3A6E;
+
+  /* Accion. El texto sobre ambar va OSCURO: blanco sobre #F59E0B da 2.15:1
+     y no pasa. Con #0D1B2A da 8.10:1. */
+  --color-accent:      #F59E0B;
+  --color-accent-dark: #D97706;   /* hover: 5.46:1 con texto oscuro */
+  --color-on-accent:   #0D1B2A;
+
+  /* Marca. Solo iconos y detalles finos: sobre fondo oscuro da 3.49:1, que
+     vale para un elemento no textual pero NO para texto. */
+  --color-brand-red: #D52B2B;
+
+  /* Texto. --color-muted es #A0AEC0 y no #94A3B8: aquel daba 4.34:1 sobre
+     navy y no pasaba. Con este pasa en los tres fondos: 6.78 / 5.83 / 4.94. */
+  --color-text:      #FFFFFF;
+  --color-muted:     #A0AEC0;
+  --color-text-dark: #0F172A;
+
+  /* Fondo de las paginas que no son la home, y del navbar en ellas */
+  --color-bg-light:  #FFFFFF;
+
+  /* Superficies translucidas de las tarjetas sobre fondo oscuro. Estaban
+     escritas a mano en tres plantillas. */
+  --color-tint:        rgba(255, 255, 255, 0.05);
+  --color-tint-border: rgba(255, 255, 255, 0.12);
+
+  --color-whatsapp: #128C7E;   /* verde oscuro oficial: 4.14:1 con icono blanco */
+  --color-whatsapp-dark: #0B6B60;   /* hover del flotante */
+
+  /* Velo del hero. Degradado y no opacidad plana: mas suave en los bordes
+     para que se vea la foto, y 0.68 en la franja central, que es donde cae
+     el texto. Medido sobre el pixel mas claro de home_surge.webp: sin velo
+     el texto blanco daba 1.39:1; con este, 7.34:1 en el peor caso. */
+  --hero-scrim: linear-gradient(to bottom,
+                  rgba(13, 27, 42, 0.30)  0%,
+                  rgba(13, 27, 42, 0.68) 20%,
+                  rgba(13, 27, 42, 0.68) 85%,
+                  rgba(13, 27, 42, 0.40) 100%);
+
+  /* Altura de la barra de oferta y del navbar. El hero se las resta para que
+     su 100svh no empuje la primera pantalla fuera de la ventana. */
+  --offer-h: 44px;
+  --nav-h:   58px;
+}

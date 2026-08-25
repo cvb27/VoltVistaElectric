@@ -1,39 +1,38 @@
 /**
- * Paleta VoltVista + estilos de layout para la home.
+ * Layout de las paginas publicas: hero, secciones, marca y barra de oferta.
  *
- * Variables de color centralizadas. Fondo oscuro aplicado solo en la home
- * (body[data-page="home"]) — las demás páginas mantienen fondo blanco.
+ * Los colores viven en palette.css y los botones en components.css.
+ * Aqui no debe aparecer ni un hex suelto: todo por variable.
  */
 
-:root {
-  --color-bg:      #0D1B2A;
-  --color-accent:  #D52B2B;
-  --color-navy:    #1E3A6E;
-  --color-text:    #FFFFFF;
-  --color-muted:   #A8B8C8;
-  --color-overlay: rgba(13, 27, 42, 0.65);
-}
+html { scroll-behavior: smooth; }
 
-/* Fondo oscuro solo en home — evita romper páginas con diseño blanco */
+/* Fondo oscuro solo en la home — las demas paginas son de fondo blanco */
 body[data-page="home"] {
   background-color: var(--color-bg);
   color: var(--color-text);
 }
 
-/* Hero section — video de fondo a pantalla completa */
+/* ---------- Hero ---------- */
+
+/* min-height con calc: sin restar el navbar y la barra de oferta, la primera
+   pantalla mide nav + banner + 100svh y el hero queda cortado. Es min-height
+   y no height para que crezca si el contenido no cabe (movil pequeno). */
 .hero {
   position: relative;
   z-index: 0;
-  min-height: 100vh;
+  min-height: calc(100svh - var(--nav-h) - var(--offer-h));
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
+@supports not (height: 100svh) {
+  .hero { min-height: calc(100vh - var(--nav-h) - var(--offer-h)); }
+}
 .hero-video {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -42,79 +41,53 @@ body[data-page="home"] {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: var(--color-overlay);
+  background: var(--hero-scrim);
   z-index: 1;
 }
 .hero-content {
   position: relative;
   z-index: 2;
+  width: 100%;
+  padding: 3rem 1rem;
 }
 
-/* Secciones alternas por color de fondo */
-.section-dark   { background: var(--color-bg); }
-.section-navy   { background: var(--color-navy); }
-.section-accent { background: var(--color-accent); }
+/* ---------- Secciones ---------- */
 
-/* Botones de marca */
-.btn-brand {
+.section-dark { background: var(--color-bg); }
+.section-navy { background: var(--color-navy); }
+
+/* section-accent ya no es un bloque rojo: el rojo dejo de ser color de accion.
+   Se usa la superficie oscura, y el CTA de dentro es el que lleva el ambar. */
+.section-accent { background: var(--color-surface); }
+
+/* Tarjeta translucida sobre fondo oscuro (secciones de la home) */
+.tint-card {
+  background: var(--color-tint);
+  border: 1px solid var(--color-tint-border);
+}
+
+/* ---------- Marca y enlaces ---------- */
+
+.brand-logo { width: 34px; height: 34px; object-fit: contain; }
+.brand-text { letter-spacing: 0.08em; color: var(--color-navy); }
+
+.link-muted { color: var(--color-navy); text-decoration: none; }
+.link-muted:hover { text-decoration: underline; }
+body[data-page="home"] .link-muted { color: var(--color-muted); }
+
+/* ---------- Barra de oferta ---------- */
+
+/* position:relative para que el z-index cuente: antes estaba suelto y no
+   hacia nada. Fondo ambar con texto oscuro, igual que los CTA. */
+.offer-banner {
+  position: relative;
+  z-index: 100;
   background: var(--color-accent);
-  color: #fff;
-  border: none;
+  color: var(--color-on-accent);
+  padding: 12px 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
-.btn-brand:hover {
-  background: #b52020;
-  color: #fff;
-}
-.btn-outline-brand {
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  background: transparent;
-}
-.btn-outline-brand:hover {
-  background: var(--color-accent);
-  color: #fff;
-}
-
-/* Brand assets — preservados del CSS previo */
-.brand-logo {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
-}
-.brand-text {
-  letter-spacing: 0.08em;
-  color: var(--color-navy);
-}
-
-/* Enlaces muted en páginas con fondo claro */
-.link-muted {
-  color: var(--color-navy);
-  text-decoration: none;
-}
-.link-muted:hover {
-  text-decoration: underline;
-}
-
-/* Override del footer en home: navy no contrasta sobre fondo oscuro */
-body[data-page="home"] .link-muted {
-  color: var(--color-muted);
-}
-
-/* Navbar — blanca en páginas no-home, transparente-to-oscura en home */
-body:not([data-page="home"]) .navbar {
-  background: #fff;
-  border-bottom: 1px solid #dee2e6;
-}
-body[data-page="home"] .navbar {
-  background: transparent;
-  transition: background 0.3s ease;
-}
-body[data-page="home"] .navbar.nav-scrolled {
-  background: var(--color-bg);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-body[data-page="home"] .navbar .nav-link,
-body[data-page="home"] .navbar .brand-text {
-  color: #fff;
-}
-html { scroll-behavior: smooth; }
+.offer-banner a { color: var(--color-on-accent); }
+.offer-banner a:hover { opacity: 0.85; }
