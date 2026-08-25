@@ -58,10 +58,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <!-- Site CSS -->
-  <link href="/static/css/palette.css" rel="stylesheet">
-  <link href="/static/css/site.css" rel="stylesheet">
-  <link href="/static/css/buttons.css" rel="stylesheet">
-  <link href="/static/css/components.css" rel="stylesheet">
+  <link href="/static/css/palette.css?v={{ asset_v }}" rel="stylesheet">
+  <link href="/static/css/site.css?v={{ asset_v }}" rel="stylesheet">
+  <link href="/static/css/buttons.css?v={{ asset_v }}" rel="stylesheet">
+  <link href="/static/css/components.css?v={{ asset_v }}" rel="stylesheet">
 
   <!-- Tracking hook (opcional) -->
   {# Ejemplo: pega aquí Plausible o GA si quieres #}
@@ -144,7 +144,7 @@
 </a>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/static/js/site.js"></script>
+<script src="/static/js/site.js?v={{ asset_v }}"></script>
 
 {% if settings.ga4_id or settings.gads_id %}
 <!-- Un unico loader: gtag.js atiende a GA4 y a Ads a la vez. Antes se

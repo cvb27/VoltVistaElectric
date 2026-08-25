@@ -19,6 +19,9 @@ def _build_templates() -> Jinja2Templates:
     tpl.env.globals["global_jsonld"] = build_local_business_schema(settings)
     tpl.env.globals["business_url"] = settings.business_url
     tpl.env.globals["settings"] = settings
+    # Sello para el ?v= de los estaticos: cambia en cada deploy y obliga a
+    # navegador y CDN a pedir el CSS nuevo pese al Cache-Control de un ano.
+    tpl.env.globals["asset_v"] = settings.asset_version
     return tpl
 
 

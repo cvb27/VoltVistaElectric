@@ -6,6 +6,7 @@ Centraliza configuración de la app desde variables de entorno.
 """
 
 from dataclasses import dataclass
+from pathlib import Path
 from dotenv import load_dotenv
 import os
 
@@ -14,6 +15,28 @@ load_dotenv()
 
 def _get(name: str, default: str = "") -> str:
     return os.getenv(name, default).strip()
+
+
+def _asset_version() -> str:
+    """Sello que cambia en cada deploy. Va como ?v= en el CSS y el JS.
+
+    Los estaticos se sirven con Cache-Control de un ano (ver main.py), y eso
+    solo es correcto si la URL cambia cuando cambia el contenido. Sin esto,
+    Cloudflare estuvo sirviendo el site.css del 18 de agosto durante seis
+    dias despues de desplegar la paleta nueva: la URL era la misma, asi que
+    nunca volvio a pedirlo al origen.
+
+    En Railway se usa el SHA del commit. En local, el mtime mas reciente de
+    css/ y js/, para que al editar un CSS el navegador lo recoja sin tener
+    que borrar la cache a mano.
+    """
+    sha = _get("RAILWAY_GIT_COMMIT_SHA")
+    if sha:
+        return sha[:8]
+
+    static = Path(__file__).resolve().parent.parent / "static"
+    archivos = [*static.glob("css/*"), *static.glob("js/*")]
+    return str(int(max((f.stat().st_mtime for f in archivos), default=0)))
 
 
 @dataclass(frozen=True)
@@ -43,6 +66,9 @@ class Settings:
     hours: str = _get("BUSINESS_HOURS", "Mo-Fr 08:00-18:00")
     business_url: str = _get("BUSINESS_URL", "https://voltvistaelectric.com")
     logo_url: str = _get("BUSINESS_LOGO_URL", "https://voltvistaelectric.com/static/img/logo.png")
+
+    # Sello de version de los estaticos — ver _asset_version() arriba.
+    asset_version: str = _asset_version()
 
     # Tracking IDs — se rellenan vía .env, nunca hardcodeados.
     ga4_id: str = _get("GA4_ID", "")
