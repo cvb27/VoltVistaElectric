@@ -42,15 +42,12 @@
   --color-whatsapp: #128C7E;   /* verde oscuro oficial: 4.14:1 con icono blanco */
   --color-whatsapp-dark: #0B6B60;   /* hover del flotante */
 
-  /* Velo del hero. Degradado y no opacidad plana: mas suave en los bordes
-     para que se vea la foto, y 0.68 en la franja central, que es donde cae
-     el texto. Medido sobre el pixel mas claro de home_surge.webp: sin velo
-     el texto blanco daba 1.39:1; con este, 7.34:1 en el peor caso. */
-  --hero-scrim: linear-gradient(to bottom,
-                  rgba(13, 27, 42, 0.30)  0%,
-                  rgba(13, 27, 42, 0.68) 20%,
-                  rgba(13, 27, 42, 0.68) 85%,
-                  rgba(13, 27, 42, 0.40) 100%);
+  /* Fondo del bloque de texto del hero.
+     La imagen NO se oscurece: se le da fondo al texto y ya. Antes habia un
+     velo sobre TODA la foto; medido sobre home_surge.webp, el texto blanco
+     sobre este panel da 8.21:1 en movil y 9.01:1 en desktop, y el resto de
+     la imagen queda a su brillo original. */
+  --hero-panel: rgba(13, 27, 42, 0.75);
 
   /* Altura de la barra de oferta y del navbar. El hero se las resta para que
      su 100svh no empuje la primera pantalla fuera de la ventana. */
