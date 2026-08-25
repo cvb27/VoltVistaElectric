@@ -3,10 +3,19 @@
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-md-6">
-        <video class="w-100 rounded-4 shadow" autoplay muted loop playsinline
-          poster="/static/img/gallery/IMG_20260213_224342_293.jpg">
-          <source src="/static/video/compressed/20260323_161248.mp4" type="video/mp4">
-        </video>
+        {# El video pesa 2,4 MB y llevaba autoplay, asi que se descargaba nada
+           mas cargar la pagina pese a estar muy por debajo del pliegue. Eso
+           retrasaba el LCP del hero —que pesa 45 KB— porque tenia que esperar
+           a que se liberara el canal. Ahora lo dispara site.js cuando la
+           seccion entra en pantalla.
+
+           El poster es el primer fotograma del propio video y comparte su
+           ratio 9:16: sin salto de layout (CLS) ni corte visual al arrancar.
+           El anterior era una foto de galeria de 186 KB en ratio 3:4. #}
+        <video class="w-100 rounded-4 shadow js-lazy-video" muted loop playsinline
+          preload="none"
+          poster="/static/img/work_poster.webp"
+          data-src="/static/video/compressed/20260323_161248.mp4"></video>
       </div>
 
       <div class="col-md-6">

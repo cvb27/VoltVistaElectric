@@ -57,3 +57,29 @@ if (document.body.dataset.page === 'home') {
     observer.observe(hero);
   }
 }
+
+// Vídeo de la sección "Expert Electrical Work": 2,4 MB que antes se
+// descargaban al cargar la página, porque el elemento llevaba autoplay
+// aunque está muy por debajo del pliegue. Eso ocupaba el canal y retrasaba
+// el LCP del hero, que pesa 45 KB.
+//
+// Ahora la descarga arranca cuando la sección se acerca a la pantalla.
+// El rootMargin de 200px la adelanta un poco para que ya esté reproduciendo
+// cuando el usuario llegue, sin pagar nada al cargar la página.
+var lazyVideo = document.querySelector('.js-lazy-video');
+if (lazyVideo && lazyVideo.dataset.src && 'IntersectionObserver' in window) {
+  var videoObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var v = entry.target;
+      v.src = v.dataset.src;
+      // play() devuelve una promesa que el navegador puede rechazar. Se
+      // captura para no dejar un error suelto en consola: si no reproduce,
+      // se queda el póster, que es un fallback perfectamente válido.
+      var intento = v.play();
+      if (intento && intento.catch) { intento.catch(function () {}); }
+      videoObserver.unobserve(v);
+    });
+  }, { rootMargin: '200px' });
+  videoObserver.observe(lazyVideo);
+}
