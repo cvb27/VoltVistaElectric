@@ -15,7 +15,12 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     {% if settings.ga4_id %}gtag('config', '{{ settings.ga4_id }}');{% endif %}
-    {% if settings.gads_id %}gtag('config', '{{ settings.gads_id }}');{% endif %}
+    {# El contenedor de Ads solo se carga si hay una accion de conversion
+       configurada. gtag.js busca un contenedor por cada config, y el de Ads
+       son 164 KiB que hoy no sirven para nada: en la cuenta de Ads no hay
+       ninguna accion de conversion creada. Al rellenar GADS_CONVERSION_LABEL
+       en .env vuelve a cargarse solo. #}
+    {% if settings.gads_id and settings.gads_conversion_label %}gtag('config', '{{ settings.gads_id }}');{% endif %}
   </script>
 
 
