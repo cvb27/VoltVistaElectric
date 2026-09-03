@@ -7,8 +7,12 @@
     </div>
 
     <div class="row g-3">
+      {# La primera es WebP a 380x507 (169 -> 14 KiB). Las otras 8 siguen en
+         JPG a 960x1280 y suman 1,25 MB: pendientes de convertir.
+         Los comentarios de Jinja no pueden ir dentro de la expresion del
+         bucle, y tampoco pueden contener la secuencia que los cierra. #}
       {% for img in [
-        "IMG_20260213_125657_778.jpg",
+        "IMG_20260213_125657_778.webp",
         "IMG_20260213_224333_547.jpg",
         "IMG_20260213_224333_639.jpg",
         "IMG_20260213_224342_606.jpg",
@@ -20,7 +24,7 @@
       ] %}
         <div class="col-12 col-md-6 col-lg-4">
           <div class="ratio ratio-1x1 rounded-4 overflow-hidden shadow-sm">
-            <img src="/static/img/gallery/{{ img }}"
+            <img src="/static/img/gallery/{{ img }}?v={{ asset_v }}"
                  alt="Electrical work by VoltVista Electric — Orlando, FL"
                  class="object-fit-cover"
                  loading="lazy">
