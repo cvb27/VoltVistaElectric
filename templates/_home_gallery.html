@@ -7,20 +7,20 @@
     </div>
 
     <div class="row g-3">
-      {# La primera es WebP a 380x507 (169 -> 14 KiB). Las otras 8 siguen en
-         JPG a 960x1280 y suman 1,25 MB: pendientes de convertir.
+      {# Las 9 son WebP a 380x507, calidad 73: de 1,39 MB en JPG a 133 KiB.
+         Se sirven con ?v= para que un cambio invalide la cache de un ano.
          Los comentarios de Jinja no pueden ir dentro de la expresion del
-         bucle, y tampoco pueden contener la secuencia que los cierra. #}
+         bucle, ni contener la secuencia que los cierra. #}
       {% for img in [
         "IMG_20260213_125657_778.webp",
-        "IMG_20260213_224333_547.jpg",
-        "IMG_20260213_224333_639.jpg",
-        "IMG_20260213_224342_606.jpg",
-        "IMG_20260213_224342_891.jpg",
-        "IMG_20260213_224343_129.jpg",
-        "IMG_20260213_224357_209.jpg",
-        "IMG_20260213_224357_785.jpg",
-        "IMG_20260213_224357_817.jpg"
+        "IMG_20260213_224333_547.webp",
+        "IMG_20260213_224333_639.webp",
+        "IMG_20260213_224342_606.webp",
+        "IMG_20260213_224342_891.webp",
+        "IMG_20260213_224343_129.webp",
+        "IMG_20260213_224357_209.webp",
+        "IMG_20260213_224357_785.webp",
+        "IMG_20260213_224357_817.webp"
       ] %}
         <div class="col-12 col-md-6 col-lg-4">
           <div class="ratio ratio-1x1 rounded-4 overflow-hidden shadow-sm">
