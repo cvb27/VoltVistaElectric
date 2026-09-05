@@ -46,20 +46,6 @@
     </p>
   </header>
 
-  <section class="mb-5">
-    <h2 class="h5 fw-bold">Why Orlando Homes Need Surge Protection</h2>
-    <ul class="mb-0">
-      <li><strong>Central Florida gets more lightning than anywhere else in the country.</strong>
-          Most surge damage doesn't come from a direct hit — it travels in through the utility line.</li>
-      <li><strong>Your AC is the expensive one.</strong> Replacing a surge-damaged compressor or
-          control board runs into the thousands. The protector costs a fraction of one repair.</li>
-      <li><strong>Most surges start inside the house.</strong> Every time a large motor cycles —
-          AC, pool pump, refrigerator — it sends a spike down the line. They add up and shorten
-          the life of your electronics.</li>
-      <li><strong>Power strips aren't the same thing.</strong> They only protect what's plugged
-          into them, and most are rated far below what a real surge carries.</li>
-    </ul>
-  </section>
 
   <!-- Planes y precios. Los datos vienen de data/surge_offers.json via core/offers.py -->
   <section class="mb-5" id="plans">
@@ -111,6 +97,45 @@
       your panel can't take a protector, or if you cancel at least 24 hours ahead.
     </p>
   </section>
+
+  {# CTA tras los precios: es donde el visitante acaba de decidir. Apunta al
+     plan Complete, que es el que la landing destaca. #}
+  <div class="card rounded-4 p-4 text-center bg-light-subtle mb-5">
+    <div class="h5 fw-bold mb-3">Ready to protect your home?</div>
+    <div>
+      <a class="btn btn-cta-primary btn-lg px-4"
+         href="/booking?plan=recommended"
+         onclick="if(window.gtag)gtag('event','select_plan',{plan:'recommended',value:399})"
+         aria-label="Reserve your surge protector installation">
+        Reserve Your Installation &rarr;
+      </a>
+    </div>
+  </div>
+
+  {# Este bloque estaba ANTES de los precios y empujaba los planes fuera de la
+     primera pantalla en movil. Ahora va detras y plegado.
+
+     Sale con `open` a proposito: en escritorio se lee entero, y si el JS
+     fallara seguiria visible en todas partes. site.js lo cierra por debajo
+     de 768px. El contenido de un <details> cerrado si lo indexa Google, asi
+     que plegarlo no cuesta SEO. #}
+  <details class="why-surge card rounded-4 p-3 p-md-4 mb-5" open>
+    <summary class="h5 fw-bold mb-0">Why Orlando Homes Need Surge Protection</summary>
+    <div class="mt-3">
+      <ul class="mb-0">
+      <li><strong>Central Florida gets more lightning than anywhere else in the country.</strong>
+          Most surge damage doesn't come from a direct hit — it travels in through the utility line.</li>
+      <li><strong>Your AC is the expensive one.</strong> Replacing a surge-damaged compressor or
+          control board runs into the thousands. The protector costs a fraction of one repair.</li>
+      <li><strong>Most surges start inside the house.</strong> Every time a large motor cycles —
+          AC, pool pump, refrigerator — it sends a spike down the line. They add up and shorten
+          the life of your electronics.</li>
+      <li><strong>Power strips aren't the same thing.</strong> They only protect what's plugged
+          into them, and most are rated far below what a real surge carries.</li>
+    </ul>
+    </div>
+  </details>
+
 
   <section class="mb-5">
     <h2 class="h5 fw-bold">How the Installation Works</h2>

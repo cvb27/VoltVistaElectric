@@ -83,3 +83,13 @@ if (lazyVideo && lazyVideo.dataset.src && 'IntersectionObserver' in window) {
   }, { rootMargin: '200px' });
   videoObserver.observe(lazyVideo);
 }
+
+// Bloque "Why Orlando Homes Need Surge Protection" de la landing de surge.
+// El HTML lo trae con `open`: así en escritorio se lee entero y, si este JS
+// no llegara a ejecutarse, seguiría visible en todas partes — el fallo seguro.
+// En móvil se cierra, porque sus cuatro párrafos empujaban los precios fuera
+// de la primera pantalla, que es lo que el visitante viene a ver.
+var whySurge = document.querySelector('.why-surge');
+if (whySurge && window.matchMedia('(max-width: 767.98px)').matches) {
+  whySurge.open = false;
+}

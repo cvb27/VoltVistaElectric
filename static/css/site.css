@@ -103,3 +103,8 @@ body[data-page="home"] .link-muted { color: var(--color-muted); }
 }
 .offer-banner a { color: var(--color-on-accent); }
 .offer-banner a:hover { opacity: 0.85; }
+
+/* Plegable de la landing de surge. Bootstrap no da estilo a <summary>, y sin
+   cursor de mano no parece pulsable. El resto sale de utilidades de Bootstrap
+   en la propia plantilla. */
+.why-surge summary { cursor: pointer; }
