@@ -40,4 +40,4 @@ Most Orlando installs without a panel upgrade land in the $1,000–$1,500 range.
 
 We typically complete a standard Level 2 installation in a single afternoon, leaving you ready to charge that night.
 
-[Get a quote for your EV charger installation →](/services/ev-charger-installation)
+[Get a quote for your EV charger installation →](/estimate)

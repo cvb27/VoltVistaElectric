@@ -22,9 +22,8 @@ _STATIC_PATHS = [
     "/estimate",
     "/payments",
     "/blog",
+    "/services/lighting-installation",
     "/services/electrical-repair-installation",
-    "/services/surge-protector-installation",
-    "/services/ev-charger-installation",
 ]
 
 
@@ -55,8 +54,9 @@ def sitemap():
     si no coincide con la realidad. Los posts si lo llevan, porque su fecha
     real esta en el indice.
 
-    Las URLs retiradas (panel-upgrade, electrical-installations) responden 301
-    y por eso no se ofrecen aqui como destino.
+    Las URLs retiradas (panel-upgrade, electrical-installations,
+    surge-protector-installation, ev-charger-installation) responden 301 y por
+    eso no se ofrecen aqui como destino.
     """
     entries = [_url(p) for p in _STATIC_PATHS]
     entries += [_url(f"/blog/{p['slug']}", p.get("published_at", ""))

@@ -87,23 +87,6 @@ body[data-page="home"] {
 .link-muted:hover { text-decoration: underline; }
 body[data-page="home"] .link-muted { color: var(--color-muted); }
 
-/* ---------- Barra de oferta ---------- */
-
-/* position:relative para que el z-index cuente: antes estaba suelto y no
-   hacia nada. Fondo ambar con texto oscuro, igual que los CTA. */
-.offer-banner {
-  position: relative;
-  z-index: 100;
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-  padding: 12px 20px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-.offer-banner a { color: var(--color-on-accent); }
-.offer-banner a:hover { opacity: 0.85; }
-
 /* Plegable de la landing de surge. Bootstrap no da estilo a <summary>, y sin
    cursor de mano no parece pulsable. El resto sale de utilidades de Bootstrap
    en la propia plantilla. */

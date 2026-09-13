@@ -44,7 +44,7 @@
 
   /* Fondo del bloque de texto del hero.
      La imagen NO se oscurece: se le da fondo al texto y ya. Antes habia un
-     velo sobre TODA la foto; medido sobre home_surge.webp, el texto blanco
+     velo sobre TODA la foto; medido sobre la foto del hero, el texto blanco
      sobre este panel da 8.21:1 en movil y 9.01:1 en desktop, y el resto de
      la imagen queda a su brillo original. */
   --hero-panel: rgba(13, 27, 42, 0.75);

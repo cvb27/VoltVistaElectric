@@ -1,0 +1,26 @@
+{# Galeria de trabajos de iluminacion.
+
+   CONTRATO — espera `gallery`: lista de {file, alt}. De cualquier longitud:
+   en escritorio se reparte en filas de tres y en movil es un carrusel
+   horizontal. Anadir o quitar fotos no rompe el layout.
+
+   El carrusel es CSS puro (grid + scroll-snap), sin el componente de Bootstrap
+   ni JavaScript: son fotos, no necesitan controles ni estado. #}
+{% if gallery %}
+<section class="mb-5">
+  <h2 class="h4 fw-bold mb-1">[PLACEHOLDER] Recent Lighting Work</h2>
+  <p class="text-muted mb-3">[PLACEHOLDER] Short line about the gallery.</p>
+
+  <div class="light-gallery">
+    {% for photo in gallery %}
+    <figure class="m-0">
+      <img src="/static/img/lighting/{{ photo.file }}?v={{ asset_v }}"
+           alt="{{ photo.alt }}"
+           class="img-fluid rounded-4 w-100"
+           width="380" height="507"
+           loading="lazy" decoding="async">
+    </figure>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

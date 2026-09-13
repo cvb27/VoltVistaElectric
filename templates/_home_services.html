@@ -1,41 +1,34 @@
-{# Sección Services — 3 cards linkeando a las landings SEO #}
+{# Seccion Services — dos tarjetas: la linea principal primero.
+
+   Dos columnas centradas (col-md-6 col-lg-5 + justify-content-center) en vez
+   de las tres de antes: con dos tarjetas, una rejilla de tres dejaba un hueco
+   desbalanceado a la derecha. Todo con utilidades de Bootstrap, sin CSS nuevo. #}
 <section class="section-navy py-5 py-md-6">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="display-6 fw-bold text-white mb-2">Our Services</h2>
-      <p class="lead" style="color: var(--color-muted);"> · Fast Response · </p>
+      <p class="lead" style="color: var(--color-muted);">Serving the neighborhoods west of Orlando</p>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-4">
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-md-6 col-lg-5">
+        <a href="/services/lighting-installation" class="text-decoration-none">
+          <div class="tint-card h-100 p-4 rounded-4 text-center">
+            <i class="bi bi-lightbulb-fill" style="font-size: 2.5rem; color: var(--color-accent);" aria-hidden="true"></i>
+            <h3 class="h5 fw-bold text-white mt-3">Lighting Installation</h3>
+            <p class="small mb-3" style="color: var(--color-muted);">Permanent roofline lighting and landscape lighting for your home.</p>
+            <span class="btn btn-outline-brand btn-sm">Learn More &rarr;</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-5">
         <a href="/services/electrical-repair-installation" class="text-decoration-none">
           <div class="tint-card h-100 p-4 rounded-4 text-center">
-            <i class="bi bi-lightning-charge-fill" style="font-size: 2.5rem; color: var(--color-accent);"></i>
-            <h3 class="h5 fw-bold text-white mt-3">Electrical Installations</h3>
-            <p class="small mb-3" style="color: var(--color-muted);">From outlets and lighting to troubleshooting and rewiring.</p>
-            <span class="btn btn-outline-brand btn-sm">Learn More →</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-4">
-        <a href="/services/surge-protector-installation" class="text-decoration-none">
-          <div class="tint-card h-100 p-4 rounded-4 text-center">
-            <i class="bi bi-plug-fill" style="font-size: 2.5rem; color: var(--color-accent);"></i>
-            <h3 class="h5 fw-bold text-white mt-3">Surge Protector Installation</h3>
-            <p class="small mb-3" style="color: var(--color-muted);">Professional installation, code-compliant, and backed by warranty.</p>
-            <span class="btn btn-outline-brand btn-sm">Learn More →</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-4">
-        <a href="/services/ev-charger-installation" class="text-decoration-none">
-          <div class="tint-card h-100 p-4 rounded-4 text-center">
-            <i class="bi bi-ev-station-fill" style="font-size: 2.5rem; color: var(--color-accent);"></i>
-            <h3 class="h5 fw-bold text-white mt-3">EV Charger Installation</h3>
-            <p class="small mb-3" style="color: var(--color-muted);">Residential and commercial EV chargers installed safely and to code.</p>
-            <span class="btn btn-outline-brand btn-sm">Learn More →</span>
+            <i class="bi bi-plug-fill" style="font-size: 2.5rem; color: var(--color-accent);" aria-hidden="true"></i>
+            <h3 class="h5 fw-bold text-white mt-3">Electrical Repairs &amp; Installations</h3>
+            <p class="small mb-3" style="color: var(--color-muted);">Outlets, fixtures, troubleshooting and wiring around the house.</p>
+            <span class="btn btn-outline-brand btn-sm">Learn More &rarr;</span>
           </div>
         </a>
       </div>

@@ -1,0 +1,41 @@
+{
+  "gallery": [
+    { "file": "lighting-01.webp", "alt": "[PLACEHOLDER] Lighting installation photo 1" },
+    { "file": "lighting-02.webp", "alt": "[PLACEHOLDER] Lighting installation photo 2" },
+    { "file": "lighting-03.webp", "alt": "[PLACEHOLDER] Lighting installation photo 3" },
+    { "file": "lighting-04.webp", "alt": "[PLACEHOLDER] Lighting installation photo 4" }
+  ],
+  "services": [
+    {
+      "slug": "roofline-permanent-lighting",
+      "title": "Permanent Roofline Lighting",
+      "subtitle": "[PLACEHOLDER] One install, every holiday covered.",
+      "body": "[PLACEHOLDER] Paragraph describing permanent roofline lighting: what it is, how it is mounted, and what the homeowner controls from their phone. Replace with final copy.",
+      "bullets": [
+        "[PLACEHOLDER] Benefit or spec line 1",
+        "[PLACEHOLDER] Benefit or spec line 2",
+        "[PLACEHOLDER] Benefit or spec line 3",
+        "[PLACEHOLDER] Benefit or spec line 4"
+      ],
+      "image": "roofline.webp",
+      "image_alt": "[PLACEHOLDER] Permanent roofline lighting installed on an Orlando home",
+      "cta_text": "Get a Free Estimate",
+      "cta_href": "/estimate"
+    },
+    {
+      "slug": "landscape-lighting",
+      "title": "Landscape Lighting",
+      "subtitle": "[PLACEHOLDER] New installs and repairs to existing systems.",
+      "body": "[PLACEHOLDER] Paragraph describing landscape lighting: new installations, and diagnosing and repairing systems that already exist. Replace with final copy.",
+      "bullets": [
+        "[PLACEHOLDER] Benefit or spec line 1",
+        "[PLACEHOLDER] Benefit or spec line 2",
+        "[PLACEHOLDER] Benefit or spec line 3"
+      ],
+      "image": "landscape.webp",
+      "image_alt": "[PLACEHOLDER] Landscape lighting installed along a walkway",
+      "cta_text": "Get a Free Estimate",
+      "cta_href": "/estimate"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{# Modulo de un servicio de iluminacion. Se pinta una vez por cada entrada de
+   data/lighting_services.json, asi que la pagina crece sin HTML nuevo.
+
+   CONTRATO — espera una variable `service` con estos campos:
+     slug · title · subtitle · body · bullets (lista)
+     image · image_alt · cta_text · cta_href
+   core/lighting.py valida que esten todos antes de llegar aqui.
+
+   `alt_side` (booleano) invierte el lado de la imagen en escritorio para
+   que los modulos alternen. Lo pasa quien incluye con un bloque `with`: la
+   variable `loop` NO llega a un include, es local del bucle. En movil la
+   imagen va siempre arriba, que es el orden natural de lectura. #}
+<section id="{{ service.slug }}" class="mb-5">
+  <div class="row g-4 align-items-center {% if alt_side %}flex-md-row-reverse{% endif %}">
+
+    <div class="col-12 col-md-6">
+      {# Estas imagenes estan por debajo del pliegue: lazy a proposito, para no
+         competir con la del hero, que es el elemento LCP. #}
+      <img src="/static/img/lighting/{{ service.image }}?v={{ asset_v }}"
+           alt="{{ service.image_alt }}"
+           class="img-fluid rounded-4 shadow-sm w-100"
+           width="760" height="507"
+           loading="lazy" decoding="async">
+    </div>
+
+    <div class="col-12 col-md-6">
+      <h2 class="h4 fw-bold mb-1">{{ service.title }}</h2>
+      <p class="text-muted mb-3">{{ service.subtitle }}</p>
+      <p>{{ service.body }}</p>
+
+      <ul class="list-unstyled mb-4">
+        {% for b in service.bullets %}
+        <li class="mb-2 d-flex">
+          <i class="bi bi-check-lg text-success me-2 flex-shrink-0" aria-hidden="true"></i>
+          <span>{{ b }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <a class="btn btn-cta-primary px-4"
+         href="{{ service.cta_href }}"
+         onclick="if(window.gtag)gtag('event','select_service',{service:'{{ service.slug }}'})">
+        {{ service.cta_text }}
+      </a>
+    </div>
+
+  </div>
+</section>

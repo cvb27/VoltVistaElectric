@@ -4,8 +4,10 @@ Landings SEO por servicio .
 Una ruta y template por servicio para captar keywords long-tail locales.
 Cada landing inyecta su propio JSON-LD Service vía build_service_schema.
 
-Las URLs retiradas (panel-upgrade, electrical-installations) se mantienen como
-redirects 301 para no perder el posicionamiento que ya acumularon.
+Las URLs retiradas se mantienen como redirects 301 para no perder el
+posicionamiento que ya acumularon: panel-upgrade y electrical-installations van
+a la pagina de reparaciones; surge-protector y ev-charger, a la de iluminacion,
+que es la linea de negocio que las reemplaza.
 """
 
 from fastapi import APIRouter, Request
@@ -13,11 +15,9 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 
 from core.config import settings
 from core.i18n import t
-from core.offers import load_offers
 from core.seo import build_service_schema
 from core.templating import templates
 from core.utils import get_lang
-from core.booking import DEPOSIT
 
 router = APIRouter(prefix="/services", tags=["services"])
 
@@ -57,64 +57,19 @@ async def electrical_repair_installation(request: Request):
     return templates.TemplateResponse("services/electrical_repair_installation.html", ctx)
 
 
-@router.get("/surge-protector-installation", response_class=HTMLResponse)
-async def surge_protector_installation(request: Request):
-    """Landing de surge protector. Es el destino de la campana de Google Ads.
-
-    Los tres planes y sus precios salen de data/surge_offers.json — se editan ahi,
-    sin tocar codigo. El mismo JSON alimenta el bloque de precios del template y
-    las Offer del JSON-LD, asi que nunca se pueden desincronizar entre si."""
-    ctx = _service_context(
-        request,
-        "Surge Protector Installation",
-        "/services/surge-protector-installation",
-        "Whole-home surge protector installation in Orlando, FL. "
-        "Protect your appliances and electronics from power surges.",
-    )
-
-    offers = load_offers()
-    ctx["plans"] = offers["plans"]
-    ctx["from_price"] = offers["from_price"]
-    ctx["deposit"] = DEPOSIT
-
-    # Precios en el JSON-LD: habilita que Google muestre el rango en resultados.
-    ctx["service_jsonld"]["offers"] = [
-        {
-            "@type": "Offer",
-            "name": p["name"],
-            "price": p["price"],
-            "priceCurrency": "USD",
-        }
-        for p in offers["plans"]
-    ]
-
-    return templates.TemplateResponse("services/surge_protector_installation.html", ctx)
-
-
-@router.get("/ev-charger-installation", response_class=HTMLResponse)
-async def ev_charger_installation(request: Request):
-    """Landing de instalacion de cargadores EV."""
-    ctx = _service_context(
-        request,
-        "EV Charger Installation",
-        "/services/ev-charger-installation",
-        "Professional EV charger installation in Orlando, FL. "
-        "VoltVista Electric — 10+ years experience, fully insured.",
-    )
-    return templates.TemplateResponse("services/ev_charger_installation.html", ctx)
-
-
 # ---------------------------------------------------------------------------
 # URLs retiradas — redirect 301 permanente
 #
-# Estas dos paginas ya no existen, pero estuvieron en el sitemap y pueden estar
+# Estas paginas ya no existen, pero estuvieron en el sitemap y pueden estar
 # indexadas o enlazadas desde afuera. El 301 traspasa esa autoridad a la pagina
 # nueva en vez de devolver 404. No borrar sin revisar Search Console primero.
 # ---------------------------------------------------------------------------
 
-# Destino de las dos redirecciones. Una sola constante para que, si la pagina
-# de reemplazo cambia de URL, no haya que acordarse de tocar dos sitios.
+# Destinos de las redirecciones, uno por familia. Constantes y no literales
+# sueltos para que, si una pagina de reemplazo cambia de URL, solo haya que
+# tocar una linea.
 _REPLACEMENT = "/services/electrical-repair-installation"
+_LIGHTING = "/services/lighting-installation"
 
 
 @router.get("/panel-upgrade")
@@ -133,3 +88,17 @@ async def electrical_installations_redirect():
     """301 permanente a la pagina que la reemplazo. Mismo caso que la de arriba."""
     return RedirectResponse(_REPLACEMENT, status_code=301)
 
+
+@router.get("/surge-protector-installation")
+async def surge_protector_redirect():
+    """301 a iluminacion. La oferta de surge se retiro en septiembre de 2026.
+
+    Fue el destino de la campana de Google Ads, asi que es la URL retirada con
+    mas enlaces entrantes: el 301 es lo unico que evita perderlos."""
+    return RedirectResponse(_LIGHTING, status_code=301)
+
+
+@router.get("/ev-charger-installation")
+async def ev_charger_redirect():
+    """301 a iluminacion. Retirada junto con la de surge, mismo motivo."""
+    return RedirectResponse(_LIGHTING, status_code=301)

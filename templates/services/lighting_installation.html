@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{# SEO: los hooks quedan puestos pero sin contenido final — title, description
+   y schema se definen en una tarea posterior. #}
+{% block title %}[PLACEHOLDER] Title | VoltVista Electric{% endblock %}
+{% block description %}[PLACEHOLDER] Meta description.{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url }}/services/lighting-installation">
+{% endblock %}
+{% block jsonld %}{# [PLACEHOLDER] Schema Service pendiente #}{% endblock %}
+
+{# Estilos solo de esta pagina: galeria en carrusel y barra fija de movil. #}
+{% block head_extra %}
+<link href="/static/css/lighting.css?v={{ asset_v }}" rel="stylesheet">
+{% endblock %}
+
+{# Marca el body para poder ocultar el boton flotante de WhatsApp solo aqui:
+   chocaria con la barra fija inferior, que ya lleva su propio boton. #}
+{% block page %}lighting{% endblock %}
+
+{% block content %}
+
+{# ── 1. HERO ─────────────────────────────────────────────────────────────
+   H1 y subtitulo son definitivos: hablan del producto concreto, no de
+   "iluminacion" en generico. La imagen es el elemento LCP. #}
+<header class="row g-4 align-items-center mb-5">
+  <div class="col-12 col-md-6 order-md-2">
+    <img src="/static/img/lighting/hero-roofline.webp?v={{ asset_v }}"
+         alt="Permanent LED lighting installed along the roofline of an Orlando home"
+         class="img-fluid rounded-4 shadow w-100"
+         width="760" height="507"
+         fetchpriority="high" decoding="async">
+  </div>
+
+  <div class="col-12 col-md-6 order-md-1">
+    <h1 class="h3 fw-bold">Permanent Roofline Lighting for Orlando Homes</h1>
+    <p class="lead text-muted">
+      Programmable LED lights mounted along your roofline. Set them for the
+      holidays, for game days, or for everyday warm white — from your phone.
+    </p>
+
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-cta-primary btn-lg px-4" href="/estimate">Get a Free Estimate</a>
+      {% if settings.phone %}
+      <a class="btn btn-cta-secondary btn-lg px-4" href="tel:{{ settings.phone }}"
+         onclick="if(window.gtag)gtag('event','click_to_call',{page:'lighting'})">
+        <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>Call Us Now
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{# ── 2. TRUST STRIP ──────────────────────────────────────────────────────
+   Franja delgada. Sin cifras, garantias ni certificaciones inventadas. #}
+<ul class="list-unstyled d-flex flex-wrap justify-content-center gap-3 small text-muted
+           border-top border-bottom py-3 mb-5">
+  <li>[PLACEHOLDER] Trust signal 1</li>
+  <li class="d-none d-sm-block">&middot;</li>
+  <li>[PLACEHOLDER] Trust signal 2</li>
+  <li class="d-none d-sm-block">&middot;</li>
+  <li>[PLACEHOLDER] Trust signal 3</li>
+</ul>
+
+{# ── 3. PRIMER SERVICIO ──────────────────────────────────────────────────
+   El primero va solo, porque la galeria y "como funciona" se intercalan
+   antes del resto. El bucle de abajo pinta del segundo en adelante, asi que
+   anadir un tercer o cuarto servicio no necesita HTML nuevo. #}
+{% for service in services[:1] %}
+  {% with alt_side = false %}{% include '_service_module.html' %}{% endwith %}
+{% endfor %}
+
+{# ── 4. GALERIA ──────────────────────────────────────────────────────── #}
+{% include '_lighting_gallery.html' %}
+
+{# ── 5. COMO FUNCIONA ────────────────────────────────────────────────── #}
+<section class="mb-5">
+  <h2 class="h4 fw-bold mb-3">[PLACEHOLDER] How It Works</h2>
+  <div class="row g-3">
+    {% for step in [1, 2, 3] %}
+    <div class="col-12 col-md-4">
+      <div class="card h-100 rounded-4 p-3 shadow-sm">
+        <div class="h6 fw-bold mb-1">{{ step }}. [PLACEHOLDER] Step title</div>
+        <p class="small text-muted mb-0">[PLACEHOLDER] One or two lines describing this step.</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{# ── 6. RESTO DE SERVICIOS ───────────────────────────────────────────── #}
+{% for service in services[1:] %}
+  {# index0 0 = segundo servicio, lado invertido; 1 = tercero, normal... #}
+  {% with alt_side = loop.index0 is even %}{% include '_service_module.html' %}{% endwith %}
+{% endfor %}
+
+{# ── 7. FAQ ──────────────────────────────────────────────────────────────
+   Acordeon de Bootstrap, el mismo componente que ya usa la landing de surge. #}
+<section class="mb-5">
+  <h2 class="h4 fw-bold mb-3">[PLACEHOLDER] Common Questions</h2>
+  <div class="accordion accordion-flush" id="lightingFaq">
+    {% for i in [1, 2, 3, 4] %}
+    <div class="accordion-item">
+      <h3 class="accordion-header">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#lightingFaq{{ i }}">
+          [PLACEHOLDER] Question {{ i }}
+        </button>
+      </h3>
+      <div id="lightingFaq{{ i }}" class="accordion-collapse collapse" data-bs-parent="#lightingFaq">
+        <div class="accordion-body small text-muted">
+          [PLACEHOLDER] Answer {{ i }}.
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{# ── 8. ZONAS ────────────────────────────────────────────────────────── #}
+<section class="mb-5">
+  <h2 class="h4 fw-bold">Service Area</h2>
+  <p class="mb-0">
+    {% for a in areas %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endfor %}
+  </p>
+</section>
+
+{# ── 9. CTA FINAL ────────────────────────────────────────────────────── #}
+<div class="card rounded-4 p-4 text-center bg-light-subtle mb-5">
+  <div class="h5 fw-bold mb-3">[PLACEHOLDER] Closing CTA headline</div>
+  <div>
+    <a class="btn btn-cta-primary btn-lg px-4" href="/estimate">Get a Free Estimate</a>
+  </div>
+</div>
+
+{# ── BARRA FIJA (solo movil) ─────────────────────────────────────────────
+   Visible durante todo el scroll. En escritorio se oculta por CSS: alli el
+   CTA persistente ya lo da el boton "Get Estimate" del navbar. #}
+<nav class="lighting-cta-bar" aria-label="Quick contact">
+  <a href="tel:{{ settings.phone }}"
+     onclick="if(window.gtag)gtag('event','click_to_call',{page:'lighting_bar'})">
+    <i class="bi bi-telephone-fill" aria-hidden="true"></i> Call
+  </a>
+  <a href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}"
+     target="_blank" rel="noopener"
+     onclick="if(window.gtag)gtag('event','whatsapp_contact',{page:'lighting_bar'})">
+    <i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp
+  </a>
+  <a href="/estimate" class="is-primary">Free Estimate</a>
+</nav>
+
+{% endblock %}

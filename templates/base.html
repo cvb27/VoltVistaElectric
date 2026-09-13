@@ -50,7 +50,7 @@
   <meta property="og:image" content="{% block og_image %}{{ settings.logo_url }}{% endblock %}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="VoltVista Electric — Licensed electricians in Orlando">
+  <meta property="og:image:alt" content="VoltVista Electric — lighting and electrical work in Central Florida">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% block twitter_title %}{{ self.og_title() }}{% endblock %}">
@@ -70,6 +70,10 @@
   <link href="/static/css/site.css?v={{ asset_v }}" rel="stylesheet">
   <link href="/static/css/buttons.css?v={{ asset_v }}" rel="stylesheet">
   <link href="/static/css/components.css?v={{ asset_v }}" rel="stylesheet">
+
+  {# CSS propio de una pagina concreta. Va aqui y no en los archivos globales
+     para que una pagina no cargue estilos que no usa. #}
+  {% block head_extra %}{% endblock %}
 
   <!-- Tracking hook (opcional) -->
   {# Ejemplo: pega aquí Plausible o GA si quieres #}
@@ -123,14 +127,6 @@
     </div>
   </div>
 </nav>
-
-<div class="offer-banner">
-  <a href="/services/surge-protector-installation" class="text-decoration-none text-white d-flex align-items-center justify-content-center gap-2">
-    <i class="bi bi-lightning-fill"></i>
-    Whole-Home Surge Protection from $299 · Book online in 60 seconds
-    <i class="bi bi-arrow-right"></i>
-  </a>
-</div>
 
 {% block main %}
 <main class="py-4">

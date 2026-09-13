@@ -1,5 +1,12 @@
 """Reserva de instalacion con deposito.
 
+FLUJO INACTIVO DESDE SEPTIEMBRE DE 2026. Se construyo para la oferta de surge
+protector, que se retiro del sitio; la linea de iluminacion convierte por
+/estimate, sin pagos ni calendario. No hay ningun enlace publico que llegue
+aqui, pero el codigo, la tabla booking y los webhooks de Stripe se conservan
+intactos para reactivarlo si se adopta un modelo con deposito.
+
+
 Flujo completo:
     GET  /booking?plan=recommended   el cliente elige fecha y llena datos
     POST /booking/checkout           se valida, se aparta el cupo, va a Stripe

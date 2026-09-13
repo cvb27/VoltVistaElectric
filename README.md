@@ -27,7 +27,7 @@ crea las tablas sola al arrancar. No hace falta instalar Postgres para desarroll
 | Ruta | Qué es |
 |---|---|
 | `/` | Home |
-| `/services/surge-protector-installation` | Landing de la campaña de Google Ads |
+| `/services/lighting-installation` | Landing de instalación de iluminación |
 | `/booking?plan=recommended` | Elegir fecha y pagar el depósito |
 | `/estimate` | Formulario de estimado gratuito |
 | `/payments` | Cobros manuales por Stripe |

@@ -21,9 +21,8 @@
       <div class="col-md-4">
         <div class="fw-semibold mb-2 text-white">Services</div>
         <ul class="list-unstyled small mb-0">
+          <li class="mb-1"><a class="link-light" href="/services/lighting-installation">Lighting Installation</a></li>
           <li class="mb-1"><a class="link-light" href="/services/electrical-repair-installation">Electrical Repairs &amp; Installations</a></li>
-          <li class="mb-1"><a class="link-light" href="/services/surge-protector-installation">Surge Protector Installation</a></li>
-          <li class="mb-1"><a class="link-light" href="/services/ev-charger-installation">EV Charger Installation</a></li>
           <li class="mb-1"><a class="link-light" href="/estimate">Free Estimate</a></li>
           <li><a class="link-light" href="/payments">Make a Payment</a></li>
         </ul>
@@ -32,9 +31,11 @@
       <!-- Columna 3: Área de servicio -->
       <div class="col-md-4">
         <div class="fw-semibold mb-2 text-white">Service Area</div>
+        {# Misma fuente que el bloque "Areas We Serve" del home: BUSINESS_SERVICE_AREA
+           en .env. Antes estaban escritas a mano aqui y las dos listas se habian
+           desincronizado. #}
         <p class="small text-white mb-2">
-          Lake Buena Vista · Orlando · Kissimmee · Winter Park · Windermere ·
-          Dr. Phillips · Celebration · Winter Garden
+          {{ settings.service_area.split(",") | map("trim") | join(" · ") }}
         </p>
         <p class="small text-white-50 mb-0">
           Not sure if we cover your area? <a class="link-light" href="/estimate">Ask us</a>.

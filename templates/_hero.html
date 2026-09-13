@@ -1,14 +1,19 @@
-{# Hero fullscreen con video de fondo — primera impresión de la home #}
+{# Hero del home. Primera impresion: negocio local y de confianza en las zonas
+   objetivo, no oficio tecnico. #}
 <section class="hero">
   {# Imagen estatica, no video: el video costaba 8.7s de LCP en movil.
      Esta img es el elemento LCP de la pagina, por eso:
        fetchpriority="high"  el navegador la descarga antes que nada
        sin loading="lazy"    el lazy en el hero retrasa justo lo que
                              hay que mostrar primero
-       width/height          reserva el espacio y evita layout shift #}
+       width/height          reserva el espacio y evita layout shift
+
+     home-hero.webp es un PLACEHOLDER de 1672x941. Sustituir por la foto
+     definitiva de roofline manteniendo esas dimensiones: el recuadre de movil
+     (object-position en site.css) esta calibrado para esa proporcion. #}
   <img class="hero-video"
-       src="/static/img/home_surge.webp?v={{ asset_v }}"
-       alt="Whole-home surge protector installed beside an electrical panel during a Florida thunderstorm"
+       src="/static/img/home-hero.webp?v={{ asset_v }}"
+       alt="Permanent roofline lighting glowing along the eaves of a home at dusk"
        width="1672" height="941"
        fetchpriority="high">
 
@@ -17,41 +22,34 @@
               align-items-center
               justify-content-center
               text-center w-100 px-3">
-    
-    {# TODO: replace with final slogan #}
-    <h1 class="display-4 fw-bold mb-2">Protect Your Home From Florida Storms</h1>
 
-    {#<h1 class="display-4 fw-bold mb-2">Orlando's Trusted Electricians</h1>#}
-    
-    <p class="lead mb-4">Trusted Electricians 10+ Years Serving Orlando, FL</p>
+    <h1 class="display-5 fw-bold mb-3">Lighting That Makes Your Home Look Like Home</h1>
 
-    
-    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-      <!-- Primario 1: la oferta de la campaña -->
-      <a class="btn btn-lg btn-cta-primary px-5" 
-        href="/services/surge-protector-installation">
-        <i class="bi bi-lightning-fill me-2"></i>See Plans From $299
-      </a>
-  
-      <!-- Primario 2: alternativa con fricción media -->
-      <a class="btn btn-lg btn-cta-secondary px-5" href="/estimate">Get Estimate</a>
-    </div>
-    <!-- Secundario: solo texto + icono -->
-    <div class="mt-4">
-      <a href="tel:{{ settings.phone }}"
-        class="btn btn-cta-tertiary text-white text-decoration-none">
-        <i class="bi bi-telephone-fill me-2"></i>Call Us Now
-      </a>
-    </div>
-
-    <p class="mt-3 small" style="opacity:.8">
-      Need a detailed estimate?
-      <a href="/estimate" class="text-white text-decoration-underline">Fill out our form</a>
+    <p class="lead mb-4">
+      Local, insured, and working in Dr. Phillips, Windermere, Bay Hill,
+      Gotha, Horizon West and Lake Buena Vista. Free estimates, always.
     </p>
 
-    <span class="badge rounded-pill px-3 py-2"
+    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+      {# Primario: la conversion unica de la linea de iluminacion. #}
+      <a class="btn btn-lg btn-cta-primary px-5" href="/estimate">Get a Free Estimate</a>
+
+      {# Secundario: salida para quien quiere ver antes de contactar. #}
+      <a class="btn btn-lg btn-cta-secondary px-5"
+         href="/services/lighting-installation">See Lighting Services</a>
+    </div>
+
+    <div class="mt-4">
+      <a href="tel:{{ settings.phone }}"
+        class="btn btn-cta-tertiary text-white text-decoration-none"
+        onclick="if(window.gtag)gtag('event','click_to_call',{page:'home_hero'})">
+        <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>Call Us Now
+      </a>
+    </div>
+
+    <span class="badge rounded-pill px-3 py-2 mt-3"
           style="background: var(--color-tint-border); color: var(--color-text);">
-      <span class="me-1">✓</span> Serving · Orlando area
+      <span class="me-1">✓</span> Your neighbors in Central Florida
     </span>
   </div>
 </section>
