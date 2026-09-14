@@ -94,3 +94,27 @@ body[data-page="home"] .link-muted { color: var(--color-muted); }
     padding: 1.5rem 1rem;
   }
 }
+
+/* Desktop: los dos paneles se leen como uno solo.
+   El del boton pierde el fondo y se pega al de arriba. */
+@media (min-width: 768px) {
+  .hero-cta {
+    background: none;
+    padding-top: 0;
+    margin-top: -1rem;
+  }
+}
+
+/* Movil: texto arriba sobre el cielo, boton abajo sobre la grama.
+   La casa queda despejada en medio. */
+@media (max-width: 767px) {
+  .hero-stack {
+    justify-content: space-between;
+    align-self: stretch;
+    min-height: calc(100svh - var(--nav-h) - var(--offer-h) - 3rem);
+  }
+  .hero-cta {
+    padding: 0.75rem 1rem;
+    max-width: 360px;
+  }
+}
