@@ -47,10 +47,10 @@
      velo sobre TODA la foto; medido sobre la foto del hero, el texto blanco
      sobre este panel da 8.21:1 en movil y 9.01:1 en desktop, y el resto de
      la imagen queda a su brillo original. */
-  --hero-panel: rgba(13, 27, 42, 0.75);
+  --hero-panel: rgba(11, 22, 40, 0.65);
 
   /* Altura de la barra de oferta y del navbar. El hero se las resta para que
      su 100svh no empuje la primera pantalla fuera de la ventana. */
-  --offer-h: 44px;
+  --offer-h: 0px;
   --nav-h:   58px;
 }

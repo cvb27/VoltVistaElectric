@@ -24,10 +24,11 @@
               text-center w-100 px-3">
 
     <h1 class="display-5 fw-bold mb-3">10 Years Working These Neighborhoods</h1>
-
+    {#
     <p class="lead mb-4">
       ★ 5.0 on Google · Insured · Based in Lake Buena Vista
     </p>
+    #}
 
     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
       {# Primario: la conversion unica de la linea de iluminacion. #}
@@ -38,6 +39,13 @@
          href="/services/lighting-installation">See Lighting Services</a>
     </div>
 
+    
+    
+    <span class="badge rounded-pill px-3 py-2 mt-3"
+          style="background: var(--color-tint-border); color: var(--color-text);">
+      <span class="me-1">✓</span> Insured ★ 5.0 on Google · Based in Lake Buena Vista
+    </span>
+
     <div class="mt-4">
       <a href="tel:{{ settings.phone }}"
         class="btn btn-cta-tertiary text-white text-decoration-none"
@@ -45,11 +53,6 @@
         <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>Call Us Now
       </a>
     </div>
-    {#
-    <span class="badge rounded-pill px-3 py-2 mt-3"
-          style="background: var(--color-tint-border); color: var(--color-text);">
-      <span class="me-1">✓</span> ★ 5.0 on Google · Free estimates · Based in Lake Buena Vista
-    </span>
-    #}
+    
   </div>
 </section>
