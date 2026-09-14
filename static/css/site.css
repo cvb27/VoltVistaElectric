@@ -100,17 +100,16 @@ body[data-page="home"] .link-muted { color: var(--color-muted); }
 @media (min-width: 768px) {
   .hero-cta {
     background: none;
-    padding-top: 0;
-    margin-top: -1rem;
+    padding: 0;
+    margin-top: -1.5rem;
+    width: auto;
   }
 }
-
 /* Movil: texto arriba sobre el cielo, boton abajo sobre la grama.
    La casa queda despejada en medio. */
 @media (max-width: 767px) {
   .hero-stack {
     justify-content: space-between;
-    align-self: stretch;
     min-height: calc(100svh - var(--nav-h) - var(--offer-h) - 3rem);
   }
   .hero-cta {
