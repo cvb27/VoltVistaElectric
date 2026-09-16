@@ -45,6 +45,7 @@ def build_local_business_schema(cfg) -> dict:
     return {
         "@context": "https://schema.org",
         "@type": ["LocalBusiness", "Electrician"],
+        "@id": f"{cfg.business_url.rstrip('/')}/#business",
         "name": cfg.business_name,
         "url": cfg.business_url,
         "telephone": cfg.phone,

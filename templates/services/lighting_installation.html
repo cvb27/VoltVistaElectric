@@ -2,12 +2,32 @@
 
 {# SEO: los hooks quedan puestos pero sin contenido final — title, description
    y schema se definen en una tarea posterior. #}
-{% block title %}[PLACEHOLDER] Title | VoltVista Electric{% endblock %}
-{% block description %}[PLACEHOLDER] Meta description.{% endblock %}
+{% block title %}Lighting Installation in Orlando| VoltVista Electric{% endblock %}
+{% block description %}Professional lighting installation in Orlando, FL. VoltVista Electric installs indoor, outdoor, landscape, security, LED and permanent lighting for homes and businesses.
+{% endblock %}
 {% block canonical %}
 <link rel="canonical" href="{{ settings.business_url }}/services/lighting-installation">
 {% endblock %}
-{% block jsonld %}{# [PLACEHOLDER] Schema Service pendiente #}{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "{{ settings.business_url.rstrip('/') }}/services/lighting-installation#service",
+  "name": "Lighting Installation",
+  "serviceType": "Lighting Installation",
+  "url": "{{ settings.business_url.rstrip('/') }}/services/lighting-installation",
+  "provider": {
+    "@id": "{{ settings.business_url.rstrip('/') }}/#business"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Orlando"
+  }
+}
+</script>
+{% endblock %}
 
 {# Estilos solo de esta pagina: galeria en carrusel y barra fija de movil. #}
 {% block head_extra %}
@@ -33,9 +53,9 @@
   </div>
 
   <div class="col-12 col-md-6 order-md-1">
-    <h1 class="h3 fw-bold">Permanent Roofline Lighting for Orlando Homes</h1>
+    <h1 class="h3 fw-bold">Lighting Installation for Orlando Homes</h1>
     <p class="lead text-muted">
-      Programmable LED lights mounted along your roofline. Set them for the
+      Permanent roofline lighting installation, Landscape Lighting Installation, Entry & Exterior, Curb Appeal Lighting. Set them for the
       holidays, for game days, or for everyday warm white — from your phone.
     </p>
 
@@ -55,11 +75,11 @@
    Franja delgada. Sin cifras, garantias ni certificaciones inventadas. #}
 <ul class="list-unstyled d-flex flex-wrap justify-content-center gap-3 small text-muted
            border-top border-bottom py-3 mb-5">
-  <li>[PLACEHOLDER] Trust signal 1</li>
+  <li>No deposit required</li>
   <li class="d-none d-sm-block">&middot;</li>
-  <li>[PLACEHOLDER] Trust signal 2</li>
+  <li>Most homes done in one day</li>
   <li class="d-none d-sm-block">&middot;</li>
-  <li>[PLACEHOLDER] Trust signal 3</li>
+  <li>Local</li>
 </ul>
 
 {# ── 3. PRIMER SERVICIO ──────────────────────────────────────────────────
@@ -70,23 +90,28 @@
   {% with alt_side = false %}{% include '_service_module.html' %}{% endwith %}
 {% endfor %}
 
-{# ── 4. GALERIA ──────────────────────────────────────────────────────── #}
-{% include '_lighting_gallery.html' %}
+
 
 {# ── 5. COMO FUNCIONA ────────────────────────────────────────────────── #}
 <section class="mb-5">
-  <h2 class="h4 fw-bold mb-3">[PLACEHOLDER] How It Works</h2>
+  <h2 class="h4 fw-bold mb-3"> How It Works</h2>
   <div class="row g-3">
-    {% for step in [1, 2, 3] %}
+    {% for step in [
+      ('Estimate',  "FREE * Ask us anything first "),
+      ('Schedule',  "Pick a day that works."),
+      ('Install',   "Most homes are finished in a single day.")
+    ] %}
     <div class="col-12 col-md-4">
       <div class="card h-100 rounded-4 p-3 shadow-sm">
-        <div class="h6 fw-bold mb-1">{{ step }}. [PLACEHOLDER] Step title</div>
-        <p class="small text-muted mb-0">[PLACEHOLDER] One or two lines describing this step.</p>
+        <div class="h6 fw-bold mb-1">{{ loop.index }}. {{ step[0] }}</div>
+        <p class="small text-muted mb-0">{{ step[1] }}</p>
       </div>
     </div>
     {% endfor %}
   </div>
 </section>
+
+
 
 {# ── 6. RESTO DE SERVICIOS ───────────────────────────────────────────── #}
 {% for service in services[1:] %}
@@ -94,28 +119,45 @@
   {% with alt_side = loop.index0 is even %}{% include '_service_module.html' %}{% endwith %}
 {% endfor %}
 
+{# ── 4. GALERIA ──────────────────────────────────────────────────────── #}
+{% include '_lighting_gallery.html' %}
+
 {# ── 7. FAQ ──────────────────────────────────────────────────────────────
    Acordeon de Bootstrap, el mismo componente que ya usa la landing de surge. #}
 <section class="mb-5">
-  <h2 class="h4 fw-bold mb-3">[PLACEHOLDER] Common Questions</h2>
+  <h2 class="h4 fw-bold mb-3">Common Questions</h2>
   <div class="accordion accordion-flush" id="lightingFaq">
-    {% for i in [1, 2, 3, 4] %}
-    <div class="accordion-item">
-      <h3 class="accordion-header">
-        <button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#lightingFaq{{ i }}">
-          [PLACEHOLDER] Question {{ i }}
-        </button>
-      </h3>
-      <div id="lightingFaq{{ i }}" class="accordion-collapse collapse" data-bs-parent="#lightingFaq">
-        <div class="accordion-body small text-muted">
-          [PLACEHOLDER] Answer {{ i }}.
-        </div>
+    {% for q in [
+    ("Which type of light should I get?",
+    "Depends on what you want it to do. Programmable LEDs give you color and scenes from your phone. Classic bulbs give you a warmer, more traditional look for less. Tell us what you're after and we'll tell you what fits your roofline."),
+
+    ("Do I have to buy the lights myself?",
+    "Not necessarily. Bring your own, or we can source them for you — whichever you prefer. Pricing shown on this page is labor only."),
+
+    ("Will it look bad during the day?",
+    "No. The track sits tucked under the eave line and is barely visible in daylight. If you're going with classic bulbs, we'll show you how it looks before anything goes up."),
+
+    ("What if my HOA has rules about this?",
+    "Most permanent lighting passes HOA review because it's off during the day and can run plain warm white at night. If you want, send us your guidelines and we'll tell you what works.")
+] %}
+    
+      <div class="accordion-item">
+    <h3 class="accordion-header">
+      <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#lightingFaq{{ loop.index }}">
+        {{ q[0] }}
+      </button>
+    </h3>
+    <div id="lightingFaq{{ loop.index }}" class="accordion-collapse collapse"
+        data-bs-parent="#lightingFaq">
+      <div class="accordion-body small text-muted">
+        {{ q[1] }}
       </div>
     </div>
-    {% endfor %}
   </div>
-</section>
+  {% endfor %}
+    </div>
+  </section>
 
 {# ── 8. ZONAS ────────────────────────────────────────────────────────── #}
 <section class="mb-5">
@@ -127,7 +169,7 @@
 
 {# ── 9. CTA FINAL ────────────────────────────────────────────────────── #}
 <div class="card rounded-4 p-4 text-center bg-light-subtle mb-5">
-  <div class="h5 fw-bold mb-3">[PLACEHOLDER] Closing CTA headline</div>
+  <div class="h5 fw-bold mb-3">FREE Estimate - No obligation</div>
   <div>
     <a class="btn btn-cta-primary btn-lg px-4" href="/estimate">Get a Free Estimate</a>
   </div>

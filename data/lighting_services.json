@@ -1,41 +1,58 @@
 {
   "gallery": [
-    { "file": "lighting-01.webp", "alt": "[PLACEHOLDER] Lighting installation photo 1" },
-    { "file": "lighting-02.webp", "alt": "[PLACEHOLDER] Lighting installation photo 2" },
-    { "file": "lighting-03.webp", "alt": "[PLACEHOLDER] Lighting installation photo 3" },
-    { "file": "lighting-04.webp", "alt": "[PLACEHOLDER] Lighting installation photo 4" }
+    { "file": "gallery_1.webp", "alt": "[PLACEHOLDER] Lighting installation photo 1" },
+    { "file": "gallery_2.webp", "alt": "[PLACEHOLDER] Lighting installation photo 2" },
+    { "file": "gallery_3.webp", "alt": "[PLACEHOLDER] Lighting installation photo 3" }
+    
   ],
   "services": [
     {
       "slug": "roofline-permanent-lighting",
-      "title": "Permanent Roofline Lighting",
-      "subtitle": "[PLACEHOLDER] One install, every holiday covered.",
-      "body": "[PLACEHOLDER] Paragraph describing permanent roofline lighting: what it is, how it is mounted, and what the homeowner controls from their phone. Replace with final copy.",
+      "title": "Permanent Roofline Lighting Installation",
+      "subtitle": "One install. Every holiday. Nothing to take down.",
+      "body": "Roofline lighting that goes up once and stays there. Programmable color-changing LEDs, classic bulbs along the eaves, or something in between — we install any brand and any style, on any roofline: tile, shingle, metal, single-story or two. Most nights it's just warm white on the front of the house. Then it's whatever the occasion calls for.",
       "bullets": [
-        "[PLACEHOLDER] Benefit or spec line 1",
-        "[PLACEHOLDER] Benefit or spec line 2",
-        "[PLACEHOLDER] Benefit or spec line 3",
-        "[PLACEHOLDER] Benefit or spec line 4"
+        "You pick the lights, we handle the install",
+        "Any brand, any style, any roofline",
+        "Mounted to last through Florida heat and storms",
+        "Most homes finished in a single day"
       ],
-      "image": "roofline.webp",
+      "image": "hero_roofline_2.webp",
       "image_alt": "[PLACEHOLDER] Permanent roofline lighting installed on an Orlando home",
       "cta_text": "Get a Free Estimate",
       "cta_href": "/estimate"
     },
     {
       "slug": "landscape-lighting",
-      "title": "Landscape Lighting",
-      "subtitle": "[PLACEHOLDER] New installs and repairs to existing systems.",
-      "body": "[PLACEHOLDER] Paragraph describing landscape lighting: new installations, and diagnosing and repairing systems that already exist. Replace with final copy.",
+      "title": "Landscape Lighting Installation",
+      "subtitle": "New installs and repairs to systems you already have.",
+      "body": "Low-voltage systems rarely die all at once — they go one fixture at a time until the front of the house looks half-finished. Usually it isn't the transformer. It's a corroded connector, a dead bulb, or a fixture buried under five years of mulch. We find what's actually wrong and fix that. And if you're starting from scratch, we'll lay out uplighting for the palms, path lights along the walkway, and set the timer before we go.",
       "bullets": [
-        "[PLACEHOLDER] Benefit or spec line 1",
-        "[PLACEHOLDER] Benefit or spec line 2",
-        "[PLACEHOLDER] Benefit or spec line 3"
+        "Repairs and fixture replacement on existing systems",
+        "New low-voltage installs, plug-in transformer",
+        "Uplighting, path lights, and accent lighting",
+        "Free estimate before anything starts"
       ],
-      "image": "landscape.webp",
+      "image": "landscape_installation.webp",
       "image_alt": "[PLACEHOLDER] Landscape lighting installed along a walkway",
       "cta_text": "Get a Free Estimate",
       "cta_href": "/estimate"
-    }
+    },
+    {
+  "slug": "entry-exterior",
+  "title": "Entry & Exterior Lighting Installation",
+  "subtitle": "Replace a dated fixture. Light a dark entry.",
+  "body": "Sconces by the garage, lanterns at the front door, modern LED bars along a walkway. You pick the fixture — we handle the project from start to finish, including hauling the old one away.",
+  "bullets": [
+    "You choose the fixture, we handle the rest",
+    "Old fixture removed and disposed of",
+    "Most swaps done in under an hour",
+    "Free estimate before anything starts"
+  ],
+  "image": "Exterior.webp",
+  "image_alt": "Outdoor wall sconce mounted beside the front entry of a home at dusk",
+  "cta_text": "Get a Free Estimate",
+  "cta_href": "/estimate"
+}
   ]
 }
