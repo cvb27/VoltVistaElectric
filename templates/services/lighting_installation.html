@@ -40,9 +40,11 @@
 
 {% block content %}
 
+
+
 {# ── 1. HERO ─────────────────────────────────────────────────────────────
    H1 y subtitulo son definitivos: hablan del producto concreto, no de
-   "iluminacion" en generico. La imagen es el elemento LCP. #}
+   "iluminacion" en generico. La imagen es el elemento LCP. x#}
 <header class="row g-4 align-items-center mb-5">
   <div class="col-12 col-md-6 order-md-2">
     <img src="/static/img/lighting/hero_roofline.webp?v={{ asset_v }}"
@@ -50,15 +52,20 @@
          class="img-fluid rounded-4 shadow w-100"
          width="760" height="507"
          fetchpriority="high" decoding="async">
+         
   </div>
+  
 
   <div class="col-12 col-md-6 order-md-1">
     <h1 class="h3 fw-bold">Lighting Installation for Orlando Homes</h1>
     <p class="lead text-muted">
       Permanent roofline lighting installation, Landscape Lighting Installation, Entry & Exterior, Curb Appeal Lighting. Set them for the
       holidays, for game days, or for everyday warm white — from your phone.
-    </p>
+      {# ── 4. GALERIA ──────────────────────────────────────────────────────── #}
+{% include '_lighting_gallery.html' %}
 
+    </p>
+    
     <div class="d-flex flex-wrap gap-2 mt-3">
       <a class="btn btn-cta-primary btn-lg px-4" href="/estimate">Get a Free Estimate</a>
       {% if settings.phone %}
@@ -70,6 +77,8 @@
     </div>
   </div>
 </header>
+
+
 
 {# ── 2. TRUST STRIP ──────────────────────────────────────────────────────
    Franja delgada. Sin cifras, garantias ni certificaciones inventadas. #}
@@ -119,8 +128,7 @@
   {% with alt_side = loop.index0 is even %}{% include '_service_module.html' %}{% endwith %}
 {% endfor %}
 
-{# ── 4. GALERIA ──────────────────────────────────────────────────────── #}
-{% include '_lighting_gallery.html' %}
+
 
 {# ── 7. FAQ ──────────────────────────────────────────────────────────────
    Acordeon de Bootstrap, el mismo componente que ya usa la landing de surge. #}

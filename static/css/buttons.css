@@ -88,3 +88,30 @@ a.hover-opacity-100 {
 }
 .btn-cta-tertiary:hover,
 a.hover-opacity-100:hover { opacity: 1; }
+
+/* =========================== SHELF LINK =========================== */
+
+.navbar .btn-shelfcrew,
+.btn-shelfcrew {
+  display: inline-block;
+  border: 2px solid var(--color-shelf-ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-shelf-ink);
+  box-shadow: 3px 3px 0 var(--color-shelf-yellow);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.navbar .btn-shelfcrew:hover,
+.navbar .btn-shelfcrew:focus-visible,
+.btn-shelfcrew:hover,
+.btn-shelfcrew:focus-visible {
+  background: var(--color-shelf-yellow);
+  color: var(--color-shelf-ink);
+}

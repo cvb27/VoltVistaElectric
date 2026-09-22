@@ -14,6 +14,8 @@
   --color-bg:      #0D1B2A;
   --color-surface: #16283D;
   --color-navy:    #1E3A6E;
+  --color-shelf-yellow: #FFBF00;
+  --color-shelf-ink: #FFFFFF;
 
   /* Accion. El texto sobre ambar va OSCURO: blanco sobre #F59E0B da 2.15:1
      y no pasa. Con #0D1B2A da 8.10:1. */
