@@ -122,7 +122,10 @@
 <nav class="navbar navbar-expand-lg sticky-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-      <img src="/static/img/logo.webp?v={{ asset_v }}" alt="Voltvista Electric" class="brand-logo">
+      {# Solo el simbolo: el logo completo con texto dejaba el simbolo en ~10 px.
+         alt vacio porque el nombre ya va en el span de al lado: con alt, el
+         lector de pantalla lo leeria dos veces. #}
+      <img src="/static/img/logo-mark.webp?v={{ asset_v }}" alt="" class="brand-logo" width="34" height="34">
       <span class="fw-bold brand-text">VoltvistaELectric</span>
     </a>
 
@@ -158,7 +161,10 @@
 </nav>
 
 {% block main %}
-<main class="py-4">
+{# pb-5 (48 px) y no py-4: con 24 px el contenido quedaba pegado al footer.
+   Las paginas no deben cerrar con margen propio (mb-*) para que la
+   separacion sea la misma en todas. #}
+<main class="pt-4 pb-5">
   <div class="container">
     {% block content %}{% endblock %}
   </div>

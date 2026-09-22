@@ -13,6 +13,11 @@ body[data-page="home"] {
   color: var(--color-text);
 }
 
+/* Footer al fondo aunque haya poco contenido: body en columna y el <main>
+   se estira. La home ya es mas alta que la pantalla y queda fuera. */
+body:not([data-page="home"]) { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+body:not([data-page="home"]) > main { flex: 1 0 auto; }
+
 /* ---------- Hero ---------- */
 
 /* min-height con calc: sin restar el navbar y la barra de oferta, la primera
@@ -91,9 +96,7 @@ body[data-page="home"] {
 
 /* ---------- Marca y enlaces ---------- */
 
-.brand-logo { width: 34px; height: 34px; object-fit: contain; }
-/* El color de .brand-text esta en components.css, con el resto del navbar */
-.brand-text { letter-spacing: 0.08em; }
+/* .brand-logo y .brand-text viven en components.css, con el navbar */
 
 .link-muted { color: var(--color-navy); text-decoration: none; }
 .link-muted:hover { text-decoration: underline; }
