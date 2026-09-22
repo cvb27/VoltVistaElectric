@@ -33,7 +33,7 @@
   --color-muted:     #A0AEC0;
   --color-text-dark: #0F172A;
 
-  /* Fondo de las paginas que no son la home, y del navbar en ellas */
+  /* Fondo de las paginas que no son la home (navbar y footer van oscuros) */
   --color-bg-light:  #FFFFFF;
 
   /* Superficies translucidas de las tarjetas sobre fondo oscuro. Estaban

@@ -92,7 +92,8 @@ body[data-page="home"] {
 /* ---------- Marca y enlaces ---------- */
 
 .brand-logo { width: 34px; height: 34px; object-fit: contain; }
-.brand-text { letter-spacing: 0.08em; color: var(--color-navy); }
+/* El color de .brand-text esta en components.css, con el resto del navbar */
+.brand-text { letter-spacing: 0.08em; }
 
 .link-muted { color: var(--color-navy); text-decoration: none; }
 .link-muted:hover { text-decoration: underline; }

@@ -113,5 +113,7 @@ a.hover-opacity-100:hover { opacity: 1; }
 .btn-shelfcrew:hover,
 .btn-shelfcrew:focus-visible {
   background: var(--color-shelf-yellow);
-  color: var(--color-shelf-ink);
+  /* Texto oscuro sobre el amarillo: con el blanco de reposo daba 1.65:1,
+     con --color-on-accent da 10.52:1. */
+  color: var(--color-on-accent);
 }
