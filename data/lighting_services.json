@@ -6,6 +6,23 @@
     
   ],
   "services": [
+
+    {
+  "slug": "entry-exterior",
+  "title": "Entry & Exterior Lighting Installation",
+  "subtitle": "Replace a dated fixture. Light a dark entry.",
+  "body": "Sconces by the garage, lanterns at the front door, modern LED bars along a walkway. You pick the fixture — we handle the project from start to finish, including hauling the old one away.",
+  "bullets": [
+    "You choose the fixture, we handle the rest",
+    "Old fixture removed and disposed of",
+    "Most swaps done in under an hour",
+    "Free estimate before anything starts"
+  ],
+  "image": "Exterior.webp",
+  "image_alt": "Outdoor wall sconce mounted beside the front entry of a home at dusk",
+  "cta_text": "Get a Free Estimate",
+  "cta_href": "/estimate"
+},
     {
       "slug": "roofline-permanent-lighting",
       "title": "Permanent Roofline Lighting Installation",
@@ -37,22 +54,7 @@
       "image_alt": "[PLACEHOLDER] Landscape lighting installed along a walkway",
       "cta_text": "Get a Free Estimate",
       "cta_href": "/estimate"
-    },
-    {
-  "slug": "entry-exterior",
-  "title": "Entry & Exterior Lighting Installation",
-  "subtitle": "Replace a dated fixture. Light a dark entry.",
-  "body": "Sconces by the garage, lanterns at the front door, modern LED bars along a walkway. You pick the fixture — we handle the project from start to finish, including hauling the old one away.",
-  "bullets": [
-    "You choose the fixture, we handle the rest",
-    "Old fixture removed and disposed of",
-    "Most swaps done in under an hour",
-    "Free estimate before anything starts"
-  ],
-  "image": "Exterior.webp",
-  "image_alt": "Outdoor wall sconce mounted beside the front entry of a home at dusk",
-  "cta_text": "Get a Free Estimate",
-  "cta_href": "/estimate"
-}
+    }
+    
   ]
 }
