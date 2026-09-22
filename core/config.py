@@ -65,7 +65,9 @@ class Settings:
     lng: float = float(_get("BUSINESS_LNG") or "-81.506867")
     hours: str = _get("BUSINESS_HOURS", "Mo-Fr 08:00-18:00")
     business_url: str = _get("BUSINESS_URL", "https://voltvistaelectric.com")
-    logo_url: str = _get("BUSINESS_LOGO_URL", "https://voltvistaelectric.com/static/img/logo.png")
+    # Logo del JSON-LD (Organization/publisher). Google pide minimo 112x112;
+    # el logo.png de 68 px quedaba por debajo.
+    logo_url: str = _get("BUSINESS_LOGO_URL", "https://voltvistaelectric.com/static/img/logo-512.png")
 
     # Sello de version de los estaticos — ver _asset_version() arriba.
     asset_version: str = _asset_version()
