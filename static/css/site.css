@@ -35,6 +35,12 @@ body:not([data-page="home"]) > main { flex: 1 0 auto; }
 @supports not (height: 100svh) {
   .hero { min-height: calc(100vh - var(--nav-h) - var(--offer-h)); }
 }
+/* Rotacion del hero: las tres fotos ocupan el mismo hueco y solo cambia
+   la opacidad, asi no hay reflow ni salto de layout. La clase .is-faded la
+   mueve el JS; sin JS, la primera es la unica visible. */
+.hero-video { transition: opacity 1s ease; }
+.hero-video.is-faded { opacity: 0; }
+
 .hero-video {
   position: absolute;
   inset: 0;
@@ -101,14 +107,6 @@ body:not([data-page="home"]) > main { flex: 1 0 auto; }
 .link-muted { color: var(--color-navy); text-decoration: none; }
 .link-muted:hover { text-decoration: underline; }
 body[data-page="home"] .link-muted { color: var(--color-muted); }
-
-/* Ajustes de movil: el panel tapaba casi toda la foto */
-@media (max-width: 767px) {
-  .hero-content {
-    max-width: 90%;
-    padding: 1.5rem 1rem;
-  }
-}
 
 /* Desktop: los dos paneles se leen como uno solo.
    El del boton pierde el fondo y se pega al de arriba. */

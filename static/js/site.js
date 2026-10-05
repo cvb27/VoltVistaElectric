@@ -93,3 +93,29 @@ var whySurge = document.querySelector('.why-surge');
 if (whySurge && window.matchMedia('(max-width: 767.98px)').matches) {
   whySurge.open = false;
 }
+
+
+// Rotacion de las fotos del hero (solo el home las tiene). Sin libreria: un
+// intervalo que mueve la clase .is-faded de una foto a la siguiente.
+//
+// Dos condiciones para no estropear lo que ya funcionaba:
+//   - no arranca si el visitante pidio menos movimiento en su sistema;
+//   - las fotos 2 y 3 no se descargan hasta que la pagina termino de cargar,
+//     para que no le quiten ancho de banda a la primera, que es el LCP.
+var heroSlides = document.querySelectorAll('.hero-video');
+var quietMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (heroSlides.length > 1 && !quietMotion) {
+  window.addEventListener('load', function () {
+    heroSlides.forEach(function (slide) {
+      if (slide.dataset.src) slide.src = slide.dataset.src;
+    });
+
+    var current = 0;
+    setInterval(function () {
+      heroSlides[current].classList.add('is-faded');
+      current = (current + 1) % heroSlides.length;
+      heroSlides[current].classList.remove('is-faded');
+    }, 6000);
+  });
+}

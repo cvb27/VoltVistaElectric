@@ -8,14 +8,31 @@
                              hay que mostrar primero
        width/height          reserva el espacio y evita layout shift
 
-     home-hero.webp es un PLACEHOLDER de 1672x941. Sustituir por la foto
-     definitiva de roofline manteniendo esas dimensiones: el recuadre de movil
+     Las tres fotos miden 1672x941 y rotan cada 6s (ver static/js/site.js).
+     Al sustituirlas hay que mantener esas dimensiones: el recuadre de movil
      (object-position en site.css) esta calibrado para esa proporcion. #}
   <img class="hero-video"
        src="/static/img/home_hero.webp?v={{ asset_v }}"
        alt="Permanent roofline lighting glowing along the eaves of a home at dusk"
        width="1672" height="941"
        fetchpriority="high">
+
+  {# Las otras dos fotos de la rotacion. Arrancan ocultas (.is-faded) y sin
+     src: el navegador descarga una imagen lazy que ya esta en pantalla casi
+     de inmediato, y dos fotos mas compitiendo por el ancho de banda retrasan
+     justo la del LCP. El JS les pone el src cuando la pagina termino de
+     cargar (ver static/js/site.js). Sin JS, el hero se queda como estaba. #}
+  <img class="hero-video is-faded"
+       data-src="/static/img/hero-pendant.webp?v={{ asset_v }}"
+       alt="Landscape lighting washing over palms and a front garden at night"
+       width="1672" height="941"
+       loading="lazy">
+
+  <img class="hero-video is-faded"
+       data-src="/static/img/hero-kitchen-pendants.webp?v={{ asset_v }}"
+       alt="Lit entryway and exterior wall lights at the front door of a home"
+       width="1672" height="941"
+       loading="lazy">
 
   <div class="hero-stack">
 
