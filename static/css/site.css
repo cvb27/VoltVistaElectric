@@ -35,13 +35,14 @@ body:not([data-page="home"]) > main { flex: 1 0 auto; }
 @supports not (height: 100svh) {
   .hero { min-height: calc(100vh - var(--nav-h) - var(--offer-h)); }
 }
-/* Rotacion del hero: las tres fotos ocupan el mismo hueco y solo cambia
-   la opacidad, asi no hay reflow ni salto de layout. La clase .is-faded la
-   mueve el JS; sin JS, la primera es la unica visible. */
-.hero-video { transition: opacity 1s ease; }
+/* Rotacion: las tres fotos ocupan el mismo hueco y solo cambia la opacidad
+   (.is-faded la mueve el JS; sin JS solo se ve la primera). El <picture> lleva
+   display:contents para no ser un item flex mas de .hero: no genera caja. */
+.hero picture { display: contents; }
 .hero-video.is-faded { opacity: 0; }
 
 .hero-video {
+  transition: opacity 1s ease;
   position: absolute;
   inset: 0;
   width: 100%;

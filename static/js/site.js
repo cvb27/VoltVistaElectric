@@ -102,12 +102,20 @@ if (whySurge && window.matchMedia('(max-width: 767.98px)').matches) {
 //   - no arranca si el visitante pidio menos movimiento en su sistema;
 //   - las fotos 2 y 3 no se descargan hasta que la pagina termino de cargar,
 //     para que no le quiten ancho de banda a la primera, que es el LCP.
+//
+// Cada 6s cambia la foto visible; el fundido lo hace el CSS.
 var heroSlides = document.querySelectorAll('.hero-video');
 var quietMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (heroSlides.length > 1 && !quietMotion) {
   window.addEventListener('load', function () {
     heroSlides.forEach(function (slide) {
+      // El srcset del <source> primero: si se pusiera despues del src, el
+      // navegador ya habria elegido la version apaisada en movil. La primera
+      // foto no va dentro de <picture>, de ahi la comprobacion del padre.
+      var padre = slide.parentElement;
+      var fuente = padre.tagName === 'PICTURE' && padre.querySelector('source[data-srcset]');
+      if (fuente) fuente.srcset = fuente.dataset.srcset;
       if (slide.dataset.src) slide.src = slide.dataset.src;
     });
 

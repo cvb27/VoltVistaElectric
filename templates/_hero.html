@@ -17,22 +17,38 @@
        width="1672" height="941"
        fetchpriority="high">
 
-  {# Las otras dos fotos de la rotacion. Arrancan ocultas (.is-faded) y sin
-     src: el navegador descarga una imagen lazy que ya esta en pantalla casi
-     de inmediato, y dos fotos mas compitiendo por el ancho de banda retrasan
-     justo la del LCP. El JS les pone el src cuando la pagina termino de
-     cargar (ver static/js/site.js). Sin JS, el hero se queda como estaba. #}
-  <img class="hero-video is-faded"
-       data-src="/static/img/hero-pendant.webp?v={{ asset_v }}"
-       alt="Landscape lighting washing over palms and a front garden at night"
-       width="1672" height="941"
-       loading="lazy">
+  {# Las otras dos fotos de la rotacion, cada una en dos versiones: la
+     apaisada de siempre y una vertical para movil, porque en pantalla
+     estrecha el recorte de una apaisada amplia demasiado la foto.
 
-  <img class="hero-video is-faded"
-       data-src="/static/img/hero-kitchen-pendants.webp?v={{ asset_v }}"
-       alt="Lit entryway and exterior wall lights at the front door of a home"
-       width="1672" height="941"
-       loading="lazy">
+     Arrancan ocultas (.is-faded) y SIN src ni srcset: una imagen lazy que ya
+     esta en pantalla el navegador la pide casi de inmediato, y dos fotos mas
+     compitiendo por el ancho de banda retrasan justo la del LCP. El JS les
+     pone src y srcset cuando la pagina termino de cargar (static/js/site.js).
+     Sin JS, el hero se queda con una sola foto, como antes.
+
+     Las clases y el src de respaldo van en el <img>, no en el <picture>: el
+     JS busca .hero-video y el posicionamiento absoluto es de la imagen. El
+     <picture> se neutraliza con display:contents en site.css. #}
+  <picture>
+    <source media="(max-width: 767px)"
+            data-srcset="/static/img/hero-pendant-mobile.webp?v={{ asset_v }}">
+    <img class="hero-video is-faded"
+         data-src="/static/img/hero-pendant.webp?v={{ asset_v }}"
+         alt="Modern LED pendant light over a dining table"
+         width="1672" height="941"
+         loading="lazy">
+  </picture>
+
+  <picture>
+    <source media="(max-width: 767px)"
+            data-srcset="/static/img/hero-kitchen-pendants-mobile.webp?v={{ asset_v }}">
+    <img class="hero-video is-faded"
+         data-src="/static/img/hero-kitchen-pendants.webp?v={{ asset_v }}"
+         alt="Three glass pendant lights installed over a kitchen island"
+         width="1672" height="941"
+         loading="lazy">
+  </picture>
 
   <div class="hero-stack">
 
