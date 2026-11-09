@@ -75,6 +75,7 @@ voltvista/
 │   ├── booking.py           # disponibilidad: franjas, cupos, validación de fecha
 │   ├── offers.py            # planes y precios (lee data/surge_offers.json)
 │   ├── posts.py             # índice del blog (lee data/blog_posts.json)
+│   ├── lighting.py          # servicios de iluminación (lee data/lighting_services.json)
 │   ├── checkout.py          # sesiones de Stripe + configura stripe.api_key
 │   ├── emailer.py           # envío SMTP en crudo
 │   ├── notify.py            # aviso al dueño de una reserva pagada
@@ -82,6 +83,7 @@ voltvista/
 │   ├── admin_auth.py        # HTTP Basic de /admin
 │   ├── seo.py               # JSON-LD: LocalBusiness, Service, Breadcrumb
 │   ├── seo_blog.py          # JSON-LD de posts (separado por el cap de 120)
+│   ├── seo_services.py      # JSON-LD del hub (ItemList) y de cada servicio
 │   ├── i18n.py, utils.py    # idioma y helpers varios
 ├── db/
 │   ├── models.py            # SQLModel: EstimateRequest, EstimatePhoto,
@@ -102,6 +104,7 @@ voltvista/
 ├── static/                  # css/, js/site.js, img/, video/
 ├── data/                    # JSON editables sin tocar código
 │   ├── surge_offers.json    # los 3 planes y sus precios
+│   ├── lighting_services.json # servicios: nav, hub, páginas, sitemap, schema
 │   ├── blocked_dates.json   # feriados y días sin servicio
 │   └── blog_posts.json      # índice del blog
 └── posts/                   # cuerpo de los posts en .md

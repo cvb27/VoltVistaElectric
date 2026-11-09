@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{# Plantilla unica de las paginas hijas de iluminacion (/services/{slug}).
+
+   CONTRATO — espera `service` (una entrada de data/lighting_services.json, ya
+   validada por core/lighting.py), `areas` y `jsonld`. Las secciones con la
+   lista vacia no se pintan, asi que un servicio puede ir sin FAQ o sin galeria
+   y la pagina no deja huecos. #}
+
+{% block title %}{{ service.meta_title }}{% endblock %}
+{% block description %}{{ service.meta_description }}{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url.rstrip('/') }}/services/{{ service.slug }}">
+{% endblock %}
+{% block og_title %}{{ service.meta_title }}{% endblock %}
+{% block og_description %}{{ service.meta_description }}{% endblock %}
+{% block og_url %}{{ settings.business_url.rstrip('/') }}/services/{{ service.slug }}{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">{{ jsonld | tojson }}</script>
+{% endblock %}
+
+{% block head_extra %}
+<link href="/static/css/lighting.css?v={{ asset_v }}" rel="stylesheet">
+{% endblock %}
+{% block page %}lighting{% endblock %}
+
+{% block content %}
+
+{# ── 1. HERO ─────────────────────────────────────────────────────────────
+   La imagen es el elemento LCP: sin lazy y con prioridad alta. El marco 16:9
+   reserva el hueco antes de que llegue la foto (sin salto de layout) sea cual
+   sea el tamano real del archivo. #}
+<header class="row g-4 align-items-center mb-5">
+  <div class="col-12 col-md-6 order-md-2">
+    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow">
+      <img src="/static/img/lighting/{{ service.hero_image }}?v={{ asset_v }}"
+           alt="{{ service.hero_alt }}" class="object-fit-cover"
+           fetchpriority="high" decoding="async">
+    </div>
+  </div>
+  <div class="col-12 col-md-6 order-md-1">
+    <a class="small text-muted" href="/services/lighting-installation">&larr; All Lighting Services</a>
+    <h1 class="h3 fw-bold mt-2">{{ service.h1 }}</h1>
+    <p class="lead text-muted">{{ service.subtitle }}</p>
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-cta-primary btn-lg px-4" href="{{ service.cta_href }}"
+         onclick="if(window.gtag)gtag('event','select_service',{service:'{{ service.slug }}'})">{{ service.cta_text }}</a>
+      {% if settings.phone %}
+      <a class="btn btn-cta-secondary btn-lg px-4" href="tel:{{ settings.phone }}"
+         onclick="if(window.gtag)gtag('event','click_to_call',{page:'{{ service.slug }}'})">
+        <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>Call Us Now
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{# ── 2. SECCIONES ──────────────────────────────────────────────────────── #}
+{% for sec in service.sections %}
+<section class="mb-5">
+  <h2 class="h4 fw-bold mb-3">{{ sec.heading }}</h2>
+  <p class="mb-0">{{ sec.body }}</p>
+</section>
+{% endfor %}
+
+{# ── 3. BULLETS ────────────────────────────────────────────────────────── #}
+{% if service.bullets %}
+<ul class="list-unstyled mb-5">
+  {% for b in service.bullets %}
+  <li class="mb-2 d-flex">
+    <i class="bi bi-check-lg text-success me-2 flex-shrink-0" aria-hidden="true"></i>
+    <span>{{ b }}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{# ── 4. GALERIA ──────────────────────────────────────────────────────────
+   El partial ya se salta solo si la lista viene vacia. #}
+{% with gallery = service.gallery %}{% include '_lighting_gallery.html' %}{% endwith %}
+
+{# ── 5. NOTA DE PRECIO (opcional) ──────────────────────────────────────── #}
+{% if service.price_note %}
+<p class="small text-muted border-start border-3 ps-3 mb-5">{{ service.price_note }}</p>
+{% endif %}
+
+{# ── 6. FAQ ────────────────────────────────────────────────────────────── #}
+{% with faq = service.faq %}{% include '_service_faq.html' %}{% endwith %}
+
+{# ── 7. ZONAS y 8. CTA FINAL ───────────────────────────────────────────── #}
+{% include '_service_areas.html' %}
+{% include '_service_cta.html' %}
+
+{% endblock %}

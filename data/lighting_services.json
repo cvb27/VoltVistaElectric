@@ -1,60 +1,144 @@
 {
-  "gallery": [
-    { "file": "gallery_1.webp", "alt": "[PLACEHOLDER] Lighting installation photo 1" },
-    { "file": "gallery_2.webp", "alt": "[PLACEHOLDER] Lighting installation photo 2" },
-    { "file": "gallery_3.webp", "alt": "[PLACEHOLDER] Lighting installation photo 3" }
-    
-  ],
   "services": [
-
     {
-  "slug": "entry-exterior",
-  "title": "Entry & Exterior Lighting Installation",
-  "subtitle": "Replace a dated fixture. Light a dark entry.",
-  "body": "Sconces by the garage, lanterns at the front door, modern LED bars along a walkway. You pick the fixture — we handle the project from start to finish, including hauling the old one away.",
-  "bullets": [
-    "You choose the fixture, we handle the rest",
-    "Old fixture removed and disposed of",
-    "Most swaps done in under an hour",
-    "Free estimate before anything starts"
-  ],
-  "image": "Exterior.webp",
-  "image_alt": "Outdoor wall sconce mounted beside the front entry of a home at dusk",
-  "cta_text": "Get a Free Estimate",
-  "cta_href": "/estimate"
-},
-    {
-      "slug": "roofline-permanent-lighting",
-      "title": "Permanent Roofline Lighting Installation",
+      "slug": "roofline-lighting",
+      "nav_label": "Roofline Lighting",
+      "h1": "Permanent Roofline Lighting",
       "subtitle": "One install. Every holiday. Nothing to take down.",
-      "body": "Roofline lighting that goes up once and stays there. Programmable color-changing LEDs, classic bulbs along the eaves, or something in between — we install any brand and any style, on any roofline: tile, shingle, metal, single-story or two. Most nights it's just warm white on the front of the house. Then it's whatever the occasion calls for.",
+      "card_blurb": "Lights that go up once and stay. Warm white most nights, full color when the occasion calls for it.",
+      "meta_title": "Permanent Roofline Lighting Installation | VoltVista Electric",
+      "meta_description": "Permanent roofline lighting for homes in Dr. Phillips, Windermere, Bay Hill and nearby. Any brand, any style, any roofline. Most homes done in one day.",
+      "hero_image": "roofline-holiday-home.webp",
+      "hero_alt": "Two-story home at night with permanent roofline lights glowing red and green along the eaves",
+      "sections": [
+        {
+          "heading": "Lights that go up once",
+          "body": "Roofline lighting that goes up once and stays there. Programmable color-changing LEDs, classic bulbs along the eaves, or something in between — we install any brand and any style, on any roofline: tile, shingle, metal, single-story or two. Most nights it's just warm white on the front of the house. Then it's whatever the occasion calls for."
+        }
+      ],
       "bullets": [
         "You pick the lights, we handle the install",
         "Any brand, any style, any roofline",
         "Mounted to last through Florida heat and storms",
         "Most homes finished in a single day"
       ],
-      "image": "hero_roofline_2.webp",
-      "image_alt": "[PLACEHOLDER] Permanent roofline lighting installed on an Orlando home",
+      "gallery": [],
+      "faq": [
+        {
+          "question": "Which type of light should I get?",
+          "answer": "Depends on what you want it to do. Programmable LEDs give you color and scenes from your phone. Classic bulbs give you a warmer, more traditional look for less. Tell us what you're after and we'll tell you what fits your roofline."
+        },
+        {
+          "question": "Will it look bad during the day?",
+          "answer": "No. The track sits tucked under the eave line and is barely visible in daylight. If you're going with classic bulbs, we'll show you how it looks before anything goes up."
+        }
+      ],
       "cta_text": "Get a Free Estimate",
-      "cta_href": "/estimate"
+      "cta_href": "/estimate",
+      "order": 1,
+      "published": true
     },
     {
       "slug": "landscape-lighting",
-      "title": "Landscape Lighting Installation",
-      "subtitle": "New installs and repairs to systems you already have.",
-      "body": "Low-voltage systems rarely die all at once — they go one fixture at a time until the front of the house looks half-finished. Usually it isn't the transformer. It's a corroded connector, a dead bulb, or a fixture buried under five years of mulch. We find what's actually wrong and fix that. And if you're starting from scratch, we'll lay out uplighting for the palms, path lights along the walkway, and set the timer before we go.",
+      "nav_label": "Landscape Lighting",
+      "h1": "Landscape Lighting Installation",
+      "subtitle": "Uplights for the palms. Path lights for the walkway.",
+      "card_blurb": "New low-voltage systems laid out around your yard, with the timer set before we leave.",
+      "meta_title": "Landscape Lighting Installation | VoltVista Electric",
+      "meta_description": "Landscape lighting installation in Dr. Phillips, Windermere, Bay Hill and nearby: uplights for the palms, path lights for the walkway. Get a free estimate.",
+      "hero_image": "landscape-path-lights.webp",
+      "hero_alt": "Technician installing low-voltage path lights along a front walkway at dusk",
+      "sections": [
+        {
+          "heading": "Starting from scratch",
+          "body": "We lay out uplighting for the palms, path lights along the walkway, and accent lights where they make the house look its best — then set the timer before we go."
+        }
+      ],
       "bullets": [
-        "Repairs and fixture replacement on existing systems",
         "New low-voltage installs, plug-in transformer",
         "Uplighting, path lights, and accent lighting",
+        "Timer set before we leave",
         "Free estimate before anything starts"
       ],
-      "image": "landscape_installation.webp",
-      "image_alt": "[PLACEHOLDER] Landscape lighting installed along a walkway",
+      "gallery": [],
+      "faq": [],
       "cta_text": "Get a Free Estimate",
-      "cta_href": "/estimate"
+      "cta_href": "/estimate",
+      "order": 2,
+      "published": true
+    },
+    {
+      "slug": "landscape-lighting-repair",
+      "nav_label": "Landscape Repair",
+      "h1": "Landscape Lighting Repair",
+      "subtitle": "Repairs to the system you already have.",
+      "card_blurb": "[PLACEHOLDER] Half the yard dark? We find the actual fault and fix that.",
+      "meta_title": "[PLACEHOLDER] Landscape Lighting Repair | VoltVista Electric",
+      "meta_description": "[PLACEHOLDER] 150-160 caracteres con zona objetivo.",
+      "hero_image": "[PLACEHOLDER].webp",
+      "hero_alt": "[PLACEHOLDER]",
+      "sections": [
+        {
+          "heading": "Usually it isn't the transformer",
+          "body": "Low-voltage systems rarely die all at once — they go one fixture at a time until the front of the house looks half-finished. Usually it isn't the transformer. It's a corroded connector, a dead bulb, or a fixture buried under five years of mulch. We find what's actually wrong and fix that."
+        }
+      ],
+      "bullets": [
+        "Repairs and fixture replacement on existing systems",
+        "[PLACEHOLDER] mas bullets"
+      ],
+      "gallery": [],
+      "faq": [],
+      "cta_text": "Get a Free Estimate",
+      "cta_href": "/estimate",
+      "order": 3,
+      "published": false
+    },
+    {
+      "slug": "relamping",
+      "nav_label": "Relamping",
+      "h1": "LED Relamping & Bulb Replacement",
+      "subtitle": "Entry and exterior lights back to full brightness.",
+      "card_blurb": "Dim sconces, dead lanterns and mismatched bulbs swapped for long-life LED that matches.",
+      "meta_title": "LED Relamping & Bulb Replacement | VoltVista Electric",
+      "meta_description": "LED relamping for entry and exterior lights in Dr. Phillips, Windermere, Bay Hill and nearby. Sconces, lanterns and garage lights. Get a free estimate.",
+      "hero_image": "entry-sconces.webp",
+      "hero_alt": "Pair of modern black wall sconces on either side of a double front door with leaded glass",
+      "sections": [
+        {
+          "heading": "Entry & Exterior Relamping",
+          "body": "Sconces by the garage, lanterns at the front door, LED bars along a walkway. They rarely burn out together — one goes dim, another flickers, a third gets replaced with whatever bulb was in the drawer, and the front of the house stops looking like one house. We relamp every fixture with matching LED bulbs so they all come back at the same color and brightness."
+        },
+        {
+          "heading": "Why switch to LED",
+          "body": "LED bulbs last far longer than incandescent or halogen and use a fraction of the power. They come in warm white tones that look like the bulbs you're replacing, so the house keeps its look — just without the dark spots."
+        },
+        {
+          "heading": "The ones nobody wants to climb to",
+          "body": "Two-story entry lanterns, coach lights above the garage, soffit lights over the porch. Those are usually the ones left dark the longest. We bring the ladder."
+        }
+      ],
+      "bullets": [
+        "Entry sconces, lanterns and garage lights",
+        "Matching color and brightness on every fixture",
+        "High and hard-to-reach fixtures included",
+        "Old bulbs hauled away"
+      ],
+      "gallery": [],
+      "faq": [
+        {
+          "question": "Can you match the color of my other lights?",
+          "answer": "Yes. Tell us the look you want — warm white, soft white or daylight — and every bulb on the front of the house gets matched to it."
+        },
+        {
+          "question": "Do I have to buy the bulbs myself?",
+          "answer": "Not necessarily. Bring your own, or we can source them for you — whichever you prefer."
+        }
+      ],
+      "cta_text": "Get a Free Estimate",
+      "cta_href": "/estimate",
+      "order": 4,
+      "published": true
     }
-    
   ]
 }

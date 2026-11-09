@@ -1,17 +1,14 @@
-{# Galeria de trabajos de iluminacion.
+{# Galeria de fotos de una pagina hija de iluminacion.
 
-   CONTRATO — espera `gallery`: lista de {file, alt}. De cualquier longitud:
-   en escritorio se reparte en filas de tres y en movil es un carrusel
-   horizontal. Anadir o quitar fotos no rompe el layout.
+   CONTRATO — espera `gallery`: lista de {file, alt}, el campo `gallery` de la
+   entrada en data/lighting_services.json. Las fotos van en static/img/lighting/.
+   De cualquier longitud: en escritorio se reparte en filas de tres y en movil
+   es un carrusel horizontal. Si la lista esta vacia no se pinta nada.
 
-   El carrusel es CSS puro (grid + scroll-snap), sin el componente de Bootstrap
-   ni JavaScript: son fotos, no necesitan controles ni estado. #}
+   El carrusel es CSS puro (grid + scroll-snap, en lighting.css), sin el
+   componente de Bootstrap ni JavaScript: son fotos, no necesitan controles. #}
 {% if gallery %}
 <section class="mb-5">
-  {#<h1 class="h4 fw-bold mb-1"> Lighting Installation for Orlando Homes</h1>
-  <h2 class="text-muted mb-3"> Orlando area</h2>#}
-  
-
   <div class="light-gallery">
     {% for photo in gallery %}
     <figure class="m-0">

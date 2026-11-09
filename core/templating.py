@@ -8,6 +8,7 @@ estén disponibles en cualquier plantilla sin pasarlos en cada TemplateResponse.
 from fastapi.templating import Jinja2Templates
 
 from core.config import settings
+from core.lighting import load_services
 from core.seo import build_local_business_schema
 
 
@@ -22,6 +23,9 @@ def _build_templates() -> Jinja2Templates:
     # Sello para el ?v= de los estaticos: cambia en cada deploy y obliga a
     # navegador y CDN a pedir el CSS nuevo pese al Cache-Control de un ano.
     tpl.env.globals["asset_v"] = settings.asset_version
+    # Servicios publicados para el desplegable del nav. Global y no por
+    # contexto porque el nav sale en todas las paginas que extienden base.html.
+    tpl.env.globals["nav_services"] = load_services()
     return tpl
 
 

@@ -7,8 +7,8 @@
 
 /* ============================= NAVBAR =============================
    Oscuro en TODAS las paginas, igual que en la home. Antes solo la home
-   lo tenia oscuro y el resto iba en blanco, pero .btn-shelfcrew y el footer
-   estan pensados para fondo oscuro y en blanco quedaban a 1.00:1.
+   lo tenia oscuro y el resto iba en blanco, pero el footer y los enlaces
+   del nav estan pensados para fondo oscuro y en blanco quedaban a 1.00:1.
 
    Se sobreescriben las VARIABLES de Bootstrap en vez de sus selectores: asi
    cubre de una vez enlaces, hover, activo, marca y el borde del toggler, sin

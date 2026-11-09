@@ -136,8 +136,22 @@
     <div id="nav" class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item">
-          <a class="nav-link" href="/services/lighting-installation">Lighting Installation</a>
+        {# Desplegable de servicios. Sale de data/lighting_services.json (global
+           nav_services, ya filtrado por published y ordenado por order): un
+           servicio nuevo aparece aqui sin tocar esta plantilla.
+           Dropdown de Bootstrap: teclado (Enter, flechas, Esc) y movil vienen de
+           bootstrap.bundle. data-bs-theme="dark" lo pinta oscuro como el navbar
+           sin CSS propio. Garage Storage ya no va en el nav: vive en el footer. #}
+        <li class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">Services</button>
+          <ul class="dropdown-menu" data-bs-theme="dark">
+            {% for s in nav_services %}
+            <li><a class="dropdown-item" href="/services/{{ s.slug }}">{{ s.nav_label }}</a></li>
+            {% endfor %}
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/services/lighting-installation">All Lighting Services</a></li>
+          </ul>
         </li>
 
         <li class="nav-item"><a class="nav-link" href="/payments">Payments</a></li>
@@ -145,15 +159,6 @@
 
         <li class="nav-item ms-lg-2">
           <a class="btn btn-cta-nav" href="/estimate">Get FREE Estimate</a>
-        </li>
-
-        <li class="nav-item d-flex align-items-center me-lg-2 my-2 my-lg-0">
-          <a class="btn-shelfcrew"
-            href="https://theshelfcrew.com/?utm_source=voltvista&utm_medium=referral&utm_campaign=navbar"
-            target="_blank" rel="noopener"
-            onclick="if(window.gtag)gtag('event','shelfcrew_click',{location:'navbar'})">
-            Garage Storage <i class="bi bi-arrow-up-right" aria-hidden="true"></i><span class="visually-hidden"> (opens in a new tab)</span>
-          </a>
         </li>
       </ul>
     </div>

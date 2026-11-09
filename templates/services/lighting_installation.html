@@ -1,50 +1,33 @@
 {% extends "base.html" %}
 
-{# SEO: los hooks quedan puestos pero sin contenido final — title, description
-   y schema se definen en una tarea posterior. #}
+{# Hub de iluminacion: un INDICE, no una landing larga. Cada servicio aparece
+   como tarjeta (card_blurb + enlace) y su desarrollo completo vive solo en su
+   pagina hija. Si el hub repitiera ese texto, Google veria contenido duplicado
+   y no sabria cual de las dos posicionar. #}
+
 {% block title %}Lighting Installation in Orlando| VoltVista Electric{% endblock %}
 {% block description %}Professional lighting installation in Orlando, FL. VoltVista Electric installs indoor, outdoor, landscape, security, LED and permanent lighting for homes and businesses.
 {% endblock %}
 {% block canonical %}
 <link rel="canonical" href="{{ settings.business_url }}/services/lighting-installation">
 {% endblock %}
-
 {% block jsonld %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": "{{ settings.business_url.rstrip('/') }}/services/lighting-installation#service",
-  "name": "Lighting Installation",
-  "serviceType": "Lighting Installation",
-  "url": "{{ settings.business_url.rstrip('/') }}/services/lighting-installation",
-  "provider": {
-    "@id": "{{ settings.business_url.rstrip('/') }}/#business"
-  },
-  "areaServed": {
-    "@type": "City",
-    "name": "Orlando"
-  }
-}
-</script>
+<script type="application/ld+json">{{ jsonld | tojson }}</script>
 {% endblock %}
 
-{# Estilos solo de esta pagina: galeria en carrusel y barra fija de movil. #}
+{# Estilos solo de las paginas de iluminacion: galeria y barra fija de movil. #}
 {% block head_extra %}
 <link href="/static/css/lighting.css?v={{ asset_v }}" rel="stylesheet">
 {% endblock %}
 
-{# Marca el body para poder ocultar el boton flotante de WhatsApp solo aqui:
-   chocaria con la barra fija inferior, que ya lleva su propio boton. #}
+{# Marca el body para ocultar el boton flotante de WhatsApp: chocaria con la
+   barra fija inferior de _service_cta.html, que ya lleva su propio boton. #}
 {% block page %}lighting{% endblock %}
 
 {% block content %}
 
-
-
 {# ── 1. HERO ─────────────────────────────────────────────────────────────
-   H1 y subtitulo son definitivos: hablan del producto concreto, no de
-   "iluminacion" en generico. La imagen es el elemento LCP. x#}
+   La imagen es el elemento LCP. #}
 <header class="row g-4 align-items-center mb-5">
   <div class="col-12 col-md-6 order-md-2">
     <img src="/static/img/lighting/hero_roofline.webp?v={{ asset_v }}"
@@ -52,20 +35,14 @@
          class="img-fluid rounded-4 shadow w-100"
          width="760" height="507"
          fetchpriority="high" decoding="async">
-         
   </div>
-  
 
   <div class="col-12 col-md-6 order-md-1">
     <h1 class="h3 fw-bold">Lighting Installation for Orlando Homes</h1>
     <p class="lead text-muted">
-      Permanent roofline lighting installation, Landscape Lighting Installation, Entry & Exterior, Curb Appeal Lighting. Set them for the
-      holidays, for game days, or for everyday warm white — from your phone.
-      {# ── 4. GALERIA ──────────────────────────────────────────────────────── #}
-      {% include '_lighting_gallery.html' %}
-
+      Permanent roofline lighting, landscape lighting and LED relamping. Set them
+      for the holidays, for game days, or for everyday warm white.
     </p>
-    
     <div class="d-flex flex-wrap gap-2 mt-3">
       <a class="btn btn-cta-primary btn-lg px-4" href="/estimate">Get a Free Estimate</a>
       {% if settings.phone %}
@@ -78,8 +55,6 @@
   </div>
 </header>
 
-
-
 {# ── 2. TRUST STRIP ──────────────────────────────────────────────────────
    Franja delgada. Sin cifras, garantias ni certificaciones inventadas. #}
 <ul class="list-unstyled d-flex flex-wrap justify-content-center gap-3 small text-muted
@@ -91,19 +66,35 @@
   <li>Local</li>
 </ul>
 
-{# ── 3. PRIMER SERVICIO ──────────────────────────────────────────────────
-   El primero va solo, porque la galeria y "como funciona" se intercalan
-   antes del resto. El bucle de abajo pinta del segundo en adelante, asi que
-   anadir un tercer o cuarto servicio no necesita HTML nuevo. #}
-{% for service in services[:1] %}
-  {% with alt_side = false %}{% include '_service_module.html' %}{% endwith %}
-{% endfor %}
-
-
-
-{# ── 5. COMO FUNCIONA ────────────────────────────────────────────────── #}
+{# ── 3. TARJETAS DE SERVICIOS ────────────────────────────────────────────
+   Una por servicio publicado, en el orden del JSON. Las fotos estan bajo el
+   pliegue: lazy para no competir con la del hero. #}
 <section class="mb-5">
-  <h2 class="h4 fw-bold mb-3"> How It Works</h2>
+  <h2 class="h4 fw-bold mb-3">Our Lighting Services</h2>
+  <div class="row g-4">
+    {% for s in services %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <a href="/services/{{ s.slug }}" class="card h-100 rounded-4 shadow-sm text-decoration-none overflow-hidden"
+         onclick="if(window.gtag)gtag('event','select_service',{service:'{{ s.slug }}',location:'hub'})">
+        <div class="ratio ratio-16x9">
+          <img src="/static/img/lighting/{{ s.hero_image }}?v={{ asset_v }}"
+               alt="{{ s.hero_alt }}" class="object-fit-cover"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <h3 class="h5 fw-bold">{{ s.h1 }}</h3>
+          <p class="small text-muted">{{ s.card_blurb }}</p>
+          <span class="fw-semibold">Learn More &rarr;</span>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{# ── 4. COMO FUNCIONA ────────────────────────────────────────────────── #}
+<section class="mb-5">
+  <h2 class="h4 fw-bold mb-3">How It Works</h2>
   <div class="row g-3">
     {% for step in [
       ('Estimate',  "FREE * Ask us anything first "),
@@ -120,83 +111,18 @@
   </div>
 </section>
 
+{# ── 5. FAQ GENERAL ──────────────────────────────────────────────────────
+   Solo las preguntas que valen para todos los servicios. Las propias de un
+   servicio (p. ej. roofline) estan en el `faq` de su entrada del JSON. #}
+{% with faq = [
+  {"question": "Do I have to buy the lights myself?",
+   "answer": "Not necessarily. Bring your own, or we can source them for you — whichever you prefer. Pricing shown on this page is labor only."},
+  {"question": "What if my HOA has rules about this?",
+   "answer": "Most permanent lighting passes HOA review because it's off during the day and can run plain warm white at night. If you want, send us your guidelines and we'll tell you what works."}
+] %}{% include '_service_faq.html' %}{% endwith %}
 
-
-{# ── 6. RESTO DE SERVICIOS ───────────────────────────────────────────── #}
-{% for service in services[1:] %}
-  {# index0 0 = segundo servicio, lado invertido; 1 = tercero, normal... #}
-  {% with alt_side = loop.index0 is even %}{% include '_service_module.html' %}{% endwith %}
-{% endfor %}
-
-
-
-{# ── 7. FAQ ──────────────────────────────────────────────────────────────
-   Acordeon de Bootstrap, el mismo componente que ya usa la landing de surge. #}
-<section class="mb-5">
-  <h2 class="h4 fw-bold mb-3">Common Questions</h2>
-  <div class="accordion accordion-flush" id="lightingFaq">
-    {% for q in [
-    ("Which type of light should I get?",
-    "Depends on what you want it to do. Programmable LEDs give you color and scenes from your phone. Classic bulbs give you a warmer, more traditional look for less. Tell us what you're after and we'll tell you what fits your roofline."),
-
-    ("Do I have to buy the lights myself?",
-    "Not necessarily. Bring your own, or we can source them for you — whichever you prefer. Pricing shown on this page is labor only."),
-
-    ("Will it look bad during the day?",
-    "No. The track sits tucked under the eave line and is barely visible in daylight. If you're going with classic bulbs, we'll show you how it looks before anything goes up."),
-
-    ("What if my HOA has rules about this?",
-    "Most permanent lighting passes HOA review because it's off during the day and can run plain warm white at night. If you want, send us your guidelines and we'll tell you what works.")
-] %}
-    
-      <div class="accordion-item">
-    <h3 class="accordion-header">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#lightingFaq{{ loop.index }}">
-        {{ q[0] }}
-      </button>
-    </h3>
-    <div id="lightingFaq{{ loop.index }}" class="accordion-collapse collapse"
-        data-bs-parent="#lightingFaq">
-      <div class="accordion-body small text-muted">
-        {{ q[1] }}
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-    </div>
-  </section>
-
-{# ── 8. ZONAS ────────────────────────────────────────────────────────── #}
-<section class="mb-5">
-  <h2 class="h4 fw-bold">Service Area</h2>
-  <p class="mb-0">
-    {% for a in areas %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endfor %}
-  </p>
-</section>
-
-{# ── 9. CTA FINAL ────────────────────────────────────────────────────── #}
-<div class="card rounded-4 p-4 text-center bg-light-subtle">
-  <div class="h5 fw-bold mb-3">FREE Estimate - No obligation</div>
-  <div>
-    <a class="btn btn-cta-primary btn-lg px-4" href="/estimate">Get a Free Estimate</a>
-  </div>
-</div>
-
-{# ── BARRA FIJA (solo movil) ─────────────────────────────────────────────
-   Visible durante todo el scroll. En escritorio se oculta por CSS: alli el
-   CTA persistente ya lo da el boton "Get Estimate" del navbar. #}
-<nav class="lighting-cta-bar" aria-label="Quick contact">
-  <a href="tel:{{ settings.phone }}"
-     onclick="if(window.gtag)gtag('event','click_to_call',{page:'lighting_bar'})">
-    <i class="bi bi-telephone-fill" aria-hidden="true"></i> Call
-  </a>
-  <a href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}"
-     target="_blank" rel="noopener"
-     onclick="if(window.gtag)gtag('event','whatsapp_contact',{page:'lighting_bar'})">
-    <i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp
-  </a>
-  <a href="/estimate" class="is-primary">Free Estimate</a>
-</nav>
+{# ── 6. ZONAS y 7. CTA FINAL ───────────────────────────────────────────── #}
+{% include '_service_areas.html' %}
+{% include '_service_cta.html' %}
 
 {% endblock %}

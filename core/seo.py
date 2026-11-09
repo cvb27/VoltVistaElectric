@@ -2,14 +2,16 @@
 Generadores de JSON-LD para SEO de VoltVista.
 
 Cada función es pura: recibe datos, devuelve un dict listo para json.dumps.
-Se llama desde main.py (schema global) y desde rutas que necesiten schemas extra.
+Se llama desde core/templating.py (schema global) y desde rutas que necesiten
+schemas extra. Los de las paginas de iluminacion estan en core/seo_services.py.
 """
 
 
-def _parse_areas(service_area: str) -> list[str]:
-    """Divide cfg.service_area en lista limpia de ciudades.
-    Recibe string separado por comas (e.g. "Orlando, Kissimmee").
-    Devuelve list[str] sin espacios ni elementos vacíos."""
+def parse_areas(service_area: str) -> list[str]:
+    """Divide cfg.service_area en lista limpia de zonas.
+    Recibe string separado por comas (e.g. "Dr. Phillips, Windermere").
+    Devuelve list[str] sin espacios ni elementos vacíos. Publica porque la
+    usan tambien core/seo_services.py y las rutas que pintan las zonas."""
     return [a.strip() for a in (service_area or "").split(",") if a.strip()]
 
 
@@ -39,12 +41,15 @@ def _build_geo(cfg) -> dict:
 
 
 def build_local_business_schema(cfg) -> dict:
-    """Construye JSON-LD LocalBusiness + Electrician.
-    Recibe cfg (instancia Settings con NAP, geo, horario).
-    Existe para que Google muestre VoltVista en panel local y Maps."""
+    """Construye JSON-LD LocalBusiness + HomeAndConstructionBusiness.
+    Recibe cfg (instancia Settings con NAP, geo, horario y zonas).
+    Existe para que Google muestre VoltVista en panel local y Maps.
+
+    HomeAndConstructionBusiness y no Electrician: el negocio ya no ofrece
+    contratacion electrica, y el tipo de schema no debe decir lo contrario."""
     return {
         "@context": "https://schema.org",
-        "@type": ["LocalBusiness", "Electrician"],
+        "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
         "@id": f"{cfg.business_url.rstrip('/')}/#business",
         "name": cfg.business_name,
         "url": cfg.business_url,
@@ -54,7 +59,7 @@ def build_local_business_schema(cfg) -> dict:
         "address": _build_postal_address(cfg),
         "geo": _build_geo(cfg),
         "openingHours": cfg.hours,
-        "areaServed": _parse_areas(cfg.service_area),
+        "areaServed": parse_areas(cfg.service_area),
         "sameAs": [],
         "priceRange": "$$",
     }
@@ -88,7 +93,7 @@ def build_service_schema(cfg, service_name: str, service_url: str, description: 
             "name": cfg.business_name,
             "url": cfg.business_url,
         },
-        "areaServed": _parse_areas(cfg.service_area),
+        "areaServed": parse_areas(cfg.service_area),
     }
 
 

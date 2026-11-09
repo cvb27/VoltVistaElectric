@@ -27,7 +27,8 @@ crea las tablas sola al arrancar. No hace falta instalar Postgres para desarroll
 | Ruta | Qué es |
 |---|---|
 | `/` | Home |
-| `/services/lighting-installation` | Landing de instalación de iluminación |
+| `/services/lighting-installation` | Hub de iluminación: una tarjeta por servicio |
+| `/services/{slug}` | Página de cada servicio (roofline, landscape, relamping…) |
 | `/booking?plan=recommended` | Elegir fecha y pagar el depósito |
 | `/estimate` | Formulario de estimado gratuito |
 | `/payments` | Cobros manuales por Stripe |
@@ -41,8 +42,26 @@ crea las tablas sola al arrancar. No hace falta instalar Postgres para desarroll
 | Precios y textos de los 3 planes | `data/surge_offers.json` |
 | Feriados y días sin servicio | `data/blocked_dates.json` |
 | Publicar un post | `data/blog_posts.json` + un `.md` en `posts/` |
+| Servicios de iluminación (nav, hub, páginas, sitemap, schema) | `data/lighting_services.json` — ver abajo |
 | Depósito de reserva | `BOOKING_DEPOSIT` en `.env` |
 | Horario, cupos por franja, anticipación mínima | constantes al inicio de `core/booking.py` |
+
+### Agregar un servicio de iluminación
+
+1. Sube la foto principal (y las de galería, si hay) a `static/img/lighting/`,
+   en WebP de ~1200 px de ancho. Una foto de 2 MB hunde el LCP de la página.
+2. Añade una entrada a `services` en `data/lighting_services.json` copiando una
+   existente. Campos obligatorios: `slug`, `nav_label`, `h1`, `subtitle`,
+   `card_blurb`, `meta_title`, `meta_description` (150-160 caracteres),
+   `hero_image`, `hero_alt`, `cta_text`, `cta_href`, `order`, `published`.
+   Opcionales: `sections`, `bullets`, `gallery`, `faq` (vacías no se pintan) y
+   `price_note`.
+3. Mientras falte contenido, deja `"published": false` y marca lo pendiente con
+   `[PLACEHOLDER]`. Un borrador no sale en ningún sitio y su URL da 404.
+4. Para publicarlo, pon `"published": true`. Si queda algún `[PLACEHOLDER]` o
+   falta una foto, **la app no arranca** y el error dice qué entrada y qué campo.
+5. Despliega. La página `/services/{slug}`, el menú, la tarjeta del hub, el
+   sitemap y el schema salen solos.
 
 ## Despliegue
 

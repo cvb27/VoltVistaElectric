@@ -11,6 +11,7 @@ from fastapi import APIRouter, Response
 from fastapi.responses import FileResponse, JSONResponse
 
 from core.config import settings
+from core.lighting import load_services
 from core.posts import load_posts
 
 router = APIRouter(tags=["seo"])
@@ -19,9 +20,10 @@ _ICONS = Path(__file__).resolve().parent.parent / "static" / "icons"
 
 # Paginas fijas del sitio. Al crear una pagina nueva se anade aqui.
 #
-# Los posts del blog NO van en esta lista: se generan leyendo el mismo indice
-# que usa /blog, asi que publicar uno nuevo lo mete en el sitemap sin tocar
-# este archivo. Antes estaban escritos a mano y era facil olvidarse.
+# Ni los posts del blog ni las paginas de servicio van en esta lista: se
+# generan leyendo el mismo JSON que usan /blog y el nav, asi que publicar uno
+# nuevo lo mete en el sitemap sin tocar este archivo. Antes estaban escritos a
+# mano y era facil olvidarse.
 _STATIC_PATHS = [
     "/",
     "/estimate",
@@ -52,7 +54,7 @@ Sitemap: {settings.base_url}/sitemap.xml
 
 @router.get("/sitemap.xml")
 def sitemap():
-    """Sitemap del sitio: paginas fijas + posts del blog.
+    """Sitemap del sitio: paginas fijas + servicios publicados + posts del blog.
 
     Las paginas fijas no llevan <lastmod>: no guardamos cuando cambiaron, y
     una fecha inventada es peor que ninguna — Google deja de fiarse del campo
@@ -64,6 +66,7 @@ def sitemap():
     eso no se ofrecen aqui como destino.
     """
     entries = [_url(p) for p in _STATIC_PATHS]
+    entries += [_url(f"/services/{s['slug']}") for s in load_services()]
     entries += [_url(f"/blog/{p['slug']}", p.get("published_at", ""))
                 for p in load_posts()]
 
