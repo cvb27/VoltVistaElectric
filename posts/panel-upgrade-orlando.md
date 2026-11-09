@@ -12,7 +12,7 @@ Noticing your lights dim when the AC kicks in or the refrigerator cycles? That's
 Homes built before the mid-1990s often shipped with 60 to 100-amp service. Today's homes — with central AC, dishwashers, electric ovens, and growing numbers of EV chargers — need 200-amp service at minimum.
 
 **4. You're adding an EV charger.**
-Level 2 EV chargers draw 30-50 amps on a dedicated 240V circuit. Older panels often can't accommodate this without a full upgrade. We see this come up weekly in Orlando as more homeowners go electric.
+Level 2 EV chargers draw 30-50 amps on a dedicated 240V circuit. Older panels often can't accommodate this without a full upgrade. It comes up more and more in Orlando as homeowners go electric.
 
 **5. You're renovating or adding to your home.**
 New kitchens, master bath additions, or converted garages all add significant load. Permits and inspections typically require a panel upgrade if you're adding more than a circuit or two.
@@ -24,18 +24,3 @@ Florida's climate isn't kind to electrical equipment. High humidity accelerates 
 Many neighborhoods — College Park, Winter Park, Audubon Park, Conway — have homes built 40-60 years ago with original panels still in service. Federal Pacific, Zinsco, and Challenger panels in particular have documented safety issues and should be replaced on sight.
 
 Add to this the rapid EV adoption in Orlando: Tesla, Rivian, Ford F-150 Lightning — our streets are filling up. Every one of those drivers eventually needs home charging, which often means a panel upgrade.
-
-## How VoltVista Electric Can Help
-
-VoltVista Electric has been upgrading panels across Orlando for over 10 years. We're fully insured, licensed, and specialize in residential panel service upgrades. Every job includes:
-
-- Free on-site or photo-based assessment
-- Permit and utility coordination with Orlando Utilities Commission (OUC) or Duke Energy
-- Code-compliant install with modern 200-amp or 400-amp panels
-- Inspection-ready handoff
-
-We serve Orlando, Kissimmee, Winter Park, Lake Buena Vista, and surrounding areas.
-
-Most panel upgrades finish in one business day, with a short utility shutoff in the morning. We coordinate the permit, the inspection, and the utility handoff — so you're not chasing three different people. If you have questions or want to see what an upgrade would cost for your specific home, reach out today.
-
-[Learn more about our panel upgrade service →](/services/panel-upgrade)

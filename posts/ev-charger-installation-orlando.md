@@ -12,13 +12,13 @@ Level 2 charging is faster, more convenient, and typically adds value to your ho
 
 ## What Does EV Charger Installation Involve?
 
-1. **Panel inspection.** We first check if your electrical panel can handle a new 240V circuit. Many Orlando homes have 100-amp panels that were fine for gas appliances but don't have headroom for a 40-amp EV charger.
+1. **Panel inspection.** An electrician first checks if your electrical panel can handle a new 240V circuit. Many Orlando homes have 100-amp panels that were fine for gas appliances but don't have headroom for a 40-amp EV charger.
 
 2. **Dedicated circuit install.** A Level 2 charger requires its own 240V circuit, typically 40-50 amps with a dedicated breaker. The wire run from the panel to the charger location is the biggest variable in cost.
 
-3. **Permit and inspection.** Orange County and the City of Orlando require a permit for any 240V circuit work. We handle the permit application and coordinate the inspection.
+3. **Permit and inspection.** Orange County and the City of Orlando require a permit for any 240V circuit work. Your electrician handles the permit application and coordinates the inspection.
 
-4. **Charger mounting and commissioning.** Once the circuit is live, we mount the charger on the wall, connect it to the circuit, and test it with your vehicle.
+4. **Charger mounting and commissioning.** Once the circuit is live, the charger is mounted on the wall, connected to the circuit, and tested with your vehicle.
 
 ## How Much Does It Cost in Orlando?
 
@@ -30,14 +30,3 @@ A typical Level 2 EV charger installation in Orlando ranges **$800–$2,500** al
 - **Charger model.** Basic chargers start around $400 (Grizzl-E). Smart networked chargers with apps run $600–$1,000 (Tesla Wall Connector, ChargePoint Home Flex, JuiceBox).
 
 Most Orlando installs without a panel upgrade land in the $1,000–$1,500 range.
-
-## Why Choose VoltVista Electric
-
-- **10+ years of local experience** in Orlando residential electrical.
-- **Fully insured and licensed** for residential and commercial work.
-- **Brand-agnostic.** We install Tesla, ChargePoint, JuiceBox, Grizzl-E, Emporia — whatever charger you choose.
-- **Service area:** Orlando, Kissimmee, Winter Park, Lake Buena Vista, and surrounding cities.
-
-We typically complete a standard Level 2 installation in a single afternoon, leaving you ready to charge that night.
-
-[Get a quote for your EV charger installation →](/estimate)
