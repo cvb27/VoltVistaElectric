@@ -226,13 +226,13 @@ from core.config import BUSINESS_NAME
 
 def build_local_business_schema(config) -> dict:
     """
-    Genera el schema JSON-LD de tipo LocalBusiness + ElectricalContractor.
+    Genera el schema JSON-LD de tipo LocalBusiness + HomeAndConstructionBusiness.
     Recibe: objeto config con datos del negocio (NAP, horario, coordenadas).
     Devuelve: dict listo para serializar con json.dumps en el template.
     """
     return {
         "@context": "https://schema.org",
-        "@type": ["LocalBusiness", "ElectricalContractor"],
+        "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
         ...
     }
 ```
@@ -260,7 +260,7 @@ async def panel_electrico(request: Request):
 
 ## 5. Prioridades SEO (en orden)
 
-1. JSON-LD `LocalBusiness` + `ElectricalContractor` en todas las páginas
+1. JSON-LD `LocalBusiness` + `HomeAndConstructionBusiness` en todas las páginas
 2. `<title>` y `<meta description>` únicos por página
 3. `<link rel="canonical">` en cada página
 4. NAP idéntico en footer, JSON-LD y Google Business Profile
@@ -286,7 +286,7 @@ Actualizado 2026-08-22. Nada de esto rompe el sitio hoy, pero está pendiente.
 
 **Archivos que superan el límite de 120 líneas (§4.1)**
 - `routes/booking.py` (195) — se partiría sacando `/confirmed` y el webhook.
-- `routes/estimates.py` (204) y `routes/services.py` (135).
+- `routes/estimates.py` (204). (`routes/services.py` bajó a ~45 al quedar solo con los 301.)
 
 **Fragilidad**
 - `datetime.utcnow()` está deprecado en Python 3.12+ y se usa en 4 archivos.

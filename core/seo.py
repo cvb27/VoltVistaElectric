@@ -78,25 +78,6 @@ def build_aggregate_rating_schema(rating: float, count: int) -> dict:
     }
 
 
-def build_service_schema(cfg, service_name: str, service_url: str, description: str) -> dict:
-    """Construye JSON-LD Service para una landing de servicio concreta.
-    Recibe cfg (provider) y datos del servicio (nombre, URL, descripción).
-    Devuelve dict listo para json.dumps en la plantilla de la landing."""
-    return {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": service_name,
-        "description": description,
-        "url": service_url,
-        "provider": {
-            "@type": "LocalBusiness",
-            "name": cfg.business_name,
-            "url": cfg.business_url,
-        },
-        "areaServed": parse_areas(cfg.service_area),
-    }
-
-
 def build_breadcrumb_schema(items: list[dict]) -> dict:
     """Construye JSON-LD BreadcrumbList a partir de una lista ordenada.
     Recibe items con {"name": str, "url": str} en orden jerárquico.

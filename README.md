@@ -1,6 +1,6 @@
 # VoltVista Electric
 
-Sitio web de VoltVista Electric — servicios eléctricos residenciales en Orlando, FL.
+Sitio web de VoltVista Electric — iluminación residencial en Orlando, FL.
 FastAPI + Jinja2 + Bootstrap 5, con reservas de instalación y pagos por Stripe.
 
 Las reglas de código y la estructura del proyecto están en **[CLAUDE.md](CLAUDE.md)**.

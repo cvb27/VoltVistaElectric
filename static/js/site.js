@@ -58,7 +58,7 @@ if (document.body.dataset.page === 'home') {
   }
 }
 
-// Vídeo de la sección "Expert Electrical Work": 2,4 MB que antes se
+// Vídeo de la sección "Work We're Proud Of": 2,4 MB que antes se
 // descargaban al cargar la página, porque el elemento llevaba autoplay
 // aunque está muy por debajo del pliegue. Eso ocupaba el canal y retrasaba
 // el LCP del hero, que pesa 45 KB.

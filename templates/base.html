@@ -25,12 +25,11 @@
 
 
   <!-- Título por página — cada plantilla hija sobreescribe este bloque -->
-  <title>{% block title %}Electrical Services in Orlando | VoltVistaElectric{% endblock %}</title>
+  <title>{% block title %}Roofline &amp; Landscape Lighting | VoltVista{% endblock %}</title>
 
   <!-- SEO básico — cada plantilla hija sobreescribe el bloque description -->
   <meta name="description"
-    content="{% block description %}Electrical repairs and installations in Orlando. Lighting, outlets, GFCIs, relamping, EV chargers, surge protectors, troubleshooting and more.
-{% endblock %}">
+    content="{% block description %}Permanent roofline lighting, landscape lighting and holiday color for homes west of Orlando. Free estimates.{% endblock %}">
 
 
   {# Iconos. Solo el simbolo, sin texto: a 16-48 px las letras son ilegibles.
@@ -53,7 +52,7 @@
        vacio deja la tarjeta de WhatsApp sin titulo. -->
   <meta property="og:title" content="{% block og_title %}VoltVista Electric — Orlando {% endblock %}">
 
-  <meta property="og:description" content="{% block og_description %}Electrical repairs and installations. FREE Estimate.{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Permanent roofline and landscape lighting. Free estimates.{% endblock %}">
   <meta property="og:type" content="website">
 
   <!-- og:url debe ser ABSOLUTA y apuntar a esta pagina, no a la home.
@@ -66,7 +65,7 @@
   <meta property="og:image" content="{% block og_image %}{{ settings.business_url }}/static/img/og-default.png?v={{ asset_v }}{% endblock %}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="VoltVista Electric — lighting and electrical work in Central Florida">
+  <meta property="og:image:alt" content="Permanent roofline lighting installed on a home at dusk">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% block twitter_title %}{{ self.og_title() }}{% endblock %}">
@@ -126,7 +125,7 @@
          alt vacio porque el nombre ya va en el span de al lado: con alt, el
          lector de pantalla lo leeria dos veces. #}
       <img src="/static/img/logo-mark.webp?v={{ asset_v }}" alt="" class="brand-logo" width="34" height="34">
-      <span class="fw-bold brand-text">VoltvistaELectric</span>
+      <span class="fw-bold brand-text">VoltVista Electric</span>
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation menu">
@@ -179,7 +178,7 @@
 {% include '_footer.html' %}
 
 <!-- Botón flotante WhatsApp — visible en todas las páginas -->
-<a href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%20have%20a%20question%20about%20your%20electrical%20services%20in%20Orlando."
+<a href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}?text=Hi%21%20I%20have%20a%20question%20about%20your%20lighting%20services%20in%20Orlando."
    class="whatsapp-float"
    target="_blank"
    rel="noopener"

@@ -74,10 +74,10 @@ body:not([data-page="home"]) > main { flex: 1 0 auto; }
   align-items: center;
 }
 
-/* Reencuadre. El panel electrico —el asunto de la foto— vive en el 73%..95%
-   del ancho, y la mitad izquierda es garaje vacio. Con el encuadre centrado
-   por defecto, una pantalla estrecha recortaba x=34%..66% y el panel se
-   quedaba fuera entero.
+/* Reencuadre del hero. Hoy va centrado: las fotos actuales (roofline y
+   lamparas colgantes) tienen el asunto en el medio. La regla se conserva como
+   punto unico de ajuste: si una foto futura tiene el asunto a un lado, se
+   cambia aqui el object-position y no hay que tocar la plantilla.
 
    La condicion es el recorte horizontal, que ocurre cuando el viewport es
    mas estrecho que la imagen (16:9). En pantallas mas anchas se ve la foto

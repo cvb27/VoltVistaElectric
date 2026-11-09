@@ -19,7 +19,7 @@ def create_stripe_session(amount: float, description: str = "") -> str:
     
     Args:
         amount: Monto en dólares (ej: 99.99)
-        description: Descripción del producto (ej: "Electrical Service Payment")
+        description: Descripción del producto (ej: "Roofline lighting install")
     
     Returns:
         La URL de la sesión de Stripe (session.url)
@@ -38,7 +38,7 @@ def create_stripe_session(amount: float, description: str = "") -> str:
                 "price_data": {
                     "currency": settings.stripe_currency,
                     "product_data": {
-                        "name": description.strip() or "Electric Service Payment",
+                        "name": description.strip() or "VoltVista Service Payment",
                     },
                     "unit_amount": int(round(amount * 100)),  # Stripe usa centavos
                 },
