@@ -7,19 +7,6 @@
  * no paga una peticion bloqueante mas.
  */
 
-/* ── Galeria de iluminacion ───────────────────────────────────────────────
-   La rejilla la pone Bootstrap (row-cols-*, ver _lighting_gallery.html). Aqui
-   solo se iguala el tamano de las celdas: todas en 4:3 aunque el archivo sea
-   vertical, cuadrado o 16:9, y object-fit recorta sin deformar.
-
-   height:auto es necesario: sin el, el atributo height="900" del <img> fija
-   900 px de alto y el navegador ignora el aspect-ratio. */
-.light-gallery img {
-  aspect-ratio: 4 / 3;
-  height: auto;
-  object-fit: cover;
-}
-
 /* ── Barra CTA fija, solo movil ───────────────────────────────────────────
    Es lo unico que esta pagina no podia resolver con utilidades de Bootstrap.
    Contraste medido: blanco sobre --color-bg 17,39:1, y el boton ambar lleva

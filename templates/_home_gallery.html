@@ -1,32 +1,17 @@
-{# Sección Gallery — fotos de trabajos de iluminacion realizados #}
+{# Seccion Gallery del home — fotos de trabajos de iluminacion realizados.
+
+   Las fotos NO se escriben aqui: salen de data/home_gallery.json (lo lee
+   core/gallery.py y la ruta del home las pasa como `home_gallery`). Para anadir
+   una: subir el WebP a static/img/gallery/ y anadir una entrada {file, alt}.
+   Sin fotos, la seccion entera no se pinta. #}
+{% if home_gallery %}
 <section id="gallery" class="section-dark py-5 py-md-6">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="display-6 fw-bold text-white mb-2">Our Work</h2>
       <p class="lead" style="color: var(--color-muted);">Real jobs in Orlando and surrounding areas.</p>
     </div>
-
-    {# justify-content-center: con menos de tres fotos la fila queda centrada
-       en vez de pegada a la izquierda. #}
-    <div class="row g-3 justify-content-center">
-      {# Solo fotos de ILUMINACION: en noviembre de 2026 se retiraron las ocho
-         de trabajo electrico (tomas, GFCI, cargador EV, cuadros), que
-         contradecian la linea del negocio. Para anadir una: WebP a 380x507 en
-         static/img/gallery/ y una tupla (archivo, alt) aqui, con un alt que
-         describa lo que se ve. Los comentarios de Jinja no pueden ir dentro
-         de la expresion del bucle, ni contener la secuencia que los cierra. #}
-      {% for img, alt in [
-        ("IMG_20260213_125657_778.webp", "Pool deck at night lit by pole-mounted flood lights"),
-      ] %}
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="ratio ratio-1x1 rounded-4 overflow-hidden shadow-sm">
-            <img src="/static/img/gallery/{{ img }}?v={{ asset_v }}"
-                 alt="{{ alt }}"
-                 class="object-fit-cover"
-                 loading="lazy">
-          </div>
-        </div>
-      {% endfor %}
-    </div>
+    {% with photos = home_gallery, img_dir = "gallery" %}{% include '_photo_grid.html' %}{% endwith %}
   </div>
 </section>
+{% endif %}

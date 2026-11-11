@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse
 from core.utils import get_lang
 from core.i18n import t
 from core.config import settings
+from core.gallery import load_home_gallery
 from core.templating import templates
 
 router = APIRouter()
@@ -20,5 +21,6 @@ def home(request: Request):
             "lang": lang,
             "t": lambda k: t(lang, k),
             "app_name": settings.app_name,
+            "home_gallery": load_home_gallery(),
         },
     )

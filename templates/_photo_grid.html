@@ -1,0 +1,25 @@
+{# Rejilla de fotos compartida: galeria del home y de las paginas hijas.
+
+   CONTRATO — espera `photos` (lista de {file, alt}, ya validada en core/) e
+   `img_dir` (subcarpeta de static/img/: "gallery" o "lighting").
+
+   Una sola rejilla para las dos galerias, asi miden y se comportan igual:
+   1 columna en movil, 2 en tablet, 3 en escritorio; con 1 o 2 fotos la fila
+   queda centrada (justify-content-center).
+
+   Todas las celdas son 4:3 sea cual sea la proporcion del archivo: el marco
+   .ratio-4x3 de Bootstrap reserva el hueco antes de que llegue la foto (CLS 0)
+   y object-fit-cover la recorta sin deformarla. Sin CSS propio. #}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 justify-content-center">
+  {% for photo in photos %}
+  <div class="col">
+    <div class="ratio ratio-4x3 rounded-4 overflow-hidden">
+      <img src="/static/img/{{ img_dir }}/{{ photo.file }}?v={{ asset_v }}"
+           alt="{{ photo.alt }}"
+           class="object-fit-cover"
+           width="1200" height="900"
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+  {% endfor %}
+</div>

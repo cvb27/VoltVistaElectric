@@ -4,26 +4,10 @@
    entrada en data/lighting_services.json. Las fotos van en static/img/lighting/.
    Si la lista esta vacia no se pinta nada.
 
-   Rejilla de Bootstrap: 1 columna en movil, 2 en tablet, 3 en escritorio.
-   justify-content-center: con 1 o 2 fotos la fila queda centrada y no pegada
-   a la izquierda.
-
-   Todas las celdas miden igual sea cual sea la proporcion del archivo: la
-   clase .light-gallery (lighting.css) fija 4:3 y recorta con object-fit.
-   width/height son los de un 4:3 para que el navegador reserve el hueco
-   antes de que llegue la foto (CLS 0). #}
+   La rejilla y el tamano de las celdas viven en _photo_grid.html, la misma que
+   usa la galeria del home. #}
 {% if gallery %}
 <section class="mb-5">
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 justify-content-center light-gallery">
-    {% for photo in gallery %}
-    <div class="col">
-      <img src="/static/img/lighting/{{ photo.file }}?v={{ asset_v }}"
-           alt="{{ photo.alt }}"
-           class="rounded-4 w-100"
-           width="1200" height="900"
-           loading="lazy" decoding="async">
-    </div>
-    {% endfor %}
-  </div>
+  {% with photos = gallery, img_dir = "lighting" %}{% include '_photo_grid.html' %}{% endwith %}
 </section>
 {% endif %}
