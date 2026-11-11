@@ -22,7 +22,11 @@
         "Mounted to last through Florida heat and storms",
         "Most homes finished in a single day"
       ],
-      "gallery": [],
+      "gallery": [
+        { "file": "roofline-teal-dr-phillips.webp", "alt": "Permanent roofline lighting in teal along the eaves of a two-story home in Dr. Phillips at night" },
+        { "file": "roofline-holiday-home.webp",   "alt": "Two-story home at night with permanent roofline lights glowing red and green along the eaves in Winter Garden" },
+        { "file": "roofline-holiday-home_2.webp", "alt": "Single-story home at night with white permanent lights along every gable of the roofline in Belle Isle" }
+],
       "faq": [
         {
           "question": "Which type of light should I get?",

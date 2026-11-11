@@ -95,8 +95,10 @@ if (whySurge && window.matchMedia('(max-width: 767.98px)').matches) {
 }
 
 
-// Rotacion de las fotos del hero (solo el home las tiene). Sin libreria: un
-// intervalo que mueve la clase .is-faded de una foto a la siguiente.
+// Rotacion de las fotos del hero: el del home y el de las paginas de servicio
+// (templates/services/service_page.html). Sin libreria: un intervalo que mueve
+// la clase .is-faded de una foto a la siguiente. Con una sola .hero-video en
+// la pagina no hace nada.
 //
 // Dos condiciones para no estropear lo que ya funcionaba:
 //   - no arranca si el visitante pidio menos movimiento en su sistema;

@@ -1,5 +1,5 @@
 /**
- * Estilos exclusivos de /services/lighting-installation.
+ * Estilos exclusivos del hub /services/lighting-installation y sus paginas hijas.
  *
  * En archivo aparte y NO en site.css por dos motivos: site.css se pasaba de
  * las 120 lineas de CLAUDE.md 4.1, y estos estilos solo los usa una pagina.
@@ -8,27 +8,16 @@
  */
 
 /* ── Galeria de iluminacion ───────────────────────────────────────────────
-   Carrusel horizontal en movil y rejilla de tres en escritorio, con CSS puro:
-   grid + scroll-snap. Sin el carrusel de Bootstrap ni JavaScript — son fotos,
-   no necesitan controles ni estado. Funciona con cualquier numero de imagenes:
-   grid-auto-flow reparte las que haya. */
-.light-gallery {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 78%;          /* se asoma la siguiente: invita a deslizar */
-  gap: .75rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: .5rem;
-}
-.light-gallery > * { scroll-snap-align: start; }
+   La rejilla la pone Bootstrap (row-cols-*, ver _lighting_gallery.html). Aqui
+   solo se iguala el tamano de las celdas: todas en 4:3 aunque el archivo sea
+   vertical, cuadrado o 16:9, y object-fit recorta sin deformar.
 
-@media (min-width: 768px) {
-  .light-gallery {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(3, 1fr);
-    overflow-x: visible;
-  }
+   height:auto es necesario: sin el, el atributo height="900" del <img> fija
+   900 px de alto y el navegador ignora el aspect-ratio. */
+.light-gallery img {
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
 }
 
 /* ── Barra CTA fija, solo movil ───────────────────────────────────────────

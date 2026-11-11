@@ -86,3 +86,20 @@ def load_services() -> list[dict]:
 def get_service(slug: str) -> dict | None:
     """El servicio publicado con ese slug, o None si no existe o es borrador."""
     return next((s for s in load_services() if s["slug"] == slug), None)
+
+
+# Fotos que rotan en el hero de una pagina hija. Tres, igual que el home: mas
+# fotos son mas bytes en la primera visita y casi nadie se queda 18 s a verlas.
+_HERO_SLIDES = 3
+
+
+def hero_slides(service: dict) -> list[dict]:
+    """Fotos del hero de una pagina hija, como lista de {file, alt}.
+
+    Son las primeras de su `gallery`: poner una foto al principio del array la
+    lleva al hero; al final, solo a la galeria de abajo. Sin galeria, cae en
+    hero_image. Con una sola foto el JS de rotacion no arranca (site.js).
+    """
+    if service["gallery"]:
+        return service["gallery"][:_HERO_SLIDES]
+    return [{"file": service["hero_image"], "alt": service["hero_alt"]}]

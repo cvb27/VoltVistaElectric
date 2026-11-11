@@ -2,22 +2,27 @@
 
    CONTRATO — espera `gallery`: lista de {file, alt}, el campo `gallery` de la
    entrada en data/lighting_services.json. Las fotos van en static/img/lighting/.
-   De cualquier longitud: en escritorio se reparte en filas de tres y en movil
-   es un carrusel horizontal. Si la lista esta vacia no se pinta nada.
+   Si la lista esta vacia no se pinta nada.
 
-   El carrusel es CSS puro (grid + scroll-snap, en lighting.css), sin el
-   componente de Bootstrap ni JavaScript: son fotos, no necesitan controles. #}
+   Rejilla de Bootstrap: 1 columna en movil, 2 en tablet, 3 en escritorio.
+   justify-content-center: con 1 o 2 fotos la fila queda centrada y no pegada
+   a la izquierda.
+
+   Todas las celdas miden igual sea cual sea la proporcion del archivo: la
+   clase .light-gallery (lighting.css) fija 4:3 y recorta con object-fit.
+   width/height son los de un 4:3 para que el navegador reserve el hueco
+   antes de que llegue la foto (CLS 0). #}
 {% if gallery %}
 <section class="mb-5">
-  <div class="light-gallery">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 justify-content-center light-gallery">
     {% for photo in gallery %}
-    <figure class="m-0">
+    <div class="col">
       <img src="/static/img/lighting/{{ photo.file }}?v={{ asset_v }}"
            alt="{{ photo.alt }}"
-           class="img-fluid rounded-4 w-100"
-           width="380" height="507"
+           class="rounded-4 w-100"
+           width="1200" height="900"
            loading="lazy" decoding="async">
-    </figure>
+    </div>
     {% endfor %}
   </div>
 </section>

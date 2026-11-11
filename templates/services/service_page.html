@@ -27,15 +27,33 @@
 {% block content %}
 
 {# ── 1. HERO ─────────────────────────────────────────────────────────────
-   La imagen es el elemento LCP: sin lazy y con prioridad alta. El marco 16:9
-   reserva el hueco antes de que llegue la foto (sin salto de layout) sea cual
-   sea el tamano real del archivo. #}
+   Rota las fotos de `hero_slides` (las primeras 3 de la galeria del servicio,
+   o hero_image si no tiene galeria; ver core/lighting.py) con el mismo JS y
+   CSS que el hero del home: la clase .hero-video es la que buscan los dos.
+
+   Sin salto de layout (CLS 0) aunque las fotos tengan proporciones distintas:
+   el marco .ratio-16x9 fija el alto, todas las fotos se apilan dentro en
+   absoluto, object-fit:cover las recorta sin deformarlas y la rotacion solo
+   cambia la opacidad. width/height son los de un 16:9; las fotos reales
+   pueden medir otra cosa, el marco manda.
+
+   La primera es el LCP: src directo y prioridad alta. Las demas arrancan
+   ocultas y sin src: site.js se lo pone cuando la pagina termino de cargar,
+   para que no le roben ancho de banda a la primera. Con una sola foto, o si
+   el visitante pidio menos movimiento, no rotan y solo se ve la primera. #}
 <header class="row g-4 align-items-center mb-5">
   <div class="col-12 col-md-6 order-md-2">
     <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow">
-      <img src="/static/img/lighting/{{ service.hero_image }}?v={{ asset_v }}"
-           alt="{{ service.hero_alt }}" class="object-fit-cover"
-           fetchpriority="high" decoding="async">
+      {% for slide in hero_slides %}
+      {% set url = "/static/img/lighting/" ~ slide.file ~ "?v=" ~ asset_v %}
+      {% if loop.first %}
+      <img class="hero-video" src="{{ url }}" alt="{{ slide.alt }}"
+           width="1200" height="675" fetchpriority="high" decoding="async">
+      {% else %}
+      <img class="hero-video is-faded" data-src="{{ url }}" alt="{{ slide.alt }}"
+           width="1200" height="675" loading="lazy" decoding="async">
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
   <div class="col-12 col-md-6 order-md-1">

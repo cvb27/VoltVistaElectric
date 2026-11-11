@@ -14,7 +14,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
 from core.config import settings
-from core.lighting import get_service, load_services
+from core.lighting import get_service, hero_slides, load_services
 from core.seo import parse_areas
 from core.seo_services import build_service_list_schema, build_service_page_schema
 from core.templating import templates
@@ -54,6 +54,7 @@ async def lighting_service(request: Request, slug: str):
         {
             "request": request,
             "service": service,
+            "hero_slides": hero_slides(service),
             "areas": parse_areas(settings.service_area),
             "jsonld": build_service_page_schema(settings, service),
         },

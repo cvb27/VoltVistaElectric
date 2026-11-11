@@ -26,6 +26,32 @@
 
 {% block content %}
 
+{# ── 3. TARJETAS DE SERVICIOS ────────────────────────────────────────────
+   Una por servicio publicado, en el orden del JSON. Las fotos estan bajo el
+   pliegue: lazy para no competir con la del hero. #}
+<section class="mb-5">
+  <h2 class="h4 fw-bold mb-3">Our Lighting Services</h2>
+  <div class="row g-4">
+    {% for s in services %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <a href="/services/{{ s.slug }}" class="card h-100 rounded-4 shadow-sm text-decoration-none overflow-hidden"
+         onclick="if(window.gtag)gtag('event','select_service',{service:'{{ s.slug }}',location:'hub'})">
+        <div class="ratio ratio-16x9">
+          <img src="/static/img/lighting/{{ s.hero_image }}?v={{ asset_v }}"
+               alt="{{ s.hero_alt }}" class="object-fit-cover"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <h3 class="h5 fw-bold">{{ s.h1 }}</h3>
+          <p class="small text-muted">{{ s.card_blurb }}</p>
+          <span class="fw-semibold">Learn More &rarr;</span>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
 {# ── 1. HERO ─────────────────────────────────────────────────────────────
    La imagen es el elemento LCP. #}
 <header class="row g-4 align-items-center mb-5">
@@ -66,31 +92,7 @@
   <li>Local</li>
 </ul>
 
-{# ── 3. TARJETAS DE SERVICIOS ────────────────────────────────────────────
-   Una por servicio publicado, en el orden del JSON. Las fotos estan bajo el
-   pliegue: lazy para no competir con la del hero. #}
-<section class="mb-5">
-  <h2 class="h4 fw-bold mb-3">Our Lighting Services</h2>
-  <div class="row g-4">
-    {% for s in services %}
-    <div class="col-12 col-md-6 col-lg-4">
-      <a href="/services/{{ s.slug }}" class="card h-100 rounded-4 shadow-sm text-decoration-none overflow-hidden"
-         onclick="if(window.gtag)gtag('event','select_service',{service:'{{ s.slug }}',location:'hub'})">
-        <div class="ratio ratio-16x9">
-          <img src="/static/img/lighting/{{ s.hero_image }}?v={{ asset_v }}"
-               alt="{{ s.hero_alt }}" class="object-fit-cover"
-               loading="lazy" decoding="async">
-        </div>
-        <div class="card-body">
-          <h3 class="h5 fw-bold">{{ s.h1 }}</h3>
-          <p class="small text-muted">{{ s.card_blurb }}</p>
-          <span class="fw-semibold">Learn More &rarr;</span>
-        </div>
-      </a>
-    </div>
-    {% endfor %}
-  </div>
-</section>
+
 
 {# ── 4. COMO FUNCIONA ────────────────────────────────────────────────── #}
 <section class="mb-5">
