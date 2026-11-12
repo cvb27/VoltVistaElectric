@@ -105,8 +105,8 @@
       "subtitle": "Entry and exterior lights back to full brightness.",
       "card_blurb": "Dim sconces, dead lanterns and mismatched bulbs swapped for long-life LED that matches.",
       "meta_title": "LED Relamping & Bulb Replacement | VoltVista Electric",
-      "meta_description": "LED relamping for entry and exterior lights in Dr. Phillips, Windermere, Bay Hill and nearby. Sconces, lanterns and garage lights. Get a free estimate.",
-      "hero_image": "entry-sconces.webp",
+      "meta_description": "LED relamping for entry and exterior lights in Dr. Phillips, Windermere, Winter Garden, Celebration, Lake Buena vista, Bay Hill and nearby. Sconces, lanterns and garage lights. Get a free estimate.",
+      "hero_image": "relamping-entry-wall-sconces-windermere.webp",
       "hero_alt": "Pair of modern black wall sconces on either side of a double front door with leaded glass",
       "sections": [
         {
@@ -114,13 +114,36 @@
           "body": "Sconces by the garage, lanterns at the front door, LED bars along a walkway. They rarely burn out together — one goes dim, another flickers, a third gets replaced with whatever bulb was in the drawer, and the front of the house stops looking like one house. We relamp every fixture with matching LED bulbs so they all come back at the same color and brightness."
         },
         {
+          "heading": "The ones nobody wants to climb to",
+          "body": "Two-story entry lanterns, coach lights above the garage, soffit lights over the porch. Those are usually the ones left dark the longest. We bring the ladder."
+        },
+        {
+          "heading": "Indoor fixtures on high ceilings",
+          "body": "Recessed lights over a two-story living room, pendants above a stairwell, the fixture in a foyer that needs a tall ladder. We relamp those too, and we match the color of the new bulbs to the ones staying in the room so the ceiling doesn't end up half warm and half white."
+        },
+        {
+          "heading": "What old bulbs cost you every month",
+          "body": "Lighting is around 15% of an average home's electricity use, according to the U.S. Department of Energy. LED bulbs use up to 90% less energy than traditional incandescent bulbs and last up to 25 times longer. Exterior lights are where the difference adds up fastest, because they run all night, every night. A 60-watt incandescent by the front door burns about 219 kWh a year on a dusk-to-dawn schedule. A 9-watt LED giving the same light uses about 33. Multiply that by every sconce, lantern and garage light on the house."
+        },
+        {
+          "heading": "A well-lit entry is a safer entry",
+          "body": "A dark step, a dim walkway or a burned-out light by the garage is where people trip, especially guests who don't know the house. When every fixture works and matches, you can see the steps, the lock and who is at the door. LED bulbs also run much cooler than incandescent or halogen, which is easier on enclosed fixtures and glass. And because they last for years, nobody has to climb back up to a two-story lantern every few months."
+        },
+        {
+          "heading": "Getting the color right",
+          "body": "Most homes look best with warm white, around 2700K, at the entry and on the patio. Go brighter and cooler and the front of the house starts to look like a parking lot. We bring bulbs in more than one tone and show you the difference on one fixture before changing the rest."
+        },
+        {
           "heading": "Why switch to LED",
           "body": "LED bulbs last far longer than incandescent or halogen and use a fraction of the power. They come in warm white tones that look like the bulbs you're replacing, so the house keeps its look — just without the dark spots."
         },
+        
         {
-          "heading": "The ones nobody wants to climb to",
-          "body": "Two-story entry lanterns, coach lights above the garage, soffit lights over the porch. Those are usually the ones left dark the longest. We bring the ladder."
+          "heading": "How it works",
+          "body": "Tell us how many fixtures and roughly how high they are, or send a photo. We give you a free estimate. On the day, we replace the bulbs, wipe down the glass while the fixture is open, test everything at dusk settings, and take the old bulbs with us."
         }
+        
+        
       ],
       "bullets": [
         "Entry sconces, lanterns and garage lights",
@@ -128,16 +151,27 @@
         "High and hard-to-reach fixtures included",
         "Old bulbs hauled away"
       ],
-      "gallery": [],
+      "gallery": [
+        { "file": "relamping-entry-wall-sconces-windermere.webp", "alt": "Pair of modern black wall sconces on either side of a double front door with leaded glass" },
+        { "file": "relamping-entry-lantern-dr-phillips.webp", "alt": "Two tall ladders set up under a hanging lantern fixture at the columned front entry of a home in Dr. Phillips" },
+        { "file": "relamping-garage-coach-lights-dr-phillips.webp", "alt": "Black coach lanterns mounted beside a garage entry, one on a white column, with a stepladder below in Dr. Phillips" },
+        { "file": "garage-hexagon-led-ceiling-lights-belle-isle.webp", "alt": "Hexagon LED light grid glowing white on a textured garage ceiling" },
+        { "file": "relamping-recessed-ceiling-lights-winter-garden.webp", "alt": "Recessed ceiling lights lit across a high living room ceiling, with a stepladder set up below in Winter Garden" }
+
+
+
+      ],
       "faq": [
+        
+        { "q": "Do I need to buy the bulbs?", "a": "Either way works. Use bulbs you already have, or ask us to bring matching LED bulbs for every fixture." },
         {
           "question": "Can you match the color of my other lights?",
           "answer": "Yes. Tell us the look you want — warm white, soft white or daylight — and every bulb on the front of the house gets matched to it."
         },
-        {
-          "question": "Do I have to buy the bulbs myself?",
-          "answer": "Not necessarily. Bring your own, or we can source them for you — whichever you prefer."
-        }
+        { "q": "Will LED bulbs work with my dimmers?", "a": "Many do, some flicker. We use dimmable bulbs and test each dimmed fixture before we leave." },
+        { "q": "What if a new bulb doesn't fix the light?", "a": "Then the problem is in the fixture or the wiring, not the bulb. We tell you which fixture it is so you know exactly what needs repair." },
+        { "q": "Can you reach two-story entry lanterns?", "a": "Yes. High entry lanterns and coach lights above the garage are the most common reason people call us." },
+        { "q": "Which areas do you cover?", "a": "Dr. Phillips, Windermere, Winter Garden, Bay Hill, Gotha, Horizon West and Lake Buena Vista and more." }
       ],
       "cta_text": "Get a Free Estimate",
       "cta_href": "/estimate",
