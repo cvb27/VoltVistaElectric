@@ -163,15 +163,20 @@
       ],
       "faq": [
         
-        { "q": "Do I need to buy the bulbs?", "a": "Either way works. Use bulbs you already have, or ask us to bring matching LED bulbs for every fixture." },
+        { "question": "Do I need to buy the bulbs?", 
+          "answer": "Either way works. Use bulbs you already have, or ask us to bring matching LED bulbs for every fixture." },
         {
           "question": "Can you match the color of my other lights?",
           "answer": "Yes. Tell us the look you want — warm white, soft white or daylight — and every bulb on the front of the house gets matched to it."
         },
-        { "q": "Will LED bulbs work with my dimmers?", "a": "Many do, some flicker. We use dimmable bulbs and test each dimmed fixture before we leave." },
-        { "q": "What if a new bulb doesn't fix the light?", "a": "Then the problem is in the fixture or the wiring, not the bulb. We tell you which fixture it is so you know exactly what needs repair." },
-        { "q": "Can you reach two-story entry lanterns?", "a": "Yes. High entry lanterns and coach lights above the garage are the most common reason people call us." },
-        { "q": "Which areas do you cover?", "a": "Dr. Phillips, Windermere, Winter Garden, Bay Hill, Gotha, Horizon West and Lake Buena Vista and more." }
+        { "question": "Will LED bulbs work with my dimmers?", 
+          "answer": "Many do, some flicker. We use dimmable bulbs and test each dimmed fixture before we leave." },
+        { "question": "What if a new bulb doesn't fix the light?", 
+          "answer": "Then the problem is in the fixture or the wiring, not the bulb. We tell you which fixture it is so you know exactly what needs repair." },
+        { "question": "Can you reach two-story entry lanterns?", 
+          "answer": "Yes. High entry lanterns and coach lights above the garage are the most common reason people call us." },
+        { "question": "Which areas do you cover?", 
+          "answer": "Dr. Phillips, Windermere, Winter Garden, Bay Hill, Gotha, Horizon West and Lake Buena Vista and more." }
       ],
       "cta_text": "Get a Free Estimate",
       "cta_href": "/estimate",
