@@ -7,6 +7,7 @@ estén disponibles en cualquier plantilla sin pasarlos en cada TemplateResponse.
 
 from fastapi.templating import Jinja2Templates
 
+from core.areas import area_links
 from core.config import settings
 from core.lighting import load_services
 from core.seo import build_local_business_schema
@@ -26,6 +27,9 @@ def _build_templates() -> Jinja2Templates:
     # Servicios publicados para el desplegable del nav. Global y no por
     # contexto porque el nav sale en todas las paginas que extienden base.html.
     tpl.env.globals["nav_services"] = load_services()
+    # {zona: URL} de las zonas con pagina publicada. Global por el mismo motivo:
+    # el footer (todas las paginas) convierte esas zonas en enlaces.
+    tpl.env.globals["area_links"] = area_links()
     return tpl
 
 

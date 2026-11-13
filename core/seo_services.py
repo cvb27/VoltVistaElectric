@@ -1,6 +1,6 @@
 """
-JSON-LD de las paginas de iluminacion: ItemList para el hub y Service para
-cada pagina hija.
+JSON-LD de las paginas de iluminacion (ItemList para el hub y Service para
+cada pagina hija) y de las paginas por zona (Service acotado a la zona).
 
 Separado de core/seo.py por el limite de 120 lineas (CLAUDE.md 4.1). Mismas
 reglas: funciones puras que reciben datos y devuelven un dict.
@@ -60,4 +60,26 @@ def build_service_list_schema(cfg, services: list[dict]) -> dict:
         "@type": "ItemList",
         "name": "Lighting Services",
         "itemListElement": items,
+    }
+
+
+def build_area_page_schema(cfg, area: dict) -> dict:
+    """Schema Service de una pagina de zona (/areas/{slug}).
+
+    Recibe cfg (settings) y la entrada de data/areas.json. Es un Service y no
+    un segundo LocalBusiness: eso le diria a Google que hay una sede en la
+    zona, y el negocio esta en otro sitio. areaServed lleva el mismo nombre
+    que la lista de .env para que coincida con el del LocalBusiness global.
+    """
+    url = f"{_base(cfg)}/areas/{area['slug']}"
+    return {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": f"{url}#service",
+        "name": area["h1"],
+        "serviceType": "Lighting Installation",
+        "description": area["meta_description"],
+        "url": url,
+        "provider": {"@id": f"{_base(cfg)}/#business"},
+        "areaServed": {"@type": "Place", "name": area["name"]},
     }

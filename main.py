@@ -13,6 +13,7 @@ from routes.services import router as services_router
 from routes import booking as booking_routes
 from routes.admin import router as admin_router
 from routes.lighting import router as lighting_router
+from routes.areas import router as areas_router
 
 
 
@@ -39,6 +40,7 @@ def _register_routers(app: FastAPI) -> None:
     app.include_router(booking_routes.router)
     app.include_router(admin_router)
     app.include_router(lighting_router)
+    app.include_router(areas_router)
 
 
 def create_app() -> FastAPI:

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{# Plantilla unica de las paginas por zona (/areas/{slug}).
+
+   CONTRATO — espera `area` (una entrada de data/areas.json, ya validada por
+   core/areas.py), `services` (slug -> servicio publicado, para nombrar el
+   enlace de cada trabajo) y `jsonld`. Sin FAQ o sin trabajos, esa seccion no
+   se pinta y la pagina no deja huecos.
+
+   Sin onclick en telefono ni WhatsApp: static/js/site.js ya registra todos
+   los enlaces tel: y wa.me del sitio. #}
+
+{% block title %}{{ area.meta_title }}{% endblock %}
+{% block description %}{{ area.meta_description }}{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="{{ settings.business_url.rstrip('/') }}/areas/{{ area.slug }}">
+{% endblock %}
+{% block og_title %}{{ area.meta_title }}{% endblock %}
+{% block og_description %}{{ area.meta_description }}{% endblock %}
+{% block og_url %}{{ settings.business_url.rstrip('/') }}/areas/{{ area.slug }}{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">{{ jsonld | tojson }}</script>
+{% endblock %}
+
+{# lighting.css + page "lighting": la barra fija de movil de _service_cta.html
+   y el hueco que reserva al final, igual que en las paginas de servicio. #}
+{% block head_extra %}
+<link href="/static/css/lighting.css?v={{ asset_v }}" rel="stylesheet">
+{% endblock %}
+{% block page %}lighting{% endblock %}
+
+{% block content %}
+
+{# ── 1. CABECERA ─────────────────────────────────────────────────────────
+   Solo texto: las fotos ya salen en los trabajos, y repetir una aqui la
+   descargaria dos veces. #}
+<header class="mb-5">
+  <h1 class="h3 fw-bold">{{ area.h1 }}</h1>
+  <p class="lead text-muted">{{ area.subtitle }}</p>
+  <div class="d-flex flex-wrap gap-2 mt-3">
+    <a class="btn btn-cta-primary btn-lg px-4" href="/estimate">Get a Free Estimate</a>
+    {% if settings.phone %}
+    <a class="btn btn-cta-secondary btn-lg px-4" href="tel:{{ settings.phone }}">
+      <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>Call Us Now
+    </a>
+    {% endif %}
+  </div>
+</header>
+
+{# ── 2. INTRO ──────────────────────────────────────────────────────────── #}
+<section class="mb-5">
+  <p class="mb-0">{{ area.intro }}</p>
+</section>
+
+{# ── 3. TRABAJOS ─────────────────────────────────────────────────────────
+   Misma rejilla y celda 4:3 que _photo_grid.html, para que midan igual que
+   las otras galerias. No se incluye ese parcial porque cada trabajo lleva
+   ademas texto y enlace a su servicio. #}
+{% if area.jobs %}
+<section class="mb-5">
+  <h2 class="h4 fw-bold mb-3">Recent Work in {{ area.name }}</h2>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+    {% for job in area.jobs %}
+    {% set service = services[job.service_slug] %}
+    <div class="col">
+      <div class="ratio ratio-4x3 rounded-4 overflow-hidden mb-3">
+        <img src="/static/img/{{ job.image }}?v={{ asset_v }}" alt="{{ job.alt }}"
+             class="object-fit-cover" width="1200" height="900"
+             loading="lazy" decoding="async">
+      </div>
+      <h3 class="h6 fw-bold">{{ job.title }}</h3>
+      <p class="small text-muted">{{ job.body }}</p>
+      <a class="small fw-semibold" href="/services/{{ service.slug }}">{{ service.nav_label }} &rarr;</a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{# ── 4. FAQ y 5. CTA FINAL + barra de movil ───────────────────────────── #}
+{% with faq = area.faq %}{% include '_service_faq.html' %}{% endwith %}
+{% include '_service_cta.html' %}
+
+{% endblock %}

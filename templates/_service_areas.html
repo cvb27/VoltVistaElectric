@@ -2,12 +2,17 @@
 
    CONTRATO — espera `areas`: lista de nombres. La arma la ruta con
    core.seo.parse_areas a partir de BUSINESS_SERVICE_AREA en .env, la misma
-   fuente que el footer y el schema, para que las tres listas no se separen. #}
+   fuente que el footer y el schema, para que las tres listas no se separen.
+   La zona con pagina publicada (global `area_links`, core/areas.py) sale
+   como enlace a ella; las demas, como texto. #}
 {% if areas %}
 <section class="mb-5">
   <h2 class="h4 fw-bold">Service Area</h2>
   <p class="mb-0">
-    {% for a in areas %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endfor %}
+    {% for a in areas %}
+    {% if a in area_links %}<a class="badge rounded-pill text-bg-light border me-1" href="{{ area_links[a] }}">{{ a }}</a>
+    {% else %}<span class="badge rounded-pill text-bg-light border me-1">{{ a }}</span>{% endif %}
+    {% endfor %}
   </p>
 </section>
 {% endif %}

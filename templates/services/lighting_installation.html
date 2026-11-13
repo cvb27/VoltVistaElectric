@@ -72,8 +72,8 @@
     <div class="d-flex flex-wrap gap-2 mt-3">
       <a class="btn btn-cta-primary btn-lg px-4" href="/estimate">Get a Free Estimate</a>
       {% if settings.phone %}
-      <a class="btn btn-cta-secondary btn-lg px-4" href="tel:{{ settings.phone }}"
-         onclick="if(window.gtag)gtag('event','click_to_call',{page:'lighting'})">
+      {# Sin onclick: el clic en tel: lo registra static/js/site.js (phone_call). #}
+      <a class="btn btn-cta-secondary btn-lg px-4" href="tel:{{ settings.phone }}">
         <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>Call Us Now
       </a>
       {% endif %}

@@ -1,0 +1,55 @@
+{
+  "areas": [
+    {
+      "slug": "dr-phillips",
+      "name": "Dr. Phillips",
+      "published": true,
+      "meta_title": "Lighting Installation in Dr. Phillips, FL | VoltVista Electric",
+      "meta_description": "Permanent roofline lighting, landscape lighting and LED relamping for homes in Dr. Phillips, FL. Based minutes away in Lake Buena Vista. Free estimates.",
+      "h1": "Lighting Installation in Dr. Phillips, FL",
+      "subtitle": "Roofline, landscape and entry lighting for Dr. Phillips homes.",
+      "intro": "VoltVista installs and maintains outdoor lighting for homes in Dr. Phillips. We are based minutes away in Lake Buena Vista and have worked in these neighborhoods for 10 years. Most jobs here are permanent roofline lighting on two-story homes and relamping of entry lanterns and garage lights that are too high to reach with a household ladder.",
+      "jobs": [
+        {
+          "title": "Permanent roofline lighting on a two-story home",
+          "body": "A permanent system along both rooflines, set to teal the night we finished. The owners change color and brightness from their phone: warm white most of the year, red and green in December.",
+          "image": "gallery/roofline-lighting-teal-dr-phillips.webp",
+          "alt": "Two-story home at night with permanent roofline lights glowing teal along the eaves in Dr. Phillips",
+          "service_slug": "roofline-lighting"
+        },
+        {
+          "title": "Entry lantern relamping",
+          "body": "A hanging lantern above a columned front entry, high enough to need two tall ladders. New matching LED bulbs, and the entry is fully lit again.",
+          "image": "lighting/relamping-entry-lantern-dr-phillips.webp",
+          "alt": "Two tall ladders set up under a hanging lantern fixture at the columned front entry of a home in Dr. Phillips",
+          "service_slug": "relamping"
+        },
+        {
+          "title": "Garage coach lights",
+          "body": "Coach lanterns beside the garage relamped with LED bulbs in the same warm tone, so both sides of the driveway match.",
+          "image": "lighting/relamping-garage-coach-lights-dr-phillips.webp",
+          "alt": "Black coach lanterns mounted beside a garage entry, one on a white column, with a stepladder below",
+          "service_slug": "relamping"
+        }
+      ],
+      "faq": [
+        {
+          "question": "How much does roofline lighting cost in Dr. Phillips?",
+          "answer": "It depends on the length and height of the roofline. Estimates are free and we quote on site. You can buy the lights yourself or ask us to source them."
+        },
+        {
+          "question": "My HOA has rules about exterior lights. Is that a problem?",
+          "answer": "Check your community's rules before you order. A permanent system can stay on plain warm white day to day and switch to color only when your HOA allows it."
+        },
+        {
+          "question": "How soon can you come out?",
+          "answer": "We are based in Lake Buena Vista, a short drive from Dr. Phillips. Estimates are free, and most homes are finished in a single day."
+        },
+        {
+          "question": "Do you only install, or do you also fix lights that stopped working?",
+          "answer": "Both. We install new roofline and landscape lighting, and we relamp entry, garage and high-ceiling fixtures."
+        }
+      ]
+    }
+  ]
+}

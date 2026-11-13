@@ -64,8 +64,8 @@
       <a class="btn btn-cta-primary btn-lg px-4" href="{{ service.cta_href }}"
          onclick="if(window.gtag)gtag('event','select_service',{service:'{{ service.slug }}'})">{{ service.cta_text }}</a>
       {% if settings.phone %}
-      <a class="btn btn-cta-secondary btn-lg px-4" href="tel:{{ settings.phone }}"
-         onclick="if(window.gtag)gtag('event','click_to_call',{page:'{{ service.slug }}'})">
+      {# Sin onclick: el clic en tel: lo registra static/js/site.js (phone_call). #}
+      <a class="btn btn-cta-secondary btn-lg px-4" href="tel:{{ settings.phone }}">
         <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>Call Us Now
       </a>
       {% endif %}

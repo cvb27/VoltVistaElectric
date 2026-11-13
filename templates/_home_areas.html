@@ -1,4 +1,6 @@
-{# Sección Areas — ciudades cubiertas + CTA a estimado #}
+{# Sección Areas — ciudades cubiertas + CTA a estimado.
+   La zona con pagina publicada (global `area_links`, core/areas.py) es un
+   enlace a ella; las demas quedan como texto. Mismo aspecto en las dos. #}
 <section class="section-navy py-5 py-md-6">
   <div class="container text-center">
     <h2 class="display-6 fw-bold text-white mb-2">Areas We Serve</h2>
@@ -8,10 +10,12 @@
       {% for area in settings.service_area.split(",") %}
         {% set trimmed = area.strip() %}
         {% if trimmed %}
-          <span class="badge rounded-pill px-3 py-2 fs-6"
+          {% set tag = "a" if trimmed in area_links else "span" %}
+          <{{ tag }} class="badge rounded-pill px-3 py-2 fs-6"
+                {% if tag == "a" %}href="{{ area_links[trimmed] }}"{% endif %}
                 style="background: var(--color-tint-border); color: var(--color-text);">
             <i class="bi bi-geo-alt-fill me-1" style="color: var(--color-accent);"></i>{{ trimmed }}
-          </span>
+          </{{ tag }}>
         {% endif %}
       {% endfor %}
     </div>

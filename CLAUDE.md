@@ -308,7 +308,9 @@ Actualizado 2026-08-22. Nada de esto rompe el sitio hoy, pero está pendiente.
 - No poner lógica de negocio en templates Jinja.
 - No usar jQuery ni librerías JS innecesarias. El sitio funciona sin JS propio
   salvo el tracking y el calendario de reservas.
-- No tocar `main.py` para agregar rutas — usar los archivos de `routes/`.
+- No tocar `main.py` para agregar rutas — usar los archivos de `routes/`. La
+  única excepción es registrar un router nuevo: su import y una línea en
+  `_register_routers`. Las rutas en sí van siempre en `routes/`.
 - No aceptar del cliente ningún dato que decida cuánto se cobra. El formulario
   manda la *key* del plan; el precio lo resuelve el servidor con `get_plan()`.
 - No borrar filas de `booking`: una reserva cancelada se marca `cancelled`,

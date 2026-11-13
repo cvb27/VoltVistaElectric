@@ -2,7 +2,11 @@
 
    Van juntos porque las dos piezas cierran la pagina y las dos dependen de
    `{% block page %}lighting{% endblock %}`: con esa marca lighting.css reserva
-   hueco para la barra y oculta el WhatsApp flotante, que se solaparia con ella. #}
+   hueco para la barra y oculta el WhatsApp flotante, que se solaparia con ella.
+
+   Sin onclick en Call ni WhatsApp: static/js/site.js ya registra todos los
+   enlaces tel: y wa.me (phone_call, whatsapp_contact). Con los dos, cada clic
+   se contaba doble. #}
 <div class="card rounded-4 p-4 text-center bg-light-subtle">
   <div class="h5 fw-bold mb-3">FREE Estimate - No obligation</div>
   <div>
@@ -13,13 +17,11 @@
 {# Visible durante todo el scroll en movil. En escritorio la oculta el CSS:
    alli el CTA persistente ya lo da el boton "Get Estimate" del navbar. #}
 <nav class="lighting-cta-bar" aria-label="Quick contact">
-  <a href="tel:{{ settings.phone }}"
-     onclick="if(window.gtag)gtag('event','click_to_call',{page:'lighting_bar'})">
+  <a href="tel:{{ settings.phone }}">
     <i class="bi bi-telephone-fill" aria-hidden="true"></i> Call
   </a>
   <a href="https://wa.me/{{ settings.whatsapp|replace('+','')|replace(' ','') }}"
-     target="_blank" rel="noopener"
-     onclick="if(window.gtag)gtag('event','whatsapp_contact',{page:'lighting_bar'})">
+     target="_blank" rel="noopener">
     <i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp
   </a>
   <a href="/estimate" class="is-primary">Free Estimate</a>

@@ -37,9 +37,12 @@
         <div class="fw-semibold mb-2 text-white">Service Area</div>
         {# Misma fuente que el bloque "Areas We Serve" del home: BUSINESS_SERVICE_AREA
            en .env. Antes estaban escritas a mano aqui y las dos listas se habian
-           desincronizado. #}
+           desincronizado. Las zonas con pagina publicada (global `area_links`)
+           son enlaces; las demas, texto. #}
         <p class="small text-white mb-2">
-          {{ settings.service_area.split(",") | map("trim") | join(" · ") }}
+          {% for a in settings.service_area.split(",") | map("trim") | select %}
+          {% if a in area_links %}<a class="link-light" href="{{ area_links[a] }}">{{ a }}</a>{% else %}{{ a }}{% endif %}{% if not loop.last %} · {% endif %}
+          {% endfor %}
         </p>
         <p class="small text-white-50 mb-0">
           Not sure if we cover your area? <a class="link-light" href="/estimate">Ask us</a>.

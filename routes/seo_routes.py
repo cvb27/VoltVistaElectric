@@ -10,6 +10,7 @@ from pathlib import Path
 from fastapi import APIRouter, Response
 from fastapi.responses import FileResponse, JSONResponse
 
+from core.areas import load_areas
 from core.config import settings
 from core.lighting import load_services
 from core.posts import load_posts
@@ -53,7 +54,7 @@ Sitemap: {settings.base_url}/sitemap.xml
 
 @router.get("/sitemap.xml")
 def sitemap():
-    """Sitemap del sitio: paginas fijas + servicios publicados + posts del blog.
+    """Sitemap: paginas fijas + servicios y zonas publicados + posts del blog.
 
     Las paginas fijas no llevan <lastmod>: no guardamos cuando cambiaron, y
     una fecha inventada es peor que ninguna — Google deja de fiarse del campo
@@ -66,6 +67,7 @@ def sitemap():
     """
     entries = [_url(p) for p in _STATIC_PATHS]
     entries += [_url(f"/services/{s['slug']}") for s in load_services()]
+    entries += [_url(f"/areas/{a['slug']}") for a in load_areas()]
     entries += [_url(f"/blog/{p['slug']}", p.get("published_at", ""))
                 for p in load_posts()]
 
